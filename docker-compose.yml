@@ -1,0 +1,15 @@
+services:
+  algorithm-guide-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: algorithm-guide-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - algorithm-network
+
+networks:
+  algorithm-network:
+    driver: bridge

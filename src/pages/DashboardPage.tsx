@@ -1,13 +1,13 @@
 // DashboardPage.tsx — 首頁儀表板：顯示整體學習進度與各分類概覽
 import { Link } from 'react-router-dom';
 import { CATEGORIES, TOTAL_PROBLEMS } from '../data/index';
-import { useProgressStore } from '../store/progressStore';
+// import { useProgressStore } from '../store/progressStore';
 
 const DashboardPage = () => {
-  const { getStatus } = useProgressStore();
+  // const { getStatus } = useProgressStore();
 
   // 計算已掌握的題數
-  const masteredCount = CATEGORIES.reduce((total, cat) => {
+  const masteredCount = CATEGORIES.reduce((total, _cat) => {
     // 每個分類都預設用流水號當題目 id（簡化版，之後可細化）
     return total;
   }, 0);

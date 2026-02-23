@@ -4,7 +4,8 @@ import { ChevronLeft } from 'lucide-react';
 import { getCategoryById } from '../data/index';
 import { useProgressStore } from '../store/progressStore';
 import FlashCard from '../components/FlashCard';
-import { parseMarkdownToFlashcards, ParsedFlashcard } from '../utils/markdownParser';
+import { parseMarkdownToFlashcards } from '../utils/markdownParser';
+import type { ParsedFlashcard } from '../utils/markdownParser';
 import type { ProblemStatus } from '../data/index';
 
 const FlashcardPage = () => {

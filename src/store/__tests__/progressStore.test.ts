@@ -31,7 +31,7 @@ describe('useProgressStore', () => {
   });
 
   it('可以新增書籤', () => {
-    const { toggleBookmark, bookmarks } = useProgressStore.getState();
+    const { toggleBookmark } = useProgressStore.getState();
     toggleBookmark('1');
     // toggleBookmark 後需要重新取得最新的 state
     expect(useProgressStore.getState().bookmarks).toContain('1');

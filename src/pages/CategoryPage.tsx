@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import CategorySidebar from '../components/CategorySidebar';
 import MarkdownViewer from '../components/MarkdownViewer';
 import { getCategoryById } from '../data/index';
-import { useProgressStore } from '../store/progressStore';
+// import { useProgressStore } from '../store/progressStore';
 
 const CategoryPage = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -13,7 +13,7 @@ const CategoryPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   const category = categoryId ? getCategoryById(categoryId) : null;
-  const { setStatus, getStatus, toggleBookmark, isBookmarked } = useProgressStore();
+  // const { setStatus, getStatus, toggleBookmark, isBookmarked } = useProgressStore();
 
   // 當分類改變時，動態載入對應的 Markdown 檔案
   useEffect(() => {

@@ -1,0 +1,248 @@
+# 五、Binary Search（二分搜尋）
+
+## 通用套路
+
+**核心**：在已排序的搜尋空間中，每次砍掉一半，O(log n) 找到目標。
+
+**三種變形**：
+
+1. 精確查找：找到 target 回傳
+2. 左邊界：找第一個 >= target 的位置
+3. 右邊界：找最後一個 <= target 的位置
+
+```python
+# 套路模板：標準二分搜尋
+def binary_search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+# 套路模板：找左邊界（第一個 >= target）
+def lower_bound(nums, target):
+    left, right = 0, len(nums)
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    return left
+```
+
+---
+
+### 21. Binary Search (Easy)
+
+- **套路**：標準二分
+- **💡 白話文解說**：想像你在把兩副已經排好點數的撲克牌合在一起。你每次只要比較兩副牌最上面那張，把比較小的那張拿出來放到新的牌堆裡，最後把還沒拿完的那副牌整個接在後面就完成了。
+- **複雜度**：O(log n) / O(1)
+
+```python
+def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+```
+
+### 19. First Bad Version (Easy)
+
+- **套路**：左邊界二分
+- **💡 白話文解說**：你要刪除倒數第 N 個人。你可以派兩個探子，讓第一個探子先往前走 N 步。接著兩個探子一起以同樣的速度往下走。當第一個探子抵達終點時，第二個探子剛好就會停在「要被刪除的那個人」的前面一格！
+- **思路**：找第一個 `isBadVersion(mid) == True` 的位置。
+- **複雜度**：O(log n) / O(1)
+
+```python
+def firstBadVersion(n):
+    left, right = 1, n
+    while left < right:
+        mid = (left + right) // 2
+        if isBadVersion(mid):
+            right = mid       # 答案在左半邊（含 mid）
+        else:
+            left = mid + 1    # 答案在右半邊
+    return left
+```
+
+### 27. Search in Rotated Sorted Array (Med.)
+
+- **套路**：二分 + 判斷哪半邊有序
+- **思路**：旋轉後的陣列一定有一半是有序的。先判斷 mid 在哪半邊，再決定搜尋方向。
+- **要點**：用 `nums[left] <= nums[mid]` 判斷左半邊是否有序。
+- **複雜度**：O(log n) / O(1)
+
+```python
+def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        if nums[left] <= nums[mid]:  # 左半邊有序
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:  # 右半邊有序
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1
+```
+
+### 90. Find Minimum in Rotated Sorted Array (Med.)
+
+- **套路**：二分找旋轉點
+- **思路**：最小值在「無序的那一半」。如果 nums[mid] > nums[right]，最小值在右半邊；否則在左半邊。
+- **複雜度**：O(log n) / O(1)
+
+```python
+def findMin(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] > nums[right]:
+            left = mid + 1    # 最小值在右半邊
+        else:
+            right = mid       # 最小值在左半邊（含 mid）
+    return nums[left]
+```
+
+### 23. Time Based Key-Value Store (Med.)
+
+- **套路**：Hash Map + 二分搜尋
+- **💡 白話文解說**：想像你有 K 副已經排好的撲克牌，你要把它們合併。如果你每次都檢查 K 張牌會太慢，所以你可以找一個「裁判」（最小堆積 Min-Heap），同時把 K 副牌最上面的牌交給裁判。裁判每次只會把最小的那張發給你，你就可以一直拿到目前最小的牌了！
+- **思路**：每個 key 對應一個有序的 (timestamp, value) 列表。get 時用二分找 <= timestamp 的最大值。
+- **複雜度**：set O(1) / get O(log n)
+
+```python
+from collections import defaultdict
+import bisect
+
+class TimeMap:
+    def __init__(self):
+        self.store = defaultdict(list)  # key → [(timestamp, value)]
+
+    def set(self, key, value, timestamp):
+        self.store[key].append((timestamp, value))
+
+    def get(self, key, timestamp):
+        if key not in self.store:
+            return ""
+        pairs = self.store[key]
+        # 找最大的 t <= timestamp
+        idx = bisect.bisect_right(pairs, (timestamp, chr(127))) - 1
+        return pairs[idx][1] if idx >= 0 else ""
+```
+
+### 52. Search a 2D Matrix (Med.)
+
+- **套路**：把二維視為一維做二分
+- **思路**：m×n 矩陣視為長度 m\*n 的排序陣列。index 轉換：row = mid // n, col = mid % n。
+- **複雜度**：O(log(m·n)) / O(1)
+
+```python
+def searchMatrix(matrix, target):
+    m, n = len(matrix), len(matrix[0])
+    left, right = 0, m * n - 1
+    while left <= right:
+        mid = (left + right) // 2
+        val = matrix[mid // n][mid % n]
+        if val == target:
+            return True
+        elif val < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return False
+```
+
+### 85. Find K Closest Elements (Med.)
+
+- **套路**：二分找左邊界 + 滑動窗口
+- **思路**：找一個長度為 k 的窗口 [left, left+k-1]，使得 `x - arr[left]` 和 `arr[left+k] - x` 的比較來決定窗口該左還是右移。
+- **複雜度**：O(log(n-k) + k) / O(1)
+
+```python
+def findClosestElements(arr, k, x):
+    left, right = 0, len(arr) - k
+    while left < right:
+        mid = (left + right) // 2
+        if x - arr[mid] > arr[mid + k] - x:
+            left = mid + 1
+        else:
+            right = mid
+    return arr[left:left + k]
+```
+
+### 158. Random Pick with Weight (Med.)
+
+- **套路**：前綴和 + 二分
+- **思路**：權重轉前綴和。隨機產生 [1, total] 的數字，用二分找它落在哪個前綴和區間。
+- **複雜度**：初始化 O(n) / pickIndex O(log n)
+
+```python
+import random
+import bisect
+
+class Solution:
+    def __init__(self, w):
+        self.prefix = []
+        total = 0
+        for weight in w:
+            total += weight
+            self.prefix.append(total)
+        self.total = total
+
+    def pickIndex(self):
+        target = random.randint(1, self.total)
+        return bisect.bisect_left(self.prefix, target)
+```
+
+### 4. Median of Two Sorted Arrays (Hard)
+
+- **套路**：二分搜尋分割點
+- **💡 白話文解說**：這是二分搜尋最抽象的一題。你要找兩群人排隊的「中位數」，其實就是要在這兩條隊伍中各畫一條線，使得「左半邊的總人數 = 右半邊的總人數」，而且「左半邊所有人都比右半邊小」。只要我們對較短的那條隊伍做二分搜尋來決定畫線位置就可以了。
+- **思路**：在較短的陣列上做二分，找到一個分割點使得左半邊最大值 <= 右半邊最小值。
+- **要點**：這是 Binary Search 最難的題之一。核心是理解分割的對稱性。
+- **複雜度**：O(log(min(m,n))) / O(1)
+
+```python
+def findMedianSortedArrays(nums1, nums2):
+    if len(nums1) > len(nums2):
+        nums1, nums2 = nums2, nums1  # 確保在較短的上面搜尋
+    m, n = len(nums1), len(nums2)
+    left, right = 0, m
+    while left <= right:
+        i = (left + right) // 2         # nums1 的分割點
+        j = (m + n + 1) // 2 - i        # nums2 的分割點
+        left1 = nums1[i-1] if i > 0 else float('-inf')
+        right1 = nums1[i] if i < m else float('inf')
+        left2 = nums2[j-1] if j > 0 else float('-inf')
+        right2 = nums2[j] if j < n else float('inf')
+        if left1 <= right2 and left2 <= right1:
+            if (m + n) % 2 == 0:
+                return (max(left1, left2) + min(right1, right2)) / 2
+            else:
+                return max(left1, left2)
+        elif left1 > right2:
+            right = i - 1
+        else:
+            left = i + 1
+```
+
+---

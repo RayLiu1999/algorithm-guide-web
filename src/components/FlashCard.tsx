@@ -51,11 +51,32 @@ const FlashCard = ({ title, difficulty, explanation, solution, onRate }: FlashCa
               <p className="text-xs font-semibold uppercase tracking-widest text-sky-400 mb-3">
                 Python 解法
               </p>
-              <div className="bg-slate-950 rounded-xl overflow-hidden">
-                <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+              <article className="prose prose-invert max-w-none">
+                <ReactMarkdown 
+                  rehypePlugins={[rehypeHighlight]}
+                  components={{
+                    pre: ({ children }) => (
+                      <pre className="bg-slate-950 rounded-xl p-4 overflow-x-auto my-3 text-sm border border-slate-700">
+                        {children}
+                      </pre>
+                    ),
+                    code: ({ children, className }) => (
+                      <code className={`${className ?? ''} text-emerald-300`}>{children}</code>
+                    ),
+                    p: ({ children }) => (
+                      <p className="text-slate-300 leading-relaxed mb-3 text-sm">{children}</p>
+                    ),
+                    li: ({ children }) => (
+                      <li className="text-slate-300 mb-1 text-sm list-disc ml-4">{children}</li>
+                    ),
+                    strong: ({ children }) => (
+                      <strong className="text-slate-100 font-semibold">{children}</strong>
+                    ),
+                  }}
+                >
                   {solution}
                 </ReactMarkdown>
-              </div>
+              </article>
             </div>
 
             {/* 評分按鈕 */}

@@ -23,7 +23,7 @@ def dp_pattern(n):
 
 ---
 
-### 43. Climbing Stairs (Easy)
+### 70. Climbing Stairs (Easy)
 
 - **套路**：基礎 DP（費波那契變形）
 - **💡 白話文解說**：你可以把爬樓梯想像成分裂細胞。因為你每次只能踩 1 或 2 階，所以「走到第 N 階的方法數」就是「走到 N-1 階」和「走到 N-2 階」的方法數全部加總。
@@ -38,7 +38,7 @@ def climbStairs(n):
     return b
 ```
 
-### 98. House Robber (Med.)
+### 198. House Robber (Med.)
 
 - **套路**：DP（取或不取）
 - **💡 白話文解說**：這是一個專業小偷的掙扎。你現在走到第 i 間房子前面，如果你搶了，你就不能搶前一家（第 i-1），只能拿「前前家的收穫 + 這家」。如果你不搶，那就拿「前一家的收穫」。永遠選那個數字大的決定！
@@ -53,7 +53,7 @@ def rob(nums):
     return prev1
 ```
 
-### 41. Coin Change (Med.)
+### 322. Coin Change (Med.)
 
 - **套路**：完全背包
 - **💡 白話文解說**：這是超級換零錢法。我們知道 0 元需要 0 個硬幣。要換 11 元，你可以看看如果「換 11-5 元（也就是 6 元）」要最少幾個硬幣，如果能換出來（加上這一個 5 元），那就找到一個候選。就這樣一路從小數字推到目標，誰最少就選誰。
@@ -71,7 +71,7 @@ def coinChange(coins, amount):
     return dp[amount] if dp[amount] != float('inf') else -1
 ```
 
-### 8. Word Break (Med.)
+### 139. Word Break (Med.)
 
 - **套路**：DP + Hash Set
 - **思路**：dp[i] = s[0:i] 能否被拆成字典裡的單字。往前檢查每個可能的切割點 j：dp[j] 為 True 且 s[j:i] 在字典中。
@@ -91,7 +91,7 @@ def wordBreak(s, wordDict):
     return dp[len(s)]
 ```
 
-### 40. Unique Paths (Med.)
+### 62. Unique Paths (Med.)
 
 - **套路**：二維 DP
 - **💡 白話文解說**：你是一個只能向右或向下的機器人。你要走到每一格的方法數，永遠都只會等於「從它左邊一格走過來的方法數」加上「從它上面一格走下來的方法數」。把這些可能一路疊加到右下角。
@@ -107,7 +107,7 @@ def uniquePaths(m, n):
     return dp[-1]
 ```
 
-### 26. Partition Equal Subset Sum (Med.)
+### 416. Partition Equal Subset Sum (Med.)
 
 - **套路**：0-1 背包
 - **💡 白話文解說**：要平分寶物，就是看看能不能挑出剛好「總和一半」的裝備。如果有個背包大小剛好是總和的一半，我們就開始考慮每個裝備要不要放進去（0-1 背包問題）。只要能剛好塞滿，剩下的裝備自動另一半！
@@ -128,7 +128,7 @@ def canPartition(nums):
     return dp[target]
 ```
 
-### 59. Decode Ways (Med.)
+### 91. Decode Ways (Med.)
 
 - **套路**：DP（類似爬樓梯）
 - **💡 白話文解說**：跟爬樓梯幾乎一模一樣的密碼解讀！每個數字你可以選「只當它 1 個字元解讀」，或是「和前一個數字湊在一起變成 10~26 的兩位數解讀」。把這些走法累積起來就是解碼的方式總數。只要遇到零就是陷阱，要小心處理。
@@ -151,7 +151,7 @@ def numDecodings(s):
     return prev1
 ```
 
-### 89. Maximum Product Subarray (Med.)
+### 152. Maximum Product Subarray (Med.)
 
 - **套路**：追蹤最大值和最小值
 - **💡 白話文解說**：負數乘負數會大翻身變成超大正數！所以我們不能只關注過去的「最大值」，還要關注過去的「最小值（可能是很深的負數）」。這樣一來當我們乘下一個負數時，曾經最小的最不起眼的人就會直接翻盤成為今天的超級大老。
@@ -169,7 +169,7 @@ def maxProduct(nums):
     return result
 ```
 
-### 140. Longest Increasing Subsequence (Med.)
+### 300. Longest Increasing Subsequence (Med.)
 
 - **套路**：DP 或 二分搜尋優化
 - **💡 白話文解說**：要找最長的一連串遞增數字，我們可以用一個神奇的「排隊法」。我們準備一個單調陣列來記錄每個長度的「最小墊底數字」。每次來一個新數字，如果它筆最後一個大就直接加進去；如果比較小，就把它換掉陣列裡第一個大於它的數字，幫未來創造更多機會。
@@ -190,7 +190,7 @@ def lengthOfLIS(nums):
     return len(tails)
 ```
 
-### 110. Maximal Square (Med.)
+### 221. Maximal Square (Med.)
 
 - **套路**：二維 DP
 - **💡 白話文解說**：想像你在鋪磁磚地板。一格磁磚能長出多大一塊正方形，完全取決於它的「左邊」、「上面」、「左上方」這三個鄰居能鋪出多大的正方形！只要大家都是完美的地板（不缺角），這塊能貢獻的正方形邊長就是大家最小加上自己。
@@ -212,7 +212,7 @@ def maximalSquare(matrix):
     return max_side * max_side
 ```
 
-### 146. Longest Increasing Path in a Matrix (Hard)
+### 329. Longest Increasing Path in a Matrix (Hard)
 
 - **套路**：DFS + Memoization
 - **💡 白話文解說**：如果我們在每一塊梯田都去算它能滑「多長的滑水道」，那會有太多重複動作！我們不如把每一格曾經算出來的最長坡度紀錄在一本大筆記上。下一次滑過這格時，直接打開筆記本偷抄答案，這就是記憶化搜尋 DFS。
@@ -236,7 +236,7 @@ def longestIncreasingPath(matrix):
     return max(dfs(i, j) for i in range(m) for j in range(n))
 ```
 
-### 152. Combination Sum IV (Med.)
+### 377. Combination Sum IV (Med.)
 
 - **套路**：完全背包（計數版）
 - **💡 白話文解說**：跟湊零錢很像，但這次是「排列組合有順序之分」。湊出 4 的方法可以建立在「已經湊出 1，加上一個 3」，也可以是「湊出 3，加上 1」，這些方法數只要一路從小數字往上疊加，你就能看到最後有多少組合。
@@ -254,7 +254,7 @@ def combinationSum4(nums, target):
     return dp[target]
 ```
 
-### 46. Maximum Profit in Job Scheduling (Hard)
+### 1235. Maximum Profit in Job Scheduling (Hard)
 
 - **套路**：DP + 二分搜尋
 - **💡 白話文解說**：這是排行程表的至高挑戰。當你考慮這個工作該不該賺時，如果你接了，你就要把視線退回到「它開始之前，你做完的那個最無衝突的工作」那邊繼承它最好的利潤；如果不接，就沿用上一個歷史的最佳獲利。
@@ -276,7 +276,7 @@ def jobScheduling(startTime, endTime, profit):
     return dp[n]
 ```
 
-### 25. Next Permutation (Med.)
+### 31. Next Permutation (Med.)
 
 - **套路**：數學觀察
 - **💡 白話文解說**：要找下一個比較大的數字排列，就像你想要在現有數字基礎上稍微「進位」。我們從數字最右邊看，找到第一個「沒有按照大排到小的那個人（下降點）」，把它稍微換成右邊比它大一點點的替死鬼，然後把右邊那些排得老高的數字完全反轉成最小狀態，這就是你要的最輕微進位了！
@@ -297,7 +297,7 @@ def nextPermutation(nums):
     nums[i+1:] = reversed(nums[i+1:])
 ```
 
-### 38. Pow(x, n) (Med.)
+### 50. Pow(x, n) (Med.)
 
 - **套路**：快速冪（分治）
 - **💡 白話文解說**：如果硬乘，要算兩的五十次方你得乘 50 次。那如果我們把 n 切一半呢？（2 的 25次方）算出來平方就是 50 次方啦！只要指數偶數我們就直接基底互質，這就是超神的快速平方降維法。

@@ -22,7 +22,7 @@ def two_pointer_pattern(nums, target):
 
 ---
 
-### 74. Valid Palindrome (Easy)
+### 125. Valid Palindrome (Easy)
 
 - **套路**：對撞指標
 - **思路**：左右各一個指標，跳過非字母數字字元，比較兩端字元是否相同。
@@ -43,7 +43,7 @@ def isPalindrome(s):
     return True
 ```
 
-### 7. Container With Most Water (Med.)
+### 11. Container With Most Water (Med.)
 
 - **套路**：對撞指標 + 貪心
 - **思路**：左右指標計算面積，每次移動較矮的那一邊（因為移動較高的不可能讓面積變大）。
@@ -65,7 +65,7 @@ def maxArea(height):
     return max_water
 ```
 
-### 11. 3Sum (Med.)
+### 15. 3Sum (Med.)
 
 - **套路**：排序 + 固定一個 + 對撞指標
 - **思路**：先排序。外層迴圈固定第一個數 nums[i]，內層用雙指標在 i+1~末尾找兩個數使三數之和為 0。
@@ -98,7 +98,7 @@ def threeSum(nums):
     return result
 ```
 
-### 14. 3Sum Closest (Med.)
+### 16. 3Sum Closest (Med.)
 
 - **套路**：排序 + 固定一個 + 對撞指標
 - **思路**：與 3Sum 相同框架，但改為追蹤「與 target 差距最小」的和。
@@ -124,7 +124,7 @@ def threeSumClosest(nums, target):
     return closest
 ```
 
-### 31. Trapping Rain Water (Hard)
+### 42. Trapping Rain Water (Hard)
 
 - **套路**：對撞指標 + 追蹤左右最高值
 - **思路**：每個位置能接的雨水 = min(左邊最高, 右邊最高) - 自身高度。用雙指標從兩端往中間走，哪邊較矮就處理哪邊（因為另一邊保證更高）。
@@ -149,7 +149,7 @@ def trap(height):
     return water
 ```
 
-### 134. Move Zeroes (Easy)
+### 283. Move Zeroes (Easy)
 
 - **套路**：快慢指標（原地分區）
 - **思路**：slow 指向下一個非零值該放的位置。fast 遍歷陣列，遇到非零就和 slow 交換，slow 前進。
@@ -164,7 +164,7 @@ def moveZeroes(nums):
             slow += 1
 ```
 
-### 168. Squares of a Sorted Array (Easy)
+### 977. Squares of a Sorted Array (Easy)
 
 - **套路**：對撞指標（從兩端取絕對值較大的）
 - **思路**：已排序陣列平方後，最大值在兩端。從兩端開始比較絕對值，大的放到結果陣列尾部。
@@ -185,7 +185,7 @@ def sortedSquares(nums):
     return result
 ```
 
-### 3. Longest Palindromic Substring (Med.)
+### 5. Longest Palindromic Substring (Med.)
 
 - **套路**：中心擴展法
 - **思路**：回文從中心向外擴展。遍歷每個位置作為中心（分奇數和偶數兩種），向兩邊擴展直到不匹配，記錄最長的。
@@ -208,7 +208,7 @@ def longestPalindrome(s):
     return result
 ```
 
-### 8. Palindrome Number (Easy)
+### 9. Palindrome Number (Easy)
 
 - **套路**：反轉一半數字比較
 - **思路**：負數不是回文。把數字的後半段反轉，和前半段比較。當反轉的數 >= 原數時停止。

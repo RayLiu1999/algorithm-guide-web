@@ -6,7 +6,7 @@
 
 ---
 
-### 37. Merge Intervals (Med.)
+### 56. Merge Intervals (Med.)
 
 - **套路**：排序 + 合併
 - **思路**：按起點排序後，逐一檢查是否與前一個重疊。重疊就合併（取較大的終點），不重疊就加入結果。
@@ -25,7 +25,7 @@ def merge(intervals):
     return merged
 ```
 
-### 38. Insert Interval (Med.)
+### 57. Insert Interval (Med.)
 
 - **套路**：三階段處理
 - **💡 白話文解說**：突然被安插了一個外來的全新區間。先安安穩穩放所有在這區間之前的事情。接著，只要有牽扯到這個新區間的人，就把它全部融合吞噬掉，變成一個無敵大行程，最後再把剩下不相干的後續事件接上去。
@@ -51,7 +51,7 @@ def insert(intervals, newInterval):
     return result
 ```
 
-### 126. Meeting Rooms (Easy)
+### 252. Meeting Rooms (Easy)
 
 - **套路**：排序 + 檢查重疊
 - **💡 白話文解說**：非常直覺，只要把所有開會時間按順序排好，然後看看這陣列有沒有任何兩場會議「頭尾互相吃字交疊」了，如果有那就是衝堂了，參加不完！

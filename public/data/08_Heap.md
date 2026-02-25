@@ -22,7 +22,7 @@ def top_k_largest(nums, k):
 
 ---
 
-### 72. K Closest Points to Origin (Med.)
+### 973. K Closest Points to Origin (Med.)
 
 - **套路**：Max-Heap 維護 K 個最近
 - **思路**：用 Max-Heap（存負距離）維護 K 個最近的點。
@@ -42,7 +42,7 @@ def kClosest(points, k):
     return [[x, y] for _, x, y in heap]
 ```
 
-### 108. Kth Largest Element in an Array (Med.)
+### 215. Kth Largest Element in an Array (Med.)
 
 - **套路**：Min-Heap 維護 K 個最大
 - **💡 白話文解說**：給一個有小到大順序的陣列，想把它變成一棵平衡的搜尋樹（左邊小於中間、右邊大於中間）。我們只要總是把陣列「正中央的那個數字」拿來當樹頭，左半邊做成左樹、右半邊做成右樹，就能建起一棵最穩的樹了。
@@ -57,7 +57,7 @@ def findKthLargest(nums, k):
     # 或用 quickselect 做到 O(n) 平均
 ```
 
-### 94. Top K Frequent Words (Med.)
+### 692. Top K Frequent Words (Med.)
 
 - **套路**：Counter + Heap
 - **思路**：統計頻率後用 Heap 取 Top K。
@@ -73,7 +73,7 @@ def topKFrequent(words, k):
     return heapq.nsmallest(k, counts.keys(), key=lambda w: (-counts[w], w))
 ```
 
-### 68. Task Scheduler (Med.)
+### 621. Task Scheduler (Med.)
 
 - **套路**：貪心 + Max-Heap（或公式法）
 - **思路**：最高頻任務決定最少所需時間。公式：(max_freq - 1) \* (n + 1) + count_of_max_freq_tasks。
@@ -91,7 +91,7 @@ def leastInterval(tasks, n):
     return max(result, len(tasks))  # 至少要排完所有任務
 ```
 
-### 127. Meeting Rooms II (Med.)
+### 253. Meeting Rooms II (Med.)
 
 - **套路**：排序 + Min-Heap 追蹤最早結束
 - **思路**：按開始時間排序。用 Min-Heap 維護每個會議室的結束時間。新會議來時，如果最早結束的會議室已結束（end <= start），就重用。
@@ -111,7 +111,7 @@ def minMeetingRooms(intervals):
     return len(heap)
 ```
 
-### 29. Find Median from Data Stream (Hard)
+### 295. Find Median from Data Stream (Hard)
 
 - **套路**：雙堆 (Max-Heap + Min-Heap)
 - **思路**：用 Max-Heap 存較小的那一半，Min-Heap 存較大的那一半。中位數就是堆頂。
@@ -140,7 +140,7 @@ class MedianFinder:
         return (-self.small[0] + self.large[0]) / 2
 ```
 
-### 125. Employee Free Time (Hard)
+### 759. Employee Free Time (Hard)
 
 - **套路**：合併區間 + 排序
 - **思路**：把所有員工的排班攤平排序，找相鄰已排班區間之間的空隙。
@@ -158,7 +158,7 @@ def employeeFreeTime(schedule):
     return result
 ```
 
-### 150. Design Hit Counter (Med.)
+### 362. Design Hit Counter (Med.)
 
 - **套路**：Queue（時間窗口內的事件）
 - **思路**：用 Queue 存每次 hit 的時間戳。getHits 時清除超過 300 秒的舊紀錄。

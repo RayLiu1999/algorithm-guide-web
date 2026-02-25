@@ -6,7 +6,7 @@
 
 ---
 
-### 14. LRU Cache (Med.)
+### 146. LRU Cache (Med.)
 
 - **套路**：Hash Map + 雙向鏈結串列
 - **思路**：Hash Map 提供 O(1) 查找，雙向鏈結串列維護使用順序。存取時移到頭部，滿了就刪尾部。
@@ -35,7 +35,7 @@ class LRUCache:
             self.cache.popitem(last=False)
 ```
 
-### 53. Implement Trie - Prefix Tree (Med.)
+### 208. Implement Trie - Prefix Tree (Med.)
 
 - **套路**：節點樹結構
 - **💡 白話文解說**：你想把整本英文字典建起來？那就每一個字母挖一個洞當作指標陣列往下走。有這條路就一直走，沒有這條路就自己擴建一個洞。在走完最後一個字母時，別忘了這格蓋個章宣告「對！在這裡停下就是一個完整單字」。
@@ -76,7 +76,7 @@ class Trie:
         return node
 ```
 
-### 106. Design Add and Search Words (Med.)
+### 211. Design Add and Search Words (Med.)
 
 - **套路**：Trie + DFS（處理萬用字元 '.'）
 - **💡 白話文解說**：這跟字典樹幾乎一模一樣，唯一不同的當你拿著「. （萬用字元）」走來的時候，你不能只走其中一條特定的路。你要化身鳴人分身大法，把底下所有可能的字母路線全探索一遍！
@@ -108,7 +108,7 @@ class WordDictionary:
         return dfs(self.root, 0)
 ```
 
-### 107. Word Search II (Hard)
+### 212. Word Search II (Hard)
 
 - **套路**：Trie + DFS 回溯
 - **💡 白話文解說**：這是在大大的格子上找單字。如果每次都在上面到處瞎走肯定時間來不及？這題超狂之處在於我們直接「帶著字典走」！只要我跨這一步發覺我的字典裡「根本沒有這種爛字首拼法」，我馬上轉頭死心，超強剪枝神技。
@@ -148,7 +148,7 @@ def findWords(board, words):
     return result
 ```
 
-### 55. Design In-Memory File System (Hard)
+### 588. Design In-Memory File System (Hard)
 
 - **套路**：Trie 變形（目錄結構）
 - **💡 白話文解說**：寫一整個雲端文件總管理系統！檔案跟資料夾的唯一區別，只是它肚子裡有沒有裝資料而已。「看檔案」就是一直遞迴鑽進目錄，找到字典最下方的紙條；「創目錄」就是在 HashMap 裡多蓋幾本子圖層。

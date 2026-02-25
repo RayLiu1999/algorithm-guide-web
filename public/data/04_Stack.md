@@ -23,7 +23,7 @@ def monotonic_stack_pattern(nums):
 
 ---
 
-### 15. Valid Parentheses (Easy)
+### 20. Valid Parentheses (Easy)
 
 - **套路**：括號配對法
 - **思路**：遇到開括號推入對應的閉括號。遇到閉括號時，棧頂必須是對應的閉括號。最後棧必須為空。
@@ -42,7 +42,7 @@ def isValid(s):
     return not stack
 ```
 
-### 22. Min Stack (Med.)
+### 155. Min Stack (Med.)
 
 - **套路**：雙棧（主棧 + 最小值棧）
 - **思路**：每次 Push 時，同步在 min_stack 記錄當前最小值。Pop 時兩邊同步 Pop。
@@ -70,7 +70,7 @@ class MinStack:
         return self.min_stack[-1]
 ```
 
-### 65. Implement Queue using Stacks (Easy)
+### 232. Implement Queue using Stacks (Easy)
 
 - **套路**：雙棧模擬佇列
 - **思路**：用兩個棧。Push 都放入 stack_in。Pop/Peek 時如果 stack_out 空了，就把 stack_in 全部倒過去。
@@ -103,7 +103,7 @@ class MyQueue:
                 self.stack_out.append(self.stack_in.pop())
 ```
 
-### 17. Evaluate Reverse Polish Notation (Med.)
+### 150. Evaluate Reverse Polish Notation (Med.)
 
 - **套路**：棧模擬運算
 - **思路**：遇到數字推入棧，遇到運算子彈出兩個數字計算後推回結果。
@@ -126,7 +126,7 @@ def evalRPN(tokens):
     return stack[0]
 ```
 
-### 116. Daily Temperatures (Med.)
+### 739. Daily Temperatures (Med.)
 
 - **套路**：單調遞減棧
 - **思路**：棧維護「還沒找到更暖天氣的日子」的索引。新的一天如果比棧頂溫度高，棧頂那天的答案就是兩天的距離差。
@@ -145,7 +145,7 @@ def dailyTemperatures(temperatures):
     return result
 ```
 
-### 55. Largest Rectangle in Histogram (Hard)
+### 84. Largest Rectangle in Histogram (Hard)
 
 - **套路**：單調遞增棧
 - **思路**：棧維護遞增的高度索引。當新柱子比棧頂矮時，棧頂的柱子可以確定右邊界，pop 後新的棧頂就是左邊界。
@@ -166,7 +166,7 @@ def largestRectangleArea(heights):
     return max_area
 ```
 
-### 58. Basic Calculator (Hard)
+### 224. Basic Calculator (Hard)
 
 - **套路**：棧保存外層狀態
 - **思路**：遇到 `(` 時把當前結果和符號推入棧保存，遇到 `)` 時彈出恢復。
@@ -198,7 +198,7 @@ def calculate(s):
     return result + sign * num
 ```
 
-### 115. Basic Calculator II (Med.)
+### 227. Basic Calculator II (Med.)
 
 - **套路**：棧 + 延遲計算
 - **思路**：遇到 +/- 時把數字推入棧，遇到 \*/÷ 時立即和棧頂計算。最後棧內所有元素求和。
@@ -222,7 +222,7 @@ def calculate(s):
     return sum(stack)
 ```
 
-### 112. Asteroid Collision (Med.)
+### 735. Asteroid Collision (Med.)
 
 - **套路**：棧模擬碰撞
 - **思路**：正值向右、負值向左。只有棧頂為正且新小行星為負時才會碰撞。碰撞時比較絕對值：大的存活、相等同歸於盡、小的被摧毀。
@@ -246,7 +246,7 @@ def asteroidCollision(asteroids):
     return stack
 ```
 
-### 156. Decode String (Med.)
+### 394. Decode String (Med.)
 
 - **套路**：棧保存外層上下文
 - **思路**：遇到 `[` 把當前字串和數字推入棧，遇到 `]` 彈出後拼接，重複 k 次。
@@ -272,7 +272,7 @@ def decodeString(s):
     return current
 ```
 
-### 20. Generate Parentheses (Med.)
+### 22. Generate Parentheses (Med.)
 
 - **套路**：回溯法 (但概念上是 Stack 的合法序列生成)
 - **思路**：追蹤左括號和右括號的剩餘數量。左括號可用就加左括號；右括號可用且數量 > 左括號剩餘數量時才加右括號。
@@ -294,7 +294,7 @@ def generateParenthesis(n):
     return result
 ```
 
-### 26. Longest Valid Parentheses (Hard)
+### 32. Longest Valid Parentheses (Hard)
 
 - **套路**：棧存索引
 - **思路**：棧底放一個「上一個無法匹配的位置」作為基準。遇到 `(` 推入索引，遇到 `)` 彈出後計算長度。
@@ -316,7 +316,7 @@ def longestValidParentheses(s):
     return max_len
 ```
 
-### 162. Maximum Frequency Stack (Hard)
+### 895. Maximum Frequency Stack (Hard)
 
 - **套路**：頻率分組棧
 - **思路**：用 Hash Map 記錄每個值的頻率，用另一個 Hash Map（頻率 → 棧）按頻率分組。Push 時頻率+1，加到對應棧。Pop 時從最高頻率棧 Pop。

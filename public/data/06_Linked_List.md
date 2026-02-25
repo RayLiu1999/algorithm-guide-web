@@ -31,7 +31,7 @@ def reverse_list(head):
 
 ---
 
-### 51. Reverse Linked List (Easy)
+### 206. Reverse Linked List (Easy)
 
 - **套路**：迭代三指標反轉
 - **思路**：用 prev/curr/next 三個指標，逐一將每個節點的 next 指向前一個。
@@ -50,7 +50,7 @@ def reverseList(head):
     return prev
 ```
 
-### 10. Middle of the Linked List (Easy)
+### 876. Middle of the Linked List (Easy)
 
 - **套路**：快慢指標
 - **思路**：快指標走兩步、慢指標走一步。快到終點時，慢剛好在中間。
@@ -65,7 +65,7 @@ def middleNode(head):
     return slow
 ```
 
-### 9. Linked List Cycle (Easy)
+### 141. Linked List Cycle (Easy)
 
 - **套路**：快慢指標偵測環
 - **思路**：快慢指標同時出發。如果有環，快指標最終會追上慢指標。
@@ -83,7 +83,7 @@ def hasCycle(head):
     return False
 ```
 
-### 16. Merge Two Sorted Lists (Easy)
+### 21. Merge Two Sorted Lists (Easy)
 
 - **套路**：Dummy Node + 逐一比較
 - **思路**：建一個 dummy 節點，每次比較兩個鏈結串列的頭，較小的接到結果後面。
@@ -106,7 +106,7 @@ def mergeTwoLists(list1, list2):
     return dummy.next
 ```
 
-### 119. Palindrome Linked List (Easy)
+### 234. Palindrome Linked List (Easy)
 
 - **套路**：快慢指標找中點 + 反轉後半段 + 逐一比較
 - **思路**：找到中點後反轉後半段，然後從頭和從中間開始逐一比較。
@@ -136,7 +136,7 @@ def isPalindrome(head):
     return True
 ```
 
-### 17. Remove Nth Node From End of List (Med.)
+### 19. Remove Nth Node From End of List (Med.)
 
 - **套路**：快慢指標（間距 N）
 - **思路**：快指標先走 N 步，然後快慢同時走。快到末尾時，慢剛好在倒數第 N 個前面。
@@ -157,7 +157,7 @@ def removeNthFromEnd(head, n):
     return dummy.next
 ```
 
-### 22. Swap Nodes in Pairs (Med.)
+### 24. Swap Nodes in Pairs (Med.)
 
 - **套路**：Dummy Node + 成對交換
 - **思路**：每次取兩個節點交換，指標跳兩步。
@@ -177,7 +177,7 @@ def swapPairs(head):
     return dummy.next
 ```
 
-### 83. Reorder List (Med.)
+### 143. Reorder List (Med.)
 
 - **套路**：找中點 + 反轉後半 + 交錯合併
 - **思路**：1→2→3→4→5 變成 1→5→2→4→3。分三步：找中點切開、反轉後半、交錯合併。
@@ -207,7 +207,7 @@ def reorderList(head):
         first, second = tmp1, tmp2
 ```
 
-### 145. Odd Even Linked List (Med.)
+### 328. Odd Even Linked List (Med.)
 
 - **套路**：分離奇偶串接
 - **思路**：用兩個指標分別串起奇數位和偶數位的節點，最後把偶數鏈接到奇數鏈尾部。
@@ -228,7 +228,7 @@ def oddEvenList(head):
     return head
 ```
 
-### 47. Rotate List (Med.)
+### 61. Rotate List (Med.)
 
 - **套路**：成環再斷開
 - **思路**：尾接頭形成環，然後在 (len - k % len) 處斷開。
@@ -258,7 +258,7 @@ def rotateRight(head, k):
     return new_head
 ```
 
-### 86. Sort List (Med.)
+### 148. Sort List (Med.)
 
 - **套路**：Merge Sort（找中點 + 遞迴排序 + 合併）
 - **思路**：鏈結串列天生適合 Merge Sort：找中點切開、各自排序、合併有序鏈結串列。
@@ -293,7 +293,7 @@ def sortList(head):
     return dummy.next
 ```
 
-### 136. Find the Duplicate Number (Med.)
+### 287. Find the Duplicate Number (Med.)
 
 - **套路**：Floyd 環偵測（快慢指標）
 - **思路**：把值當作 next 索引，問題轉化為「鏈結串列找環的入口」。快慢指標相遇後，一個回起點，兩個各走一步直到再次相遇就是重複值。
@@ -343,7 +343,7 @@ def addTwoNumbers(l1, l2):
     return dummy.next
 ```
 
-### 18. Merge k Sorted Lists (Hard)
+### 23. Merge k Sorted Lists (Hard)
 
 - **套路**：分治合併 / Min-Heap
 - **思路**：用 Min-Heap 同時維護 k 個鏈結串列的當前頭部，每次取最小的加入結果。
@@ -369,7 +369,7 @@ def mergeKLists(lists):
     return dummy.next
 ```
 
-### 23. Reverse Nodes in k-Group (Hard)
+### 25. Reverse Nodes in k-Group (Hard)
 
 - **套路**：逐組反轉
 - **💡 白話文解說**：想像你有 K 副已經排好的撲克牌，你要把它們合併。如果你每次都檢查 K 張牌會太慢，所以你可以找一個「裁判」（最小堆積 Min-Heap），同時把 K 副牌最上面的牌交給裁判。裁判每次只會把最小的那張發給你，你就可以一直拿到目前最小的牌了！

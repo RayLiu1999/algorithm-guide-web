@@ -26,7 +26,7 @@ def sliding_window_longest(s):
 
 ---
 
-### 2. Longest Substring Without Repeating Characters (Med.)
+### 3. Longest Substring Without Repeating Characters (Med.)
 
 - **套路**：滑動窗口 + Hash Set
 - **思路**：窗口內不能有重複字元。右邊新字元若已在窗口中，左邊就持續縮小直到把重複的移除。
@@ -47,7 +47,7 @@ def lengthOfLongestSubstring(s):
     return result
 ```
 
-### 39. Find All Anagrams in a String (Med.)
+### 438. Find All Anagrams in a String (Med.)
 
 - **套路**：固定大小的滑動窗口 + Counter 比對
 - **思路**：窗口大小固定為 p 的長度。滑動窗口每次右移一步，比較窗口內字母頻率是否等於 p 的頻率。
@@ -74,7 +74,7 @@ def findAnagrams(s, p):
     return result
 ```
 
-### 48. Minimum Window Substring (Hard)
+### 76. Minimum Window Substring (Hard)
 
 - **套路**：滑動窗口（尋找最短）
 - **💡 白話文解說**：要把圖片順時針旋轉 90 度，其實有一個數學小魔術：先把它「上下翻轉」（或者沿著對角線翻轉），然後再把每一行「左右翻轉」，結果就會剛好是旋轉 90 度的樣子！這樣就不用去算複雜的座標變換了。
@@ -109,7 +109,7 @@ def minWindow(s, t):
     return result
 ```
 
-### 163. Longest Repeating Character Replacement (Med.)
+### 424. Longest Repeating Character Replacement (Med.)
 
 - **套路**：滑動窗口 + 追蹤最高頻字元
 - **思路**：窗口大小 - 最高頻字元數量 = 需要替換的字元數。如果需替換數 > k，就縮小窗口。
@@ -133,7 +133,7 @@ def characterReplacement(s, k):
     return result
 ```
 
-### 123. Sliding Window Maximum (Hard)
+### 239. Sliding Window Maximum (Hard)
 
 - **套路**：單調遞減佇列 (Monotonic Deque)
 - **思路**：維護一個遞減的 deque。新元素來時，把 deque 尾部所有比它小的都移除（它們不可能再成為最大值）。deque 頭部就是窗口最大值。窗口滑動時，超出範圍的頭部元素移除。
@@ -158,7 +158,7 @@ def maxSlidingWindow(nums, k):
     return result
 ```
 
-### 72. Smallest Range Covering Elements from K Lists (Hard)
+### 632. Smallest Range Covering Elements from K Lists (Hard)
 
 - **套路**：滑動窗口 + 排序
 - **思路**：把所有元素帶上「來自哪個 list」的標記，全部排序。滑動窗口找包含所有 K 個 list 的最短範圍。

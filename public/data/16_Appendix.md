@@ -1,6 +1,6 @@
 # 附錄：其他零散題目
 
-### 11. Roman to Integer (Easy)
+### 13. Roman to Integer (Easy)
 
 - **套路**：查表 + 判斷前減規則
 - **💡 白話文解說**：和 Two Sum 非常相似。我們一樣先排序，固定一個數字，然後用左右指標去找另外兩個數字。如果三個數字的總和比目標大，右邊的指標往左移（變小）；如果比目標小，左邊的往右移（變大），過程隨時更新「目前最接近的總和」。
@@ -18,7 +18,7 @@ def romanToInt(s):
     return result
 ```
 
-### 12. Longest Common Prefix (Easy)
+### 14. Longest Common Prefix (Easy)
 
 - **套路**：逐字元比較
 - **💡 白話文解說**：你可以把腐爛的橘子當作傳染病帶原者。每過一分鐘，它們就會傳染給隔壁健康的新橘子。我們把所有帶原橘子放進等待名單，一分鐘一分鐘地擴散，最後檢查還有沒有沒被傳染到的健康橘子。
@@ -35,7 +35,7 @@ def longestCommonPrefix(strs):
     return strs[0]
 ```
 
-### 6. Reverse Integer (Med.)
+### 7. Reverse Integer (Med.)
 
 - **套路**：數學逐位翻轉
 - **💡 白話文解說**：這題就是考你怎麼把字串變成數字。重點是按部就班：先忽略前面的空白，再看正負號，然後把連續的數字轉出來，遇到不是數字的字元就停。最後記得檢查有沒有超過 32 位元整數的極限。
@@ -53,7 +53,7 @@ def reverse(x):
     return result if -2**31 <= result <= 2**31 - 1 else 0
 ```
 
-### 151. Backspace String Compare (Easy)
+### 844. Backspace String Compare (Easy)
 
 - **套路**：從後往前比較 + 計數跳過
 - **💡 白話文解說**：這不是往前走，而是往後退的文字遊戲！從後往前讀，每看到一個 # 按鍵，你就先記錄「我欠一個刪除」。等你要讀字母的時候有欠債就先把字母殺掉抵銷，還能安全印出來的就是真實留下來的字母了。
@@ -84,7 +84,7 @@ def backspaceCompare(s, t):
     return True
 ```
 
-### 148. Palindrome Pairs (Hard)
+### 336. Palindrome Pairs (Hard)
 
 - **套路**：Hash Map + 分割檢查
 - **💡 白話文解說**：迴文的終極秘密！我們如果把它這單字顛倒過來看是不是出現在 Hash裡，那他們互補。但如果是字串的「這半邊本身就是個迴文了」，那只要它的「另一半顛倒」出現在字典裡，接在前面就是完美對稱了！

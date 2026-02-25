@@ -39,7 +39,7 @@ def bfs(root):
 
 ---
 
-### 63. Maximum Depth of Binary Tree (Easy)
+### 104. Maximum Depth of Binary Tree (Easy)
 
 - **套路**：DFS 遞迴（後序）
 - **思路**：深度 = max(左子樹深度, 右子樹深度) + 1。
@@ -52,7 +52,7 @@ def maxDepth(root):
     return max(maxDepth(root.left), maxDepth(root.right)) + 1
 ```
 
-### 60. Invert Binary Tree (Easy)
+### 226. Invert Binary Tree (Easy)
 
 - **套路**：DFS 遞迴
 - **思路**：交換左右子樹，然後遞迴翻轉。
@@ -66,7 +66,7 @@ def invertTree(root):
     return root
 ```
 
-### 61. Same Tree (Easy)
+### 100. Same Tree (Easy)
 
 - **套路**：同步 DFS
 - **思路**：同時遍歷兩棵樹，比較每個對應位置的值。
@@ -81,7 +81,7 @@ def isSameTree(p, q):
     return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
 ```
 
-### 62. Symmetric Tree (Easy)
+### 101. Symmetric Tree (Easy)
 
 - **套路**：鏡像 DFS
 - **思路**：檢查左子樹的左 == 右子樹的右，左子樹的右 == 右子樹的左。
@@ -98,7 +98,7 @@ def isSymmetric(root):
     return mirror(root.left, root.right)
 ```
 
-### 46. Subtree of Another Tree (Easy)
+### 572. Subtree of Another Tree (Easy)
 
 - **套路**：DFS + isSameTree
 - **💡 白話文解說**：如果要在桌子上把數字亂排。每擺下一個位子，你就會有這一個數字跟「還沒有擺到桌上的那些數字」可以選。所以我們帶著一個「使用清單(Used Array)」闖蕩迴圈，如果用了就畫掉，闖蕩完再把畫掉的痕跡塗銷準備試下一套排法。
@@ -114,7 +114,7 @@ def isSubtree(root, subRoot):
     return isSubtree(root.left, subRoot) or isSubtree(root.right, subRoot)
 ```
 
-### 25. Diameter of Binary Tree (Easy)
+### 543. Diameter of Binary Tree (Easy)
 
 - **套路**：DFS 後序 + 全域變數追蹤最大值
 - **思路**：直徑 = 某節點的左深度 + 右深度。遞迴計算每個節點的深度，同時更新全域最大直徑。
@@ -136,7 +136,7 @@ def diameterOfBinaryTree(root):
     return diameter
 ```
 
-### 69. Balanced Binary Tree (Easy)
+### 110. Balanced Binary Tree (Easy)
 
 - **套路**：DFS 後序 + 提前剪枝
 - **思路**：平衡 = 左右子樹高度差 ≤ 1 且左右子樹各自也平衡。用 -1 表示不平衡來提前剪枝。
@@ -155,7 +155,7 @@ def isBalanced(root):
     return height(root) != -1
 ```
 
-### 67. Convert Sorted Array to Binary Search Tree (Easy)
+### 108. Convert Sorted Array to Binary Search Tree (Easy)
 
 - **套路**：二分遞迴建樹
 - **思路**：取中間元素為根，左半邊遞迴建左子樹，右半邊建右子樹。
@@ -172,7 +172,7 @@ def sortedArrayToBST(nums):
     return root
 ```
 
-### 61. Binary Tree Level Order Traversal (Med.)
+### 102. Binary Tree Level Order Traversal (Med.)
 
 - **套路**：BFS 層序
 - **思路**：用 Queue，每次處理一整層。
@@ -197,7 +197,7 @@ def levelOrder(root):
     return result
 ```
 
-### 64. Binary Tree Zigzag Level Order Traversal (Med.)
+### 103. Binary Tree Zigzag Level Order Traversal (Med.)
 
 - **套路**：BFS + 奇偶層反轉
 - **思路**：和標準層序一樣，但奇數層把結果 reverse。
@@ -224,7 +224,7 @@ def zigzagLevelOrder(root):
     return result
 ```
 
-### 44. Binary Tree Right Side View (Med.)
+### 199. Binary Tree Right Side View (Med.)
 
 - **套路**：BFS 取每層最後一個
 - **思路**：層序遍歷，每層只取最後一個節點放入結果。
@@ -247,7 +247,7 @@ def rightSideView(root):
     return result
 ```
 
-### 88. Maximum Width of Binary Tree (Med.)
+### 662. Maximum Width of Binary Tree (Med.)
 
 - **套路**：BFS + 節點編號
 - **思路**：給每個節點一個編號（二元堆積的方式：左=2i, 右=2i+1），每層寬度 = 最右編號 - 最左編號 + 1。
@@ -271,7 +271,7 @@ def widthOfBinaryTree(root):
     return max_width
 ```
 
-### 59. Validate Binary Search Tree (Med.)
+### 98. Validate Binary Search Tree (Med.)
 
 - **套路**：DFS + 上下界
 - **思路**：每個節點的值必須在 (lower, upper) 範圍內。左子樹 upper 變成當前值，右子樹 lower 變成當前值。
@@ -289,7 +289,7 @@ def isValidBST(root):
     return validate(root, float('-inf'), float('inf'))
 ```
 
-### 62. Kth Smallest Element in a BST (Med.)
+### 230. Kth Smallest Element in a BST (Med.)
 
 - **套路**：中序遍歷 (Inorder) — BST 中序就是排序
 - **思路**：BST 的中序遍歷結果是遞增的。走到第 k 個就是答案。
@@ -310,7 +310,7 @@ def kthSmallest(root, k):
         curr = curr.right
 ```
 
-### 135. Inorder Successor in BST (Med.)
+### 285. Inorder Successor in BST (Med.)
 
 - **套路**：BST 性質搜尋
 - **思路**：如果當前值 <= p.val，後繼在右邊。如果當前值 > p.val，當前可能是後繼，但還要往左看有沒有更小的。
@@ -328,7 +328,7 @@ def inorderSuccessor(root, p):
     return successor
 ```
 
-### 66. Lowest Common Ancestor of a BST (Med.)
+### 235. Lowest Common Ancestor of a Binary Search Tree (Med.)
 
 - **套路**：利用 BST 性質分流
 - **思路**：如果 p, q 都小於當前節點，LCA 在左邊。都大於就在右邊。分岔處就是 LCA。
@@ -345,7 +345,7 @@ def lowestCommonAncestor(root, p, q):
             return root
 ```
 
-### 67. Lowest Common Ancestor of a Binary Tree (Med.)
+### 236. Lowest Common Ancestor of a Binary Tree (Med.)
 
 - **套路**：DFS 後序找分岔點
 - **思路**：遞迴搜尋左右子樹。如果左右都找到了，當前節點就是 LCA。只有一邊找到就回傳那邊。
@@ -362,7 +362,7 @@ def lowestCommonAncestor(root, p, q):
     return left or right
 ```
 
-### 64. Construct Binary Tree from Preorder and Inorder Traversal (Med.)
+### 105. Construct Binary Tree from Preorder and Inorder Traversal (Med.)
 
 - **套路**：前序第一個 = 根，中序切割左右子樹
 - **思路**：前序的第一個元素是根。在中序中找到根的位置，左邊是左子樹，右邊是右子樹。遞迴建構。
@@ -380,7 +380,7 @@ def buildTree(preorder, inorder):
     return root
 ```
 
-### 70. Path Sum II (Med.)
+### 113. Path Sum II (Med.)
 
 - **套路**：DFS + 路徑追蹤
 - **思路**：從根到葉的路徑，邊走邊累計路徑上的值。到葉節點時檢查總和是否等於 target。
@@ -402,7 +402,7 @@ def pathSum(root, targetSum):
     return result
 ```
 
-### 165. Path Sum III (Med.)
+### 437. Path Sum III (Med.)
 
 - **套路**：前綴和 + DFS
 - **思路**：和 Subarray Sum Equals K 一樣的前綴和技巧，只是在樹上做。用 DFS 遍歷時維護前綴和和 Hash Map。
@@ -428,7 +428,7 @@ def pathSum(root, targetSum):
     return count
 ```
 
-### 74. Binary Tree Maximum Path Sum (Hard)
+### 124. Binary Tree Maximum Path Sum (Hard)
 
 - **套路**：DFS 後序 + 全域最大值
 - **思路**：每個節點可以選擇「接上左子樹」或「接上右子樹」或「兩邊都不接」。但路徑不能分叉，所以回傳給父節點時只能選一邊。
@@ -450,7 +450,7 @@ def maxPathSum(root):
     return max_sum
 ```
 
-### 154. All Nodes Distance K in Binary Tree (Med.)
+### 863. All Nodes Distance K in Binary Tree (Med.)
 
 - **套路**：建圖 + BFS
 - **思路**：把樹轉成無向圖（加上 parent 邊），然後從 target 做 BFS，走 K 步。
@@ -484,7 +484,7 @@ def distanceK(root, target, k):
     return list(queue)
 ```
 
-### 32. Serialize and Deserialize Binary Tree (Hard)
+### 297. Serialize and Deserialize Binary Tree (Hard)
 
 - **套路**：前序遍歷 + null 標記
 - **思路**：序列化時用前序遍歷，null 用 "N" 表示。反序列化時按順序讀取，遇到 "N" 返回 None。
@@ -517,7 +517,7 @@ class Codec:
         return dfs()
 ```
 
-### 36. Minimum Height Trees (Med.)
+### 310. Minimum Height Trees (Med.)
 
 - **套路**：拓撲排序剝洋蔥（從葉子向中心）
 - **思路**：MHT 的根一定在「圖的中心」。反覆移除所有葉節點（degree=1），最後剩下的 1-2 個就是答案。

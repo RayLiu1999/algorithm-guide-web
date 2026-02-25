@@ -14,7 +14,7 @@ export interface Category {
 
 // 16 個分類的索引資料
 export const CATEGORIES: Category[] = [
-  { id: 'array-hashing', number: 1, title: '陣列與雜湊表', subtitle: 'Array & Hashing', file: '01_Array_Hashing.md', count: 22 },
+  { id: 'array-hashing', number: 1, title: '陣列與雜湊表', subtitle: 'Array & Hashing', file: '01_Array_Hashing.md', count: 24 },
   { id: 'two-pointers', number: 2, title: '雙指標', subtitle: 'Two Pointers', file: '02_Two_Pointers.md', count: 9 },
   { id: 'sliding-window', number: 3, title: '滑動窗口', subtitle: 'Sliding Window', file: '03_Sliding_Window.md', count: 6 },
   { id: 'stack', number: 4, title: '堆疊', subtitle: 'Stack', file: '04_Stack.md', count: 13 },
@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
   { id: 'tree', number: 7, title: '二元樹', subtitle: 'Tree', file: '07_Tree.md', count: 24 },
   { id: 'heap', number: 8, title: '堆積', subtitle: 'Heap / Priority Queue', file: '08_Heap.md', count: 8 },
   { id: 'backtracking', number: 9, title: '回溯法', subtitle: 'Backtracking', file: '09_Backtracking.md', count: 8 },
-  { id: 'graph', number: 10, title: '圖論', subtitle: 'Graph', file: '10_Graph.md', count: 15 },
+  { id: 'graph', number: 10, title: '圖論', subtitle: 'Graph', file: '10_Graph.md', count: 17 },
   { id: 'dynamic-programming', number: 11, title: '動態規劃', subtitle: 'Dynamic Programming', file: '11_Dynamic_Programming.md', count: 15 },
   { id: 'greedy', number: 12, title: '貪心法', subtitle: 'Greedy', file: '12_Greedy.md', count: 3 },
   { id: 'intervals', number: 13, title: '區間問題', subtitle: 'Intervals', file: '13_Intervals.md', count: 3 },

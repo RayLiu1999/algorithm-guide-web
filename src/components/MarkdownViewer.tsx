@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import type { Components } from 'react-markdown';
+import { Copy, Check } from 'lucide-react';
 
 interface MarkdownViewerProps {
   content: string;
@@ -20,10 +22,8 @@ const components: Components = {
   h4: ({ children }) => (
     <h4 className="text-lg font-medium text-slate-200 mt-6 mb-3">{children}</h4>
   ),
-  // 程式碼區塊 - 強化發光邊框與字體
-  pre: ({ children }) => (
-    <pre className="bg-[#0d1117] border border-slate-800 rounded-xl p-5 overflow-x-auto my-6 text-[13px] leading-relaxed shadow-lg shadow-black/40 custom-scrollbar">{children}</pre>
-  ),
+  // 程式碼區塊 - 強化發光邊框與字體，並加入複製按鈕
+  pre: ({ children }) => <PreWithCopy>{children}</PreWithCopy>,
   code: ({ children, className }) => {
     // 檢查是否為 inline code (沒有 className 表示通常是 inline)
     const isInline = !className;
@@ -77,6 +77,56 @@ const components: Components = {
       {children}
     </a>
   ),
+};
+
+// 封裝 pre 元件以支援複製按鈕
+const PreWithCopy: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    // 嘗試從 children 中提取純文字內容
+    const extractText = (node: React.ReactNode): string => {
+      if (typeof node === 'string' || typeof node === 'number') return String(node);
+      if (Array.isArray(node)) return node.map(extractText).join('');
+      if (React.isValidElement(node)) {
+        const props = node.props as { children?: React.ReactNode };
+        return extractText(props.children);
+      }
+      return '';
+    };
+
+    const text = extractText(children);
+    
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div className="group relative my-6">
+      <button
+        onClick={handleCopy}
+        className="absolute right-3 top-3 z-10 p-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-400 opacity-0 group-hover:opacity-100 transition-all hover:bg-slate-700 hover:text-white flex items-center gap-1.5 text-xs font-medium backdrop-blur-sm"
+        title="複製代碼"
+      >
+        {copied ? (
+          <>
+            <Check size={14} className="text-emerald-400" />
+            <span className="text-emerald-400">已複製</span>
+          </>
+        ) : (
+          <>
+            <Copy size={14} />
+            <span>複製</span>
+          </>
+        )}
+      </button>
+      <pre className="bg-[#0d1117] border border-slate-800 rounded-xl p-5 overflow-x-auto text-[13px] leading-relaxed shadow-lg shadow-black/40 custom-scrollbar m-0">
+        {children}
+      </pre>
+    </div>
+  );
 };
 
 const MarkdownViewer = ({ content }: MarkdownViewerProps) => {

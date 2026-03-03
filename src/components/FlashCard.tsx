@@ -27,7 +27,6 @@ const FlashCard = ({ title, difficulty, explanation, solution, onRate }: FlashCa
     <div className="w-full max-w-3xl mx-auto drop-shadow-2xl">
       {/* 卡片本體 - 加入動畫與玻璃擬態 */}
       <motion.div 
-        layout
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 rounded-3xl overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative"
       >
@@ -45,12 +44,12 @@ const FlashCard = ({ title, difficulty, explanation, solution, onRate }: FlashCa
           <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 tracking-tight">{title}</h2>
         </div>
 
-        {/* 白話文解說區（永遠可見） */}
+        {/* 解說區（永遠可見） */}
         <div className="px-8 py-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-6 h-6 rounded-md bg-amber-500/20 flex items-center justify-center text-amber-400 shadow-inner">💡</div>
             <p className="text-sm font-bold tracking-wider text-amber-400">
-              白話文解說
+              解說
             </p>
           </div>
           <p className="text-slate-300 text-lg leading-relaxed font-medium">{explanation}</p>

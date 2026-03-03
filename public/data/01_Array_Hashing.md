@@ -1,5 +1,32 @@
 # 一、Array & Hashing（陣列與雜湊表）
 
+## 題目目錄
+
+- [1. Two Sum (Easy)](#1-two-sum-easy)
+- [383. Ransom Note (Easy)](#383-ransom-note-easy)
+- [409. Longest Palindrome (Easy)](#409-longest-palindrome-easy)
+- [169. Majority Element (Easy)](#169-majority-element-easy)
+- [217. Contains Duplicate (Easy)](#217-contains-duplicate-easy)
+- [242. Valid Anagram (Easy)](#242-valid-anagram-easy)
+- [121. Best Time to Buy and Sell Stock (Easy)](#121-best-time-to-buy-and-sell-stock-easy)
+- [238. Product of Array Except Self (Med.)](#238-product-of-array-except-self-med)
+- [49. Group Anagrams (Med.)](#49-group-anagrams-med)
+- [53. Maximum Subarray (Med.)](#53-maximum-subarray-med)
+- [525. Contiguous Array (Med.)](#525-contiguous-array-med)
+- [560. Subarray Sum Equals K (Med.)](#560-subarray-sum-equals-k-med)
+- [128. Longest Consecutive Sequence (Med.)](#128-longest-consecutive-sequence-med)
+- [8. String to Integer - atoi (Med.)](#8-string-to-integer---atoi-med)
+- [54. Spiral Matrix (Med.)](#54-spiral-matrix-med)
+- [48. Rotate Image (Med.)](#48-rotate-image-med)
+- [73. Set Matrix Zeroes (Med.)](#73-set-matrix-zeroes-med)
+- [75. Sort Colors (Med.)](#75-sort-colors-med)
+- [136. Single Number (Easy)](#136-single-number-easy)
+- [179. Largest Number (Med.)](#179-largest-number-med)
+- [189. Rotate Array (Med.)](#189-rotate-array-med)
+- [41. First Missing Positive (Hard)](#41-first-missing-positive-hard)
+- [271. Encode and Decode Strings (Med.)](#271-encode-and-decode-strings-med)
+- [380. Insert Delete GetRandom O(1) (Med.)](#380-insert-delete-getrandom-o1-med)
+
 ## 通用套路
 
 **Hash Map 反查法**：當題目要你「找到某個配對/目標」，用 Hash Map 把已經看過的值存起來，每次新元素進來就查表，達成 O(1) 查詢。
@@ -37,495 +64,94 @@ def prefix_sum_pattern(nums, k):
 
 ### 1. Two Sum (Easy)
 
-- **套路**：Hash Map 反查
-- **思路**：遍歷陣列，對每個數字算出 `target - num`，查 Hash Map 是否已存在。存在就找到答案，不存在就把當前數字存入。
-- **💡 白話文解說**：這就像你想找兩張拼圖湊成完整的圖案。與其每次拿著一張拼圖去和剩下的比對（太慢了），不如一邊看一邊把看過的拼圖特徵記在腦海裡，這樣看到下一張時，馬上就能知道另一半有沒有見過！
-- **要點**：不能用同一個元素兩次，所以是先查再存。
-- **複雜度**：O(n) / O(n)
-
-```python
-def twoSum(nums, target):
-    seen = {}
-    for i, num in enumerate(nums):
-        if target - num in seen:
-            return [seen[target - num], i]
-        seen[num] = i
-```
+---
 
 ### 383. Ransom Note (Easy)
 
-- **套路**：計數法 (Counter)
-- **思路**：統計 `magazine` 中每個字母的數量，然後檢查 `ransomNote` 的每個字母是否都夠用。
-- **💡 白話文解說**：想像你有一個字母磁鐵盤（magazine），你想拼出一張勒索信（ransomNote）。你得確保信上的每個字母，你在磁鐵盤裡都有足夠的數量可以用。我們先數好盤子裡每個字母有幾顆，每拼一個字就扣掉一顆，不夠用的話計畫就失敗囉！
-- **要點**：`ransomNote` 的每個字母消耗量不能超過 `magazine` 提供的量。
-- **複雜度**：O(n+m) / O(1)（字母只有 26 個）
-
-```python
-from collections import Counter
-
-def canConstruct(ransomNote, magazine):
-    mag_count = Counter(magazine)
-    for ch in ransomNote:
-        if mag_count[ch] <= 0:
-            return False
-        mag_count[ch] -= 1
-    return True
-```
+---
 
 ### 409. Longest Palindrome (Easy)
 
-- **套路**：計數法
-- **思路**：回文要求字母成對出現。統計每個字母出現次數，每對字母都能放進回文。如果有任何字母剩餘奇數個，還能放一個在正中間。
-- **💡 白話文解說**：想拼出最長的回文，關鍵在於「字母要成對出現」。根据統計，每一對字母都能放進回文（一吐一）。如果剩了奇數個字母，還能就其中一個放在正中間。所以只要數清每個字母有幾顏，統計這些「成對的貢獻」就是答案。
-- **要點**：答案 = 所有偶數貢獻 + 最多一個奇數中心。
-- **複雜度**：O(n) / O(1)
-
-```python
-from collections import Counter
-
-def longestPalindrome(s):
-    counts = Counter(s)
-    length = 0
-    has_odd = False
-    for c in counts.values():
-        length += c // 2 * 2  # 取偶數部分
-        if c % 2 == 1:
-            has_odd = True
-    return length + (1 if has_odd else 0)
-```
+---
 
 ### 169. Majority Element (Easy)
 
-- **套路**：Boyer-Moore 投票法
-- **思路**：維護一個候選人和計數。遇到相同的 +1，不同的 -1，歸零就換人。最後剩下的就是多數元素（因為它佔超過一半）。
-- **💡 白話文解說**：這就像是一場「陣營大亂鬥」。如果有一個族群的人數超過一半，那即使他們跟所有人一對一同歸於盡，最後留下來的也一定是這個族群的人！我們每次看到不同的人就抵銷，最後剩下的那個英雄就是我們要找的大多數。
-- **要點**：這個方法只用 O(1) 空間，比 Counter 更優。
-- **複雜度**：O(n) / O(1)
-
-```python
-def majorityElement(nums):
-    candidate = None
-    count = 0
-    for num in nums:
-        if count == 0:
-            candidate = num
-        count += 1 if num == candidate else -1
-    return candidate
-```
+---
 
 ### 217. Contains Duplicate (Easy)
 
-- **套路**：Hash Set 去重
-- **思路**：把元素逐一加入 Set，如果加入前已存在就是重複。或者直接比較 `len(set(nums))` 和 `len(nums)`。
-- **💡 白話文解說**：就像是在門口放一個點名簿。每進來一個數字，我們就去簿子上查有沒有人來過了。如果已經在簿子上，那這場派對就有重複的人；如果還沒出現過，就把他寫上去。這樣只要逛完一遍就能抓出有沒有重複的人。
-- **複雜度**：O(n) / O(n)
-
-```python
-def containsDuplicate(nums):
-    return len(set(nums)) != len(nums)
-```
+---
 
 ### 242. Valid Anagram (Easy)
 
-- **套路**：計數法
-- **思路**：兩個字串的字母頻率完全相同就是 Anagram。用 Counter 比較即可。
-- **💡 白話文解說**：想知道兩個字是不是由同樣的字母組成的，最簡單的方法就是「點名」。我們先把第一個字的每個字母出現幾次數清楚，然後看第二個字的字母是不是剛好填滿這張點名表，不多不少剛剛好就是 Anagram！
-- **複雜度**：O(n) / O(1)
-
-```python
-from collections import Counter
-
-def isAnagram(s, t):
-    return Counter(s) == Counter(t)
-```
+---
 
 ### 121. Best Time to Buy and Sell Stock (Easy)
 
-- **套路**：一次遍歷追蹤最小值
-- **思路**：遍歷價格，持續記錄「到目前為止的最低價」，每天算「今天賣掉的利潤」，取最大值。
-- **💡 白話文解說**：這就像是你有一張未來的股價清單。你想知道如果你「哪一天買進、哪一天賣出」能賺最多（但買一定要在賣之前）。你只要一邊看股價，一邊記下「到目前為止看過的最低價」，然後每天算一下「如果今天賣掉能賺多少」，最後那個最高紀錄就是答案。
-- **要點**：不能用未來的低價買、過去的高價賣，所以只能往前看。
-- **複雜度**：O(n) / O(1)
-
-```python
-def maxProfit(prices):
-    min_price = float('inf')
-    max_profit = 0
-    for price in prices:
-        min_price = min(min_price, price)
-        max_profit = max(max_profit, price - min_price)
-    return max_profit
-```
+---
 
 ### 238. Product of Array Except Self (Med.)
 
-- **套路**：前綴積 + 後綴積
-- **思路**：對每個位置 i，答案 = 左邊所有數的乘積 × 右邊所有數的乘積。先從左到右算前綴積，再從右到左乘上後綴積。
-- **要點**：不能用除法（題目限制），用兩次遍歷解決。
-- **複雜度**：O(n) / O(1)（輸出陣列不算額外空間）
-
-```python
-def productExceptSelf(nums):
-    n = len(nums)
-    result = [1] * n
-    # 從左到右：result[i] = nums[0] * ... * nums[i-1]
-    prefix = 1
-    for i in range(n):
-        result[i] = prefix
-        prefix *= nums[i]
-    # 從右到左：再乘上 nums[i+1] * ... * nums[n-1]
-    suffix = 1
-    for i in range(n - 1, -1, -1):
-        result[i] *= suffix
-        suffix *= nums[i]
-    return result
-```
+---
 
 ### 49. Group Anagrams (Med.)
 
-- **套路**：Hash Map 分組
-- **思路**：Anagram 排序後的結果相同。把排序後的字串當 key，原始字串收集到同一組。
-- **💡 白話文解說**：Anagram 就是「字母組成完全一樣，只是順序不同」的字串。我們把每個字串拿去「按字母排序」，這樣只要是同一組的，排序完長得都一模一樣！我們就把這些長得一樣的東西丟進同一個籃子裡收集起來就好。
-- **複雜度**：O(n·k·log k) / O(n·k)，k 為字串長度
-
-```python
-from collections import defaultdict
-
-def groupAnagrams(strs):
-    groups = defaultdict(list)
-    for s in strs:
-        key = tuple(sorted(s))  # 排序當 key
-        groups[key].append(s)
-    return list(groups.values())
-```
+---
 
 ### 53. Maximum Subarray (Med.)
 
-- **套路**：Kadane's Algorithm
-- **思路**：維護「以當前元素結尾的最大子陣列和」。每到一個新元素，要嘛接續前面的子陣列（前面的和 + 當前值），要嘛從自己重新開始（當前值），取較大的那個。
-- **要點**：關鍵決策是「要不要繼承前面的子陣列」。如果前面的和是負數，不如拋棄重來。
-- **複雜度**：O(n) / O(1)
-
-```python
-def maxSubArray(nums):
-    current_sum = max_sum = nums[0]
-    for num in nums[1:]:
-        current_sum = max(num, current_sum + num)
-        max_sum = max(max_sum, current_sum)
-    return max_sum
-```
+---
 
 ### 525. Contiguous Array (Med.)
 
-- **套路**：前綴和 + Hash Map
-- **思路**：把 0 視為 -1，問題變成「找最長的子陣列使得和為 0」。用前綴和 + Hash Map 記錄每個前綴和第一次出現的位置，當同一個前綴和再次出現時，中間的子陣列和為 0。
-- **💡 白話文解說**：我們把 0 假裝成 -1，讓這題變成「找最長子陣列使得和為 0」。重點是：如果同一個前綴和在不同位置再次出現，就代表兩個位置之間的子陣列和為 0（即 0 和 1 的數量相同）。我們紀錄每個前綴和第一次出現的最左位置，當再次矇到相同元素就能算出區間長度。
-- **複雜度**：O(n) / O(n)
-
-```python
-def findMaxLength(nums):
-    prefix = 0
-    seen = {0: -1}  # 前綴和 → 最早出現的索引
-    max_len = 0
-    for i, num in enumerate(nums):
-        prefix += 1 if num == 1 else -1
-        if prefix in seen:
-            max_len = max(max_len, i - seen[prefix])
-        else:
-            seen[prefix] = i
-    return max_len
-```
+---
 
 ### 560. Subarray Sum Equals K (Med.)
 
-- **套路**：前綴和 + Hash Map
-- **思路**：與上題類似。前綴和 prefix[i] - prefix[j] = k 代表 j+1 到 i 的子陣列和為 k。用 Hash Map 記錄每個前綴和出現的次數。
-- **複雜度**：O(n) / O(n)
-
-```python
-def subarraySum(nums, k):
-    count = 0
-    prefix = 0
-    seen = {0: 1}
-    for num in nums:
-        prefix += num
-        if prefix - k in seen:
-            count += seen[prefix - k]
-        seen[prefix] = seen.get(prefix, 0) + 1
-    return count
-```
+---
 
 ### 128. Longest Consecutive Sequence (Med.)
 
-- **套路**：Hash Set + 只從起點開始計數
-- **思路**：把所有數字放入 Set。對每個數字，如果 `num - 1` 不在 Set 中，代表它是某個連續序列的起點，從它開始往上數看能連續多長。
-- **要點**：「只從起點開始」這個判斷確保每個數字最多被訪問兩次，保持 O(n)。
-- **複雜度**：O(n) / O(n)
-
-```python
-def longestConsecutive(nums):
-    num_set = set(nums)
-    best = 0
-    for num in num_set:
-        if num - 1 not in num_set:  # 只有起點才往下數
-            length = 1
-            while num + length in num_set:
-                length += 1
-            best = max(best, length)
-    return best
-```
+---
 
 ### 8. String to Integer - atoi (Med.)
 
-- **套路**：逐字元模擬
-- **思路**：跳過空白 → 判斷正負號 → 逐一讀取數字字元 → 溢位檢查。
-- **💡 白話文解說**：這題就是考你怎麼把字串變成數字。重點是按部就班：先忽略前面的空白，再看正負號，然後把連續的數字轉出來，遇到不是數字的字元就停。最後記得檢查有沒有超過 32 位元整數的極限。
-- **要點**：溢位處理是關鍵，超過 32-bit 範圍就截斷。
-- **複雜度**：O(n) / O(1)
-
-```python
-def myAtoi(s):
-    s = s.lstrip()  # 去前導空白
-    if not s:
-        return 0
-    sign = 1
-    i = 0
-    if s[0] in ('+', '-'):
-        sign = -1 if s[0] == '-' else 1
-        i = 1
-    result = 0
-    while i < len(s) and s[i].isdigit():
-        result = result * 10 + int(s[i])
-        i += 1
-    result *= sign
-    # 截斷到 32-bit 範圍
-    return max(-2**31, min(2**31 - 1, result))
-```
+---
 
 ### 54. Spiral Matrix (Med.)
 
-- **套路**：邊界模擬（上下左右四條邊界）
-- **思路**：設定 top/bottom/left/right 四個邊界，按「右→下→左→上」順序走，每走完一邊就收縮對應邊界。
-- **💡 白話文解說**：就像你在走迷宮，但這個迷宮是螺旋狀的。你先一直往右走，撞到牆就往下轉；往下撞到牆就往左轉；往左撞到牆就往上轉...每次轉彎後都要把剛走過的那排「拆掉」，這樣走下去就不會重複，最後就能走完所有的格子。
-- **複雜度**：O(m·n) / O(1)
-
-```python
-def spiralOrder(matrix):
-    result = []
-    top, bottom = 0, len(matrix) - 1
-    left, right = 0, len(matrix[0]) - 1
-    while top <= bottom and left <= right:
-        for col in range(left, right + 1):      # → 右
-            result.append(matrix[top][col])
-        top += 1
-        for row in range(top, bottom + 1):       # ↓ 下
-            result.append(matrix[row][right])
-        right -= 1
-        if top <= bottom:
-            for col in range(right, left - 1, -1):  # ← 左
-                result.append(matrix[bottom][col])
-            bottom -= 1
-        if left <= right:
-            for row in range(bottom, top - 1, -1):  # ↑ 上
-                result.append(matrix[row][left])
-            left += 1
-    return result
-```
+---
 
 ### 48. Rotate Image (Med.)
 
-- **套路**：矩陣轉置 + 水平翻轉
-- **思路**：順時針旋轉 90° = 先沿主對角線轉置，再左右翻轉每一行。
-- **💡 白話文解說**：要把圖片順時針旋轉 90 度，其實有一個數學小魔術：先把它「上下翻轉」（或者沿著對角線翻轉），然後再把每一行「左右翻轉」，結果就會剛好是旋轉 90 度的樣子！這樣就不用去算複雜的座標變換了。
-- **複雜度**：O(n²) / O(1)（原地操作）
-
-```python
-def rotate(matrix):
-    n = len(matrix)
-    # 步驟 1：轉置（沿主對角線翻轉）
-    for i in range(n):
-        for j in range(i + 1, n):
-            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-    # 步驟 2：水平翻轉每一行
-    for row in matrix:
-        row.reverse()
-```
+---
 
 ### 73. Set Matrix Zeroes (Med.)
 
-- **套路**：用第一行/第一列當標記
-- **思路**：如果某格為 0，就在它所在的第一行和第一列做標記。最後根據標記把整行整列歸零。
-- **💡 白話文解說**：如果你找到一個 0，你就必須把那一整行和一整列都變成 0。為了避免「後面才被變成 0 的格子」誤導我們，我們可以直接用矩陣的「第一列」和「第一行」當作記事本，用來標記這行/這列未來需不需要變成 0。
-- **要點**：第一行和第一列本身的 0 需要額外變數記錄。
-- **複雜度**：O(m·n) / O(1)
-
-```python
-def setZeroes(matrix):
-    m, n = len(matrix), len(matrix[0])
-    first_row_zero = any(matrix[0][j] == 0 for j in range(n))
-    first_col_zero = any(matrix[i][0] == 0 for i in range(m))
-    # 用第一行/列標記
-    for i in range(1, m):
-        for j in range(1, n):
-            if matrix[i][j] == 0:
-                matrix[i][0] = 0
-                matrix[0][j] = 0
-    # 根據標記歸零
-    for i in range(1, m):
-        for j in range(1, n):
-            if matrix[i][0] == 0 or matrix[0][j] == 0:
-                matrix[i][j] = 0
-    if first_row_zero:
-        for j in range(n):
-            matrix[0][j] = 0
-    if first_col_zero:
-        for i in range(m):
-            matrix[i][0] = 0
-```
+---
 
 ### 75. Sort Colors (Med.)
 
-- **套路**：三指標原地分區（Dutch National Flag）
-- **思路**：維護三個指標 low/mid/high。mid 遇到 0 就和 low 交換往左放，遇到 2 就和 high 交換往右放，遇到 1 不動。
-- **複雜度**：O(n) / O(1)
-
-```python
-def sortColors(nums):
-    low, mid, high = 0, 0, len(nums) - 1
-    while mid <= high:
-        if nums[mid] == 0:
-            nums[low], nums[mid] = nums[mid], nums[low]
-            low += 1
-            mid += 1
-        elif nums[mid] == 1:
-            mid += 1
-        else:
-            nums[mid], nums[high] = nums[high], nums[mid]
-            high -= 1
-```
+---
 
 ### 136. Single Number (Easy)
 
-- **套路**：XOR 位元運算
-- **思路**：XOR 的特性：a ^ a = 0, a ^ 0 = a。所有成對的數字互相抵消，最後剩下的就是唯一的單獨數字。
-- **複雜度**：O(n) / O(1)
-
-```python
-def singleNumber(nums):
-    result = 0
-    for num in nums:
-        result ^= num
-    return result
-```
+---
 
 ### 179. Largest Number (Med.)
 
-- **套路**：自訂排序
-- **思路**：把數字轉字串後自訂排序規則：比較 a+b 和 b+a 哪個拼起來更大。
-- **要點**：注意全零的情況（例如 [0, 0]→ "0"）。
-- **複雜度**：O(n·log n) / O(n)
-
-```python
-from functools import cmp_to_key
-
-def largestNumber(nums):
-    strs = [str(n) for n in nums]
-    strs.sort(key=cmp_to_key(lambda a, b: (1 if a+b < b+a else -1)))
-    result = ''.join(strs)
-    return '0' if result[0] == '0' else result
-```
+---
 
 ### 189. Rotate Array (Med.)
 
-- **套路**：三次翻轉
-- **思路**：右旋 k 步 = 先整體翻轉，再翻轉前 k 個，再翻轉後面的。
-- **複雜度**：O(n) / O(1)
-
-```python
-def rotate(nums, k):
-    k %= len(nums)
-    nums.reverse()
-    nums[:k] = nums[:k][::-1]
-    nums[k:] = nums[k:][::-1]
-```
+---
 
 ### 41. First Missing Positive (Hard)
 
-- **套路**：原地雜湊（把數字放到對應索引位置）
-- **思路**：長度為 n 的陣列，答案一定在 1~n+1 之間。把數字 x 放到 index x-1 的位置，最後掃一遍找第一個 nums[i] != i+1 的位置。
-- **💡 白話文解說**：想像你在幫一堆亂掉的球衣（號碼 1~N）排位子。最好的排法就是讓 1 號球衣坐在第一個位子、2 號坐在第二個...依此類推。我們把球衣盡量歸位後，從頭檢查誰的位子上坐錯人了，第一個錯位的就是我們要找的「失蹤人口」。
-- **複雜度**：O(n) / O(1)
-
-```python
-def firstMissingPositive(nums):
-    n = len(nums)
-    for i in range(n):
-        while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:
-            # 把 nums[i] 放到正確位置
-            correct = nums[i] - 1
-            nums[i], nums[correct] = nums[correct], nums[i]
-    for i in range(n):
-        if nums[i] != i + 1:
-            return i + 1
-    return n + 1
-```
+---
 
 ### 271. Encode and Decode Strings (Med.)
 
-- **套路**：長度前綴編碼
-- **思路**：編碼時在每個字串前加上「長度 + 分隔符」，解碼時按長度來切割。
-- **複雜度**：O(n) / O(1)
-
-```python
-def encode(strs):
-    return ''.join(f'{len(s)}#{s}' for s in strs)
-
-def decode(s):
-    result = []
-    i = 0
-    while i < len(s):
-        j = s.index('#', i)        # 找分隔符位置
-        length = int(s[i:j])       # 讀取長度
-        result.append(s[j+1:j+1+length])
-        i = j + 1 + length
-    return result
-```
+---
 
 ### 380. Insert Delete GetRandom O(1) (Med.)
-
-- **套路**：Hash Map + 動態陣列
-- **思路**：用 list 存值（支持 random），用 dict 存「值 → 索引」（支持 O(1) 查找）。刪除時把目標與最後一個元素交換再 pop，保持 O(1)。
-- **複雜度**：所有操作 O(1)
-
-```python
-import random
-
-class RandomizedSet:
-    def __init__(self):
-        self.vals = []          # 值的列表
-        self.idx_map = {}       # 值 → 索引
-
-    def insert(self, val):
-        if val in self.idx_map:
-            return False
-        self.idx_map[val] = len(self.vals)
-        self.vals.append(val)
-        return True
-
-    def remove(self, val):
-        if val not in self.idx_map:
-            return False
-        idx = self.idx_map[val]
-        last = self.vals[-1]
-        # 把最後一個元素搬到被刪除的位置
-        self.vals[idx] = last
-        self.idx_map[last] = idx
-        self.vals.pop()
-        del self.idx_map[val]
-        return True
-
-    def getRandom(self):
-        return random.choice(self.vals)
-```
-
----

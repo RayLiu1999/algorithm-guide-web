@@ -33,9 +33,10 @@ export function parseMarkdownToFlashcards(markdown: string): ParsedFlashcard[] {
     // 完整的區塊扣掉第一行作為 solution 內容
     const solution = lines.slice(1).join('\n').trim();
 
-    // 提取白話文解說：找 "- **💡 白話文解說**：" 或 "- **思路**：" 的內容
+    // 提取解說：找 "- **思路**：" 或 "- **解說**：" 或 "- **套路**：" 的內容
     let explanation = '請參考下方程式碼解答。';
-    const explanationMatch = solution.match(/-\s*\*\*(?:💡\s*)?(?:白話文解說|思路)\*\*[：:]\s*(.*)/);
+    const explanationRegex = /-\s*\*\*(?:解說|思路)\*\*[：:]\s*([\s\S]*?)(?=\n-\s*\*\*|$)/;
+    const explanationMatch = solution.match(explanationRegex);
     if (explanationMatch && explanationMatch[1]) {
       explanation = explanationMatch[1].trim();
     }

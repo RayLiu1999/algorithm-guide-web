@@ -1,5 +1,11 @@
 # 十二、Greedy（貪心法）
 
+## 題目目錄
+
+- [55. Jump Game (Med.)](#55-jump-game-med)
+- [134. Gas Station (Med.)](#134-gas-station-med)
+- [435. Non-overlapping Intervals (Med.)](#435-non-overlapping-intervals-med)
+
 ## 通用套路
 
 **核心**：每步做局部最優選擇，最終達到全域最優。關鍵是證明局部最優可以推導出全域最優。
@@ -8,60 +14,10 @@
 
 ### 55. Jump Game (Med.)
 
-- **套路**：貪心追蹤最遠可達
-- **💡 白話文解說**：你的目標是跳到最後面，所以你每站都要算一下「目前為止我最遠最遠能跳到哪裡」。只要這股衝勁（最遠能及之處）一直都可以蓋過你現在站的格子，你就絕對可以跳下去！
-- **思路**：從左到右遍歷，持續更新「能到達的最遠位置」。如果當前位置超過最遠可達，就到不了。
-- **複雜度**：O(n) / O(1)
-
-```python
-def canJump(nums):
-    max_reach = 0
-    for i, jump in enumerate(nums):
-        if i > max_reach:
-            return False
-        max_reach = max(max_reach, i + jump)
-    return True
-```
+---
 
 ### 134. Gas Station (Med.)
 
-- **套路**：一圈貪心
-- **💡 白話文解說**：如果這座島所有加油站加起來的油，夠你繞島跑這圈消耗的油，那你絕對有辦法繞完！我們只要從第一站開始試開，如果油在半路變負數拋錨了，就代表前面那些站當起點都不夠格，直接把起點設為「拋錨的下一站」重新來過。
-- **思路**：如果總油量 >= 總消耗，一定有解。從左到右走，如果到某站油量變負，就從下一站重新開始。
-- **複雜度**：O(n) / O(1)
-
-```python
-def canCompleteCircuit(gas, cost):
-    if sum(gas) < sum(cost):
-        return -1
-    start = 0
-    tank = 0
-    for i in range(len(gas)):
-        tank += gas[i] - cost[i]
-        if tank < 0:
-            start = i + 1
-            tank = 0
-    return start
-```
+---
 
 ### 435. Non-overlapping Intervals (Med.)
-
-- **套路**：按結束時間排序 + 貪心
-- **💡 白話文解說**：你是一個超忙的會議達人！為了能一天開最多個短會議，你必須要盡可能的選「最早結束」的局，因為下局才能馬上接。只要有人會議時間跟上一局衝突，我們就無情剔除那個拖台錢（結束最晚）的會議。
-- **思路**：按結束時間排序，盡量保留結束早的區間（給後面留更多空間），衝突時移除結束晚的。
-- **複雜度**：O(n·log n) / O(1)
-
-```python
-def eraseOverlapIntervals(intervals):
-    intervals.sort(key=lambda x: x[1])
-    count = 0
-    end = float('-inf')
-    for s, e in intervals:
-        if s >= end:
-            end = e
-        else:
-            count += 1
-    return count
-```
-
----

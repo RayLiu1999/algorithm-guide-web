@@ -57,10 +57,10 @@ const components: Components = {
       {children}
     </p>
   ),
-  // 列表 — 偵測白話文解說的列表項目，給予特殊的 callout 樣式
+  // 列表 — 偵測解說的列表項目，給予特殊的 callout 樣式
   li: ({ children }) => {
     const text = String(children);
-    const isCallout = text.includes("💡") || text.includes("白話文解說");
+    const isCallout = text.includes("思路") || text.includes("解說") || text.includes("套路");
 
     if (isCallout) {
       return (

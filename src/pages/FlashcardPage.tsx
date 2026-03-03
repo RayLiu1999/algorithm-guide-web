@@ -135,7 +135,7 @@ const FlashcardPage = () => {
       </header>
 
       {/* 閃卡主要內容區 */}
-      <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8 flex items-center justify-center relative custom-scrollbar">
+      <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8 flex items-start justify-center relative custom-scrollbar">
         <AnimatePresence mode="wait">
           {loading && (
             <motion.div 

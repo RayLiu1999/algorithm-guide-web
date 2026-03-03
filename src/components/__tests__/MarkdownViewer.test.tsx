@@ -12,7 +12,7 @@ def hello():
     return "world"
 \`\`\`
 
-- **💡 白話文解說**：這是一個非常直覺的說明，讓初學者秒懂。
+- **解說**：這是一個非常直覺的說明，讓初學者秒懂。
 
 - **套路**：暴力法 O(n²)
 `;
@@ -37,9 +37,9 @@ describe('MarkdownViewer', () => {
     expect(pre?.textContent).toContain('hello');
   });
 
-  it('能渲染白話文解說，並呈現特殊 callout 樣式', () => {
+  it('能渲染解說，並呈現特殊 callout 樣式', () => {
     render(<MarkdownViewer content={MOCK_MARKDOWN} />);
-    // 白話文解說的文字應出現在畫面上
+    // 解說的文字應出現在畫面上
     expect(screen.getByText(/這是一個非常直覺的說明/i)).toBeInTheDocument();
   });
 });

@@ -1,5 +1,14 @@
 # 三、Sliding Window（滑動窗口）
 
+## 題目目錄
+
+- [3. Longest Substring Without Repeating Characters (Med.)](#3-longest-substring-without-repeating-characters-med)
+- [438. Find All Anagrams in a String (Med.)](#438-find-all-anagrams-in-a-string-med)
+- [76. Minimum Window Substring (Hard)](#76-minimum-window-substring-hard)
+- [424. Longest Repeating Character Replacement (Med.)](#424-longest-repeating-character-replacement-med)
+- [239. Sliding Window Maximum (Hard)](#239-sliding-window-maximum-hard)
+- [632. Smallest Range Covering Elements from K Lists (Hard)](#632-smallest-range-covering-elements-from-k-lists-hard)
+
 ## 通用套路
 
 **用途**：在「連續子陣列/子字串」中找符合條件的最長或最短區間。
@@ -28,170 +37,88 @@ def sliding_window_longest(s):
 
 ### 3. Longest Substring Without Repeating Characters (Med.)
 
-- **套路**：滑動窗口 + Hash Set
-- **思路**：窗口內不能有重複字元。右邊新字元若已在窗口中，左邊就持續縮小直到把重複的移除。
-- **💡 白話文解說**：你手上有一個可以伸縮的框框（窗口）。你把右邊界不斷往右拉，把新字元加進框內；一旦你發現框內出現重複字元了，就把左邊界往右縮，直到把那個重複的字元吐出去為止。過程中記錄這個框框最長有多大。
-- **複雜度**：O(n) / O(min(n, 字元集大小))
+- **套路**：滑動窗口 + 字典記錄索引 (跳躍式)
+- **思路**：當遇到重複字符時，left 指標直接跳躍到重複字符的下一個位置。
+  - 注意：之所以要 max() 取 left，是因為例如 "abba"，當 right 指向最後一個 'a' 時，char_index_map['a'] 是 0。但此時 left 已經因為中間的 'bb' 移動到了 2。如果直接取 0 + 1，left 會往回跳到 1，導致窗口錯誤。使用 max(left, index + 1) 確保 left 具備單調遞增性。
+- **TC**：O(n)
+  - n 表示字串的長度，right 指標遍歷一次字串，每個字元僅被訪問與處理一次。
+- **SC**：O(min(n, m))
+  - n (長度限制)：Map 大小不可能超過字串總字數。
+  - m (種類過濾)：Map 的 Key 具備唯一性，數量受限於「字元集大小」（如 小寫英文字母有 26 個，ASCII 的 128 種）。
+  - 總結：之所以不是 O(n) 而是 O(min(n, m))，是因為就算 n 長度超長，但是 map 一樣是紀錄不重複內容，不會超過 m，因此取 min(n, m)。
+- **其他思路**：
+  - 普通滑動窗口（毛毛蟲式）：使用 set 記錄窗口內的字元，當遇到重複字元時，left 指標逐個右移縮小窗口，直到重複字元被移出。TC: O(n) (每個字元進出窗口各一次，總計 2n), SC: O(min(n, m))。
+- **解法比較**：
+  - 跳躍式滑動窗口：
+    - 優點：常數時間更優，left 是一步到位而非逐格移動。
+    - 缺點：邏輯較抽象，需處理 left 往回跳的邊界陷阱。
+  - 普通滑動窗口：
+    - 優點：代碼邏輯最通用（Caterpillar Template），易於擴展到其他滑動窗口題目。
+    - 缺點：在極端情況下（如字串完全重複），left 需頻繁執行 remove 操作。
+- **測試重點 (Testing)**：
+  - **空字串**：傳入 `""` 應回傳 `0`。
+  - **全重複字串**：傳入 `"aaaaa"` 應回傳 `1`。
+  - **無重複字串**：傳入 `"abcdefg"` 應回傳 `7`。
+  - **包含重複的字串**：傳入 `"abcabcbb"` 應回傳 `3`。
+  - **包含重複且會導致 left 回跳的字串**：傳入 `"abba"` 應回傳 `2`。
 
 ```python
-def lengthOfLongestSubstring(s):
-    seen = set()
+# 跳躍式滑動窗口
+def lengthOfLongestSubstring(s: str) -> int:
+    # 記錄字符最後出現的位置
+    char_index_map = {}
     left = 0
-    result = 0
+    max_length = 0
     for right in range(len(s)):
-        while s[right] in seen:
-            seen.remove(s[left])
-            left += 1
-        seen.add(s[right])
-        result = max(result, right - left + 1)
-    return result
-```
+        current_char = s[right]
+        # 如果當前字符已經在窗口中出現過
+        if current_char in char_index_map:
+            # 移動 left 指標到重複字符的下一個位置
+            # max() 確保 left 不會往回移動（處理 "abba" 這種情況）
+            left = max(left, char_index_map[current_char] + 1)
+        # 更新當前字符的位置
+        char_index_map[current_char] = right
+        # 更新最大長度
+        max_length = max(max_length, right - left + 1)
+    return max_length
 
-### 438. Find All Anagrams in a String (Med.)
-
-- **套路**：固定大小的滑動窗口 + Counter 比對
-- **思路**：窗口大小固定為 p 的長度。滑動窗口每次右移一步，比較窗口內字母頻率是否等於 p 的頻率。
-- **複雜度**：O(n) / O(1)
-
-```python
-from collections import Counter
-
-def findAnagrams(s, p):
-    if len(s) < len(p):
-        return []
-    p_count = Counter(p)
-    window = Counter(s[:len(p)])
-    result = []
-    if window == p_count:
-        result.append(0)
-    for i in range(len(p), len(s)):
-        window[s[i]] += 1                 # 右邊加入
-        window[s[i - len(p)]] -= 1        # 左邊移除
-        if window[s[i - len(p)]] == 0:
-            del window[s[i - len(p)]]
-        if window == p_count:
-            result.append(i - len(p) + 1)
-    return result
-```
-
-### 76. Minimum Window Substring (Hard)
-
-- **套路**：滑動窗口（尋找最短）
-- **💡 白話文解說**：這就像是在一段很長的字串裡找「尋寶拼圖」。你先一直往右走，直到手上的碎片湊齊了（滿足條件）；接著，你為了追求「最精簡」，開始從左邊丟掉沒用的碎片，直到再丟一個就會湊不齊為止。這時候記下的長度，就是最短的距離。
-- **思路**：右邊擴展直到窗口包含 t 的所有字元，然後左邊收縮找最小窗口。用兩個 Counter 比對 + `formed` 計數追蹤滿足條件的字元數量。
-- **複雜度**：O(n+m) / O(n+m)
-
-```python
-from collections import Counter
-
-def minWindow(s, t):
-    if not t:
-        return ""
-    t_count = Counter(t)
-    window = {}
-    have, need = 0, len(t_count)  # need = 需要滿足的不同字元數
-    result = ""
-    min_len = float('inf')
+# 普通滑動窗口
+def lengthOfLongestSubstring(s: str) -> int:
+    # 記錄窗口內的字符
+    window = set()
     left = 0
+    max_length = 0
     for right in range(len(s)):
-        ch = s[right]
-        window[ch] = window.get(ch, 0) + 1
-        if ch in t_count and window[ch] == t_count[ch]:
-            have += 1
-        while have == need:  # 窗口已包含所有目標字元，嘗試收縮
-            if right - left + 1 < min_len:
-                min_len = right - left + 1
-                result = s[left:right+1]
-            window[s[left]] -= 1
-            if s[left] in t_count and window[s[left]] < t_count[s[left]]:
-                have -= 1
+        current_char = s[right]
+        # 如果當前字符已經在窗口中出現過
+        while current_char in window:
+            # 移除左邊的字符
+            window.remove(s[left])
+            # 移動 left 指標
             left += 1
-    return result
-```
-
-### 424. Longest Repeating Character Replacement (Med.)
-
-- **套路**：滑動窗口 + 追蹤最高頻字元
-- **思路**：窗口大小 - 最高頻字元數量 = 需要替換的字元數。如果需替換數 > k，就縮小窗口。
-- **要點**：`max_freq` 不需要嚴格遞減（只會影響窗口不縮小，但不影響正確性）。
-- **複雜度**：O(n) / O(1)
-
-```python
-def characterReplacement(s, k):
-    count = {}
-    left = 0
-    max_freq = 0
-    result = 0
-    for right in range(len(s)):
-        count[s[right]] = count.get(s[right], 0) + 1
-        max_freq = max(max_freq, count[s[right]])
-        # 窗口大小 - 最高頻 > k：需要替換的太多了
-        if (right - left + 1) - max_freq > k:
-            count[s[left]] -= 1
-            left += 1
-        result = max(result, right - left + 1)
-    return result
-```
-
-### 239. Sliding Window Maximum (Hard)
-
-- **套路**：單調遞減佇列 (Monotonic Deque)
-- **思路**：維護一個遞減的 deque。新元素來時，把 deque 尾部所有比它小的都移除（它們不可能再成為最大值）。deque 頭部就是窗口最大值。窗口滑動時，超出範圍的頭部元素移除。
-- **複雜度**：O(n) / O(k)
-
-```python
-from collections import deque
-
-def maxSlidingWindow(nums, k):
-    dq = deque()  # 存索引，對應的值保持遞減
-    result = []
-    for i in range(len(nums)):
-        # 移除超出窗口的頭部
-        while dq and dq[0] < i - k + 1:
-            dq.popleft()
-        # 移除尾部所有比當前值小的
-        while dq and nums[dq[-1]] < nums[i]:
-            dq.pop()
-        dq.append(i)
-        if i >= k - 1:
-            result.append(nums[dq[0]])
-    return result
-```
-
-### 632. Smallest Range Covering Elements from K Lists (Hard)
-
-- **套路**：滑動窗口 + 排序
-- **思路**：把所有元素帶上「來自哪個 list」的標記，全部排序。滑動窗口找包含所有 K 個 list 的最短範圍。
-- **複雜度**：O(n·log n) / O(n)
-
-```python
-def smallestRange(nums):
-    tagged = []
-    for i, lst in enumerate(nums):
-        for val in lst:
-            tagged.append((val, i))
-    tagged.sort()
-
-    k = len(nums)
-    count = {}         # list_id → 在窗口中的出現次數
-    have = 0           # 覆蓋了幾個 list
-    left = 0
-    best = [-10**5, 10**5]
-
-    for right in range(len(tagged)):
-        val, group = tagged[right]
-        count[group] = count.get(group, 0) + 1
-        if count[group] == 1:
-            have += 1
-        while have == k:
-            l_val, l_group = tagged[left]
-            if tagged[right][0] - l_val < best[1] - best[0]:
-                best = [l_val, tagged[right][0]]
-            count[l_group] -= 1
-            if count[l_group] == 0:
-                have -= 1
-            left += 1
-    return best
+        # 將當前字符加入窗口
+        window.add(current_char)
+        # 更新最大長度
+        max_length = max(max_length, right - left + 1)
+    return max_length
 ```
 
 ---
+
+### 438. Find All Anagrams in a String (Med.)
+
+---
+
+### 76. Minimum Window Substring (Hard)
+
+---
+
+### 424. Longest Repeating Character Replacement (Med.)
+
+---
+
+### 239. Sliding Window Maximum (Hard)
+
+---
+
+### 632. Smallest Range Covering Elements from K Lists (Hard)

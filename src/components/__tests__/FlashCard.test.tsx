@@ -12,7 +12,7 @@ const MOCK_PROPS = {
 };
 
 describe('FlashCard', () => {
-  it('預設顯示題目標題與白話文解說', () => {
+  it('預設顯示題目標題與解說', () => {
     render(<FlashCard {...MOCK_PROPS} />);
     expect(screen.getByText(/Two Sum/i)).toBeInTheDocument();
     expect(screen.getByText(/就像你想找兩張拼圖/i)).toBeInTheDocument();

@@ -64,6 +64,37 @@ def prefix_sum_pattern(nums, k):
 
 ### 1. Two Sum (Easy)
 
+- **套路**： Hash Map 反查法
+- **思路**：
+  - 遍歷陣列時，不直接找另一個數字，而是問 Hash Map：「我的另一半（target - num）在不在你家？」。
+  - 如果在，直接回傳兩人的索引；如果不在，就把「自己」存入 Map，讓後面的人來找。
+- **TC**：O(n)
+  - 只需要掃描陣列一次。Hash Map 的查詢與插入平均皆為 O(1)。
+- **SC**：O(n)
+  - 最壞情況下，需要把除最後一個數字外的所有數字都存進 Hash Map。
+  - 註：因為數字範圍通常極大，這裡不使用 m (種類) 分析，直接以 n (總數) 為準。
+- **其他思路**：
+  - 暴力解 (Brute Force)：兩層 for 迴圈硬找。TC: O(n^2), SC: O(1)。
+  - 排序 + 雙指標：先排序再從兩頭找。TC: O(n \log n), SC: O(1) (取決於排序演算法)。
+- **解法比較**：
+  - Hash Map：優點：速度最快 (O(n))。缺點：需要額外的記憶體空間。
+  - 排序 + 雙指標：優點：節省空間。缺點：會打亂原始索引（若題目要求回傳索引，需額外處理），且速度較慢。
+- **測試重點 (Testing)**：
+  - **重複數字**：傳入 `[3, 3], target = 6`，應回傳 `[0, 1]`（確保不會自己找自己）。
+  - **無解案例**：傳入 `[1, 2, 3], target = 7`，應回傳 `[]`。
+  - **負數案例**：傳入 `[-1, -3], target = -4`，應回傳 `[0, 1]`。
+
+```python
+# 套路模板：Hash Map 反查
+def two_sum_pattern(nums, target):
+    seen = {}  # 值 → 索引
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+```
+
 ---
 
 ### 383. Ransom Note (Easy)

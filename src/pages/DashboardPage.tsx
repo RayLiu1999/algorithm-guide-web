@@ -1,21 +1,19 @@
 // DashboardPage.tsx — 首頁儀表板：顯示整體學習進度與各分類概覽
 import { Link } from 'react-router-dom';
 import { CATEGORIES, TOTAL_PROBLEMS } from '../data/index';
-// import { useProgressStore } from '../store/progressStore';
+import { useProgressStore } from '../store/progressStore';
 import { motion, type Variants } from 'framer-motion';
 
 const DashboardPage = () => {
-  // const { getStatus } = useProgressStore();
-
-  // 計算已掌握的題數
-  const masteredCount = CATEGORIES.reduce((total) => {
-    // 每個分類都預設用流水號當題目 id（簡化版，之後可細化）
-    return total;
-  }, 0);
+  const progress = useProgressStore((state) => state.progress);
+  const masteredCount = Object.values(progress).filter((status) => status === 'mastered').length;
 
   // 各分類的掌握統計
   const categoryStats = CATEGORIES.map((cat) => {
-    const mastered = 0; // Phase 4 再細化
+    const categoryKeyPrefix = `${cat.id}:`;
+    const mastered = Object.entries(progress).filter(
+      ([key, status]) => key.startsWith(categoryKeyPrefix) && status === 'mastered'
+    ).length;
     const percent = cat.count > 0 ? Math.round((mastered / cat.count) * 100) : 0;
     return { ...cat, mastered, percent };
   });
@@ -163,9 +161,20 @@ const DashboardPage = () => {
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold bg-gradient-to-br ${GRADIENT_COLORS[i % GRADIENT_COLORS.length]} text-white shadow-lg shadow-black/20 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                       {cat.number}
                     </div>
-                    <span className="text-xs font-medium text-slate-400 bg-slate-950/50 px-2.5 py-1 rounded-full border border-slate-700/50">
-                      {cat.count} 題
-                    </span>
+                    <div className="flex flex-col items-end gap-2">
+                      <span className="text-xs font-medium text-slate-400 bg-slate-950/50 px-2.5 py-1 rounded-full border border-slate-700/50 tabular-nums">
+                        {cat.count} 題
+                      </span>
+                      <span
+                        className={`text-xs font-medium px-2.5 py-1 rounded-full border tabular-nums ${
+                          cat.mastered > 0
+                            ? 'text-emerald-300 bg-emerald-950/60 border-emerald-500/30'
+                            : 'text-slate-500 bg-slate-950/40 border-slate-700/50'
+                        }`}
+                      >
+                        已掌握 {cat.mastered} 題
+                      </span>
+                    </div>
                   </div>
                   
                   <div className="flex-1">

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
 import { describe, it, expect } from 'vitest';
@@ -19,8 +19,8 @@ describe('CategorySidebar', () => {
 
   it('顯示每個分類的題數', () => {
     renderWithRouter(<CategorySidebar activeCategoryId={null} />);
-    // 確認第一個分類的題數 22 有顯示
-    expect(screen.getByText('22')).toBeInTheDocument();
+    const firstCategoryLink = screen.getByRole('link', { name: /Array & Hashing/i });
+    expect(within(firstCategoryLink).getByText(String(CATEGORIES[0].count))).toBeInTheDocument();
   });
 
   it('當 activeCategoryId 對應的分類應有 active 高亮樣式', () => {

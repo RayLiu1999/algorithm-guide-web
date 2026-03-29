@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getCategoryById } from '../data/index';
-import { useProgressStore } from '../store/progressStore';
+import { createProgressKey, useProgressStore } from '../store/progressStore';
 import FlashCard from '../components/FlashCard';
 import { parseMarkdownToFlashcards } from '../utils/markdownParser';
 import type { ParsedFlashcard } from '../utils/markdownParser';
@@ -47,7 +47,7 @@ const FlashcardPage = () => {
     if (!cards[currentIndex]) return;
     
     // 儲存狀態進 Zustand store
-    setStatus(cards[currentIndex].id, status);
+    setStatus(createProgressKey(category.id, cards[currentIndex].id), status);
     
     // 進入下一張
     setCurrentIndex((prev) => prev + 1);

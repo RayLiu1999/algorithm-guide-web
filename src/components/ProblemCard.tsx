@@ -47,12 +47,27 @@ const ProblemCard = ({
   onBookmarkToggle,
 }: ProblemCardProps) => {
   const statusCfg = STATUS_CONFIG[status];
+  const isMastered = status === 'mastered';
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 bg-slate-800/50 hover:bg-slate-800 rounded-xl border border-slate-700/50 transition-all group">
+    <div
+      className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all group ${
+        isMastered
+          ? 'bg-emerald-950/20 hover:bg-emerald-950/30 border-emerald-500/30'
+          : 'bg-slate-800/50 hover:bg-slate-800 border-slate-700/50'
+      }`}
+    >
       {/* 題目名稱與難度 */}
       <div className="flex-1 min-w-0">
-        <span className="text-slate-200 font-medium text-sm truncate block">{title}</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-slate-200 font-medium text-sm truncate block">{title}</span>
+          {isMastered && (
+            <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+              <CheckCircle2 size={12} />
+              已掌握
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-2 mt-1">
           {/* 難度標籤 */}
           <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${DIFFICULTY_STYLES[difficulty]}`}>

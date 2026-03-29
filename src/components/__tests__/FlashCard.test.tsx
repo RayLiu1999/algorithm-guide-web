@@ -33,7 +33,7 @@ describe('FlashCard', () => {
     const { container } = render(<FlashCard {...MOCK_PROPS} />);
     const revealButton = screen.getByRole('button', { name: /顯示解答/i });
     await userEvent.click(revealButton);
-    // rehype-highlight 會拆成多個 span，故改用 pre 的 textContent 驗證
+    await screen.findByText(/Python 解法/i);
     const pre = container.querySelector('pre');
     expect(pre).toBeInTheDocument();
     expect(pre?.textContent).toContain('twoSum');
@@ -42,15 +42,15 @@ describe('FlashCard', () => {
   it('解答展開後，顯示「已掌握」與「還不熟」評分按鈕', async () => {
     render(<FlashCard {...MOCK_PROPS} />);
     await userEvent.click(screen.getByRole('button', { name: /顯示解答/i }));
-    expect(screen.getByRole('button', { name: /已掌握/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /還不熟/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /已掌握/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /還不熟/i })).toBeInTheDocument();
   });
 
   it('點擊「已掌握」觸發 onRate 並傳入 mastered', async () => {
     const onRate = vi.fn();
     render(<FlashCard {...MOCK_PROPS} onRate={onRate} />);
     await userEvent.click(screen.getByRole('button', { name: /顯示解答/i }));
-    await userEvent.click(screen.getByRole('button', { name: /已掌握/i }));
+    await userEvent.click(await screen.findByRole('button', { name: /已掌握/i }));
     expect(onRate).toHaveBeenCalledWith('mastered');
   });
 
@@ -58,7 +58,7 @@ describe('FlashCard', () => {
     const onRate = vi.fn();
     render(<FlashCard {...MOCK_PROPS} onRate={onRate} />);
     await userEvent.click(screen.getByRole('button', { name: /顯示解答/i }));
-    await userEvent.click(screen.getByRole('button', { name: /還不熟/i }));
+    await userEvent.click(await screen.findByRole('button', { name: /還不熟/i }));
     expect(onRate).toHaveBeenCalledWith('in_progress');
   });
 });

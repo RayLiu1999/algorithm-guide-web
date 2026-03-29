@@ -11,7 +11,7 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
-    const headline = screen.getByText(/AlgorithmGuide 教學互動網/i);
+    const headline = screen.getByText(/AlgorithmGuide/i);
     expect(headline).toBeInTheDocument();
   });
 
@@ -22,6 +22,6 @@ describe('App', () => {
       </MemoryRouter>
     );
     // 首頁應渲染 DashboardPage 的內容
-    expect(screen.getByText(/首頁/i)).toBeInTheDocument();
+    expect(screen.getByText(/Algorithm Mastery/i)).toBeInTheDocument();
   });
 });

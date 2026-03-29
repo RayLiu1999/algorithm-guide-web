@@ -28,7 +28,15 @@ describe('ProblemCard', () => {
     render(
       <ProblemCard {...MOCK_PROBLEM} status="mastered" onStatusChange={vi.fn()} onBookmarkToggle={vi.fn()} />
     );
-    expect(screen.getByText(/已掌握/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/已掌握/i)).toHaveLength(2);
+  });
+
+  it('狀態為 mastered 時會在題目名稱旁顯示標記', () => {
+    render(
+      <ProblemCard {...MOCK_PROBLEM} status="mastered" onStatusChange={vi.fn()} onBookmarkToggle={vi.fn()} />
+    );
+
+    expect(screen.getAllByText(/已掌握/i)).toHaveLength(2);
   });
 
   it('點擊「標示為已掌握」按鈕時觸發 onStatusChange callback', async () => {

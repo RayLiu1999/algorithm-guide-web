@@ -132,7 +132,7 @@ const CategoryPage = () => {
                   transition={{ duration: 0.4 }}
                   className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 rounded-3xl p-6 md:p-10 shadow-xl shadow-black/10"
                 >
-                  <MarkdownViewer content={markdownContent} />
+                  <MarkdownViewer content={markdownContent} categoryId={category.id} />
                 </motion.div>
               )}
             </AnimatePresence>

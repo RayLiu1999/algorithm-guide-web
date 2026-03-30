@@ -172,7 +172,13 @@ const FlashcardPage = () => {
                 key={cards[currentIndex].id}
                 initial={{ opacity: 0, x: 100, scale: 0.95, rotate: 2 }}
                 animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, x: -100, scale: 0.95, rotate: -2 }}
+                exit={{ 
+                  opacity: 0, 
+                  x: -100, 
+                  scale: 0.95, 
+                  rotate: -2,
+                  transition: { duration: 0.15, ease: "easeIn" }
+                }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
                 className="w-full max-w-4xl py-6 md:py-12"
               >

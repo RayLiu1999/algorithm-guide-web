@@ -44,7 +44,7 @@ const FlashcardPage = () => {
   }, [category]);
 
   const handleRate = (status: ProblemStatus) => {
-    if (!cards[currentIndex]) return;
+    if (!cards[currentIndex] || !category) return;
     
     // 儲存狀態進 Zustand store
     setStatus(createProgressKey(category.id, cards[currentIndex].id), status);

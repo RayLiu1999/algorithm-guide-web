@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CATEGORIES, TOTAL_PROBLEMS } from '../data/index';
 import { useProgressStore } from '../store/progressStore';
 import { motion, type Variants } from 'framer-motion';
+import CategorySidebar from '../components/CategorySidebar';
 
 const DashboardPage = () => {
   const progress = useProgressStore((state) => state.progress);
@@ -54,32 +55,7 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-1 w-full overflow-hidden">
       {/* 側邊欄（首頁不 active 任何分類） */}
-      <nav className="w-72 h-[calc(100vh-4rem)] bg-slate-950/50 border-r border-slate-800/50 overflow-y-auto flex-shrink-0 p-4 custom-scrollbar lg:block hidden">
-        <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4 px-2">
-          演算法分類 (Categories)
-        </h2>
-        <ul className="space-y-1">
-          {CATEGORIES.map((cat, i) => (
-            <li key={cat.id}>
-              <Link
-                to={`/category/${cat.id}`}
-                className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-all duration-200 group relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-100%] group-hover:translate-x-[100%] duration-1000 ease-in-out" />
-                <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold bg-gradient-to-br ${GRADIENT_COLORS[i % GRADIENT_COLORS.length]} text-white flex-shrink-0 shadow-sm shadow-black/20 group-hover:scale-110 transition-transform`}>
-                  {cat.number}
-                </span>
-                <span className="flex-1 min-w-0">
-                  <span className="block truncate font-medium">{cat.subtitle}</span>
-                  <span className="block text-[11px] text-slate-500 truncate group-hover:text-slate-400 transition-colors">{cat.title}</span>
-                </span>
-                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 tabular-nums">{cat.count}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
+      <CategorySidebar activeCategoryId={null} />
       {/* 右側主內容 */}
       <main className="flex-1 h-[calc(100vh-4rem)] overflow-y-auto p-6 md:p-10 custom-scrollbar relative">
         <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2" />

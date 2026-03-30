@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CATEGORIES } from '../data/index';
+import { useUiStore } from '../store/uiStore';
 
 interface CategorySidebarProps {
   activeCategoryId: string | null;
@@ -26,8 +27,27 @@ const CATEGORY_COLORS = [
 ];
 
 const CategorySidebar = ({ activeCategoryId }: CategorySidebarProps) => {
+  const { isMobileMenuOpen, setMobileMenuOpen } = useUiStore();
+
   return (
-    <nav className="w-72 h-[calc(100vh-4rem)] bg-slate-950/50 border-r border-slate-800/50 overflow-y-auto flex-shrink-0 p-4 custom-scrollbar lg:block hidden">
+    <>
+      {/* 行動版遮罩 */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      <nav className={`
+        fixed lg:static inset-y-16 left-0 z-50
+        w-72 h-[calc(100vh-4rem)] 
+        bg-slate-950 shadow-2xl lg:shadow-none lg:bg-slate-950/50 
+        border-r border-slate-800/50 
+        overflow-y-auto flex-shrink-0 p-4 custom-scrollbar
+        transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
       <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4 px-2">
         演算法分類 (Categories)
       </h2>
@@ -38,6 +58,7 @@ const CategorySidebar = ({ activeCategoryId }: CategorySidebarProps) => {
             <li key={cat.id}>
               <Link
                 to={`/category/${cat.id}`}
+                onClick={() => setMobileMenuOpen(false)}
                 aria-current={isActive ? 'page' : undefined}
                 className={`flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-all duration-200 group relative overflow-hidden ${
                   isActive
@@ -82,7 +103,8 @@ const CategorySidebar = ({ activeCategoryId }: CategorySidebarProps) => {
           );
         })}
       </ul>
-    </nav>
+      </nav>
+    </>
   );
 };
 

@@ -16,6 +16,22 @@
 
 ### 146. LRU Cache (Med.)
 
+- **Problem (English)**:
+	- Design a cache with a fixed `capacity` that supports `get` and `put` in average O(1) time.
+	- When the cache is full and a new key is inserted, remove the least recently used item.
+	- `get(key)` returns the stored value or `-1` if absent; `put(key, value)` inserts or updates a key.
+- **題目（中文）**：
+	- 設計一個固定容量為 `capacity` 的快取，並且 `get` 與 `put` 都要在平均 O(1) 時間內完成。
+	- 當快取已滿又要插入新鍵時，必須移除最近最少使用的項目。
+	- `get(key)` 回傳對應值，若不存在則回傳 `-1`；`put(key, value)` 用來插入或更新資料。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= capacity <= 3000`
+  - `0 <= key <= 10^4`
+  - `0 <= value <= 10^5`
+  - At most 2 * 10^5 calls will be made to get and put.
+
 - **套路**：Hash Map + 雙向鏈結串列 / 有序字典
 - **思路**：
 	- 題目要求 `get` 與 `put` 都是 O(1)，因此需要同時解決「快速找 key」與「快速更新最近使用順序」。
@@ -64,6 +80,19 @@ class LRUCache:
 ```
 
 ### 208. Implement Trie - Prefix Tree (Med.)
+
+- **Problem (English)**:
+	- Implement a trie that supports `insert(word)`, `search(word)`, and `startsWith(prefix)`.
+	- `search` checks whether a full word exists, while `startsWith` checks whether any inserted word begins with the given prefix.
+- **題目（中文）**：
+	- 實作一個 Trie（前綴樹），支援 `insert(word)`、`search(word)` 與 `startsWith(prefix)`。
+	- `search` 用來確認完整單字是否存在；`startsWith` 則用來判斷是否有任一已插入單字以該前綴開頭。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= word.length, prefix.length <= 2000`
+  - word and prefix consist only of lowercase English letters.
+  - At most 3 * 10^4 calls in total will be made to insert, search, and startsWith.
 
 - **套路**：Trie 前綴樹
 - **思路**：
@@ -122,6 +151,21 @@ class Trie:
 
 ### 211. Design Add and Search Words (Med.)
 
+- **Problem (English)**:
+	- Design a data structure that supports `addWord(word)` and `search(word)`.
+	- In `search`, the pattern may contain `'.'`, which matches any single lowercase letter.
+- **題目（中文）**：
+	- 設計一個資料結構，支援 `addWord(word)` 與 `search(word)`。
+	- `search` 的查詢字串中可以包含 `'.'`，代表任意一個小寫字母。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= word.length <= 25`
+  - word in addWord consists of lowercase English letters.
+  - word in search consist of '.' or lowercase English letters.
+  - There will be at most 2 dots in word for search queries.
+  - At most 10^4 calls will be made to addWord and search.
+
 - **套路**：Trie + DFS 處理萬用字元
 - **思路**：
 	- 普通字元時，沿 Trie 的單一路徑往下找即可。
@@ -176,6 +220,28 @@ class WordDictionary:
 ```
 
 ### 212. Word Search II (Hard)
+
+- **Problem (English)**:
+	- Given an `m x n` board of lowercase letters and a list of words, return all words that can be formed on the board.
+	- A word is formed by moving horizontally or vertically to adjacent cells, and the same cell cannot be reused within one word.
+- **題目（中文）**：
+	- 給定一個 `m x n` 的小寫字母棋盤，以及一組單字列表，請找出所有能在棋盤上拼出的單字。
+	- 單字只能由上下左右相鄰的格子組成，且同一格不能在同一個單字中重複使用。
+
+- **Examples**:
+  - Example 1: `board = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words = ["oath","pea","eat","rain"]`
+    - Output: `["eat","oath"]`
+  - Example 2: `board = [["a","b"],["c","d"]], words = ["abcb"]`
+    - Output: `[]`
+- **Constraints**:
+  - `m == board.length`
+  - `n == board[i].length`
+  - `1 <= m, n <= 12`
+  - board[i][j] is a lowercase English letter.
+  - `1 <= words.length <= 3 * 10^4`
+  - `1 <= words[i].length <= 10`
+  - words[i] consists of lowercase English letters.
+  - All the strings of words are unique.
 
 - **套路**：Trie + Backtracking
 - **思路**：
@@ -242,6 +308,28 @@ def findWords(board, words):
 ```
 
 ### 588. Design In-Memory File System (Hard)
+
+- **Problem (English)**:
+	- Design a data structure that simulates an in-memory file system.
+	- Support `ls(path)`, `mkdir(path)`, `addContentToFile(filePath, content)`, and `readContentFromFile(filePath)`.
+	- If `path` is a file path, `ls` returns only that filename; if `path` is a directory, `ls` returns the names in that directory in lexicographic order.
+	- `mkdir` creates missing intermediate directories, and `addContentToFile` creates the file if it does not already exist or appends content if it does.
+- **題目（中文）**：
+	- 設計一個模擬記憶體中檔案系統的資料結構。
+	- 它需要支援 `ls(path)`、`mkdir(path)`、`addContentToFile(filePath, content)` 與 `readContentFromFile(filePath)`。
+	- 若 `path` 指向檔案，`ls` 只回傳該檔名；若指向資料夾，`ls` 需以字典序回傳該目錄中的名稱。
+	- `mkdir` 需要沿路建立缺少的中間資料夾；`addContentToFile` 若檔案不存在則建立，若已存在則把內容追加在原內容後。
+- **Examples**:
+	- Example 1: `FileSystem()`, `ls("/")`, `mkdir("/a/b/c")`, `addContentToFile("/a/b/c/d","hello")`, `ls("/")`, `readContentFromFile("/a/b/c/d")`
+		- Output: `[null,[],null,null,["a"],"hello"]`
+- **Constraints**:
+	- `1 <= path.length, filePath.length <= 100`
+	- `path` and `filePath` are absolute paths that begin with `'/'` and do not end with `'/'`, except for the root path `'/'`.
+	- File and directory names consist only of lowercase English letters, and names do not repeat within the same directory.
+	- All operations are valid; the user will not query a path that does not exist.
+	- The parent directory of `filePath` in `addContentToFile` is guaranteed to exist.
+	- `1 <= content.length <= 50`
+	- At most `300` calls will be made to `ls`, `mkdir`, `addContentToFile`, and `readContentFromFile`.
 
 - **套路**：Trie 目錄樹 + 節點保存檔案內容
 - **思路**：

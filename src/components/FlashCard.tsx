@@ -44,15 +44,38 @@ const FlashCard = ({ title, difficulty, explanation, solution, onRate }: FlashCa
           <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 tracking-tight">{title}</h2>
         </div>
 
-        {/* 解說區（永遠可見） */}
+        {/* 題目區（永遠可見） */}
         <div className="px-8 py-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-6 h-6 rounded-md bg-amber-500/20 flex items-center justify-center text-amber-400 shadow-inner">💡</div>
             <p className="text-sm font-bold tracking-wider text-amber-400">
-              解說
+              Problem
             </p>
           </div>
-          <p className="text-slate-300 text-lg leading-relaxed font-medium">{explanation}</p>
+          <article className="prose prose-invert max-w-none">
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => (
+                  <p className="text-slate-300 text-lg leading-relaxed font-medium mb-4 last:mb-0">{children}</p>
+                ),
+                ul: ({ children }) => (
+                  <ul className="space-y-3 pl-5">{children}</ul>
+                ),
+                li: ({ children }) => (
+                  <li className="text-slate-300 text-lg leading-relaxed font-medium list-disc marker:text-amber-400">{children}</li>
+                ),
+                code: ({ children, className }) => {
+                  const isInline = !className;
+                  if (isInline) {
+                    return <code className="bg-amber-500/10 text-amber-200 px-1.5 py-0.5 rounded-md text-[13px] font-mono border border-amber-500/10">{children}</code>;
+                  }
+                  return <code className={className}>{children}</code>;
+                },
+              }}
+            >
+              {explanation}
+            </ReactMarkdown>
+          </article>
         </div>
 
         {/* 解答區與翻牌區 */}

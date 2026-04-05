@@ -37,6 +37,26 @@ def two_pointer_pattern(nums, target):
 
 ### 125. Valid Palindrome (Easy)
 
+- **Problem (English)**:
+  - Determine whether a string still reads the same forward and backward after removing non-alphanumeric characters and ignoring letter case.
+- **題目（中文）**：
+  - 判斷一個字串在忽略非英數字元與大小寫之後，是否仍然是回文。
+
+- **Examples**:
+  - Example 1: `s = "A man, a plan, a canal: Panama"`
+    - Output: `true`
+    - Explanation: "amanaplanacanalpanama" is a palindrome.
+  - Example 2: `s = "race a car"`
+    - Output: `false`
+    - Explanation: "raceacar" is not a palindrome.
+  - Example 3: `s = " "`
+    - Output: `true`
+    - Explanation: s is an empty string "" after removing non-alphanumeric characters.
+Since an empty string reads the same forward and backward, it is a palindrome.
+- **Constraints**:
+  - `1 <= s.length <= 2 * 10^5`
+  - s consists only of printable ASCII characters.
+
 - **套路**：對撞指標 + 跳過無效字元
 - **思路**：
   - 左右指標往中間收斂，但只在遇到英數字元時才真正比較。
@@ -78,6 +98,26 @@ def isPalindrome(s):
 
 ### 11. Container With Most Water (Med.)
 
+- **Problem (English)**:
+  - You are given an array of heights where each value represents a vertical line.
+  - Pick two lines so that, together with the x-axis, they form a container that holds the most water.
+  - The area is the distance between the two lines multiplied by the shorter height.
+- **題目（中文）**：
+  - 給定一個高度陣列，每個值代表一條垂直線。
+  - 請選出兩條線，與 x 軸共同形成一個能盛最多水的容器。
+  - 容器面積等於兩線之間的距離乘上較短那側的高度。
+
+- **Examples**:
+  - Example 1: `height = [1,8,6,2,5,4,8,3,7]`
+    - Output: `49`
+    - Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+  - Example 2: `height = [1,1]`
+    - Output: `1`
+- **Constraints**:
+  - `n == height.length`
+  - `2 <= n <= 10^5`
+  - `0 <= height[i] <= 10^4`
+
 - **套路**：對撞指標 + 移動短板
 - **思路**：
   - 面積由 `寬度 * min(height[left], height[right])` 決定，真正限制答案的是較短的那一側。
@@ -116,6 +156,31 @@ def maxArea(height):
 ```
 
 ### 15. 3Sum (Med.)
+
+- **Problem (English)**:
+  - Given an integer array `nums`, return every unique triplet `[nums[i], nums[j], nums[k]]` whose sum is `0`.
+  - The three indices must be different, and duplicate triplets are not allowed in the answer.
+- **題目（中文）**：
+  - 給定整數陣列 `nums`，找出所有總和為 `0` 的不重複三元組 `[nums[i], nums[j], nums[k]]`。
+  - 三個元素必須來自不同索引，而且答案中不能出現重複三元組。
+
+- **Examples**:
+  - Example 1: `nums = [-1,0,1,2,-1,-4]`
+    - Output: `[[-1,-1,2],[-1,0,1]]`
+    - Explanation: nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0.
+nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0.
+nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0.
+The distinct triplets are [-1,0,1] and [-1,-1,2].
+Notice that the order of the output and the order of the triplets does not matter.
+  - Example 2: `nums = [0,1,1]`
+    - Output: `[]`
+    - Explanation: The only possible triplet does not sum up to 0.
+  - Example 3: `nums = [0,0,0]`
+    - Output: `[[0,0,0]]`
+    - Explanation: The only possible triplet sums up to 0.
+- **Constraints**:
+  - `3 <= nums.length <= 3000`
+  - `-10^5 <= nums[i] <= 10^5`
 
 - **套路**：排序 + 固定一個數 + 對撞指標
 - **思路**：
@@ -169,6 +234,27 @@ def threeSum(nums):
 
 ### 16. 3Sum Closest (Med.)
 
+- **Problem (English)**:
+  - Given an integer array `nums` and an integer `target`, choose three different elements whose sum is closest to `target`.
+  - Return that sum.
+  - You may assume each input has exactly one best answer.
+- **題目（中文）**：
+  - 給定整數陣列 `nums` 與整數 `target`，請選出三個不同元素，使它們的總和最接近 `target`。
+  - 回傳這個最接近的總和。
+  - 題目保證每組輸入只有一個最佳答案。
+
+- **Examples**:
+  - Example 1: `nums = [-1,2,1,-4], target = 1`
+    - Output: `2`
+    - Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+  - Example 2: `nums = [0,0,0], target = 1`
+    - Output: `0`
+    - Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
+- **Constraints**:
+  - `3 <= nums.length <= 500`
+  - `-1000 <= nums[i] <= 1000`
+  - `-10^4 <= target <= 10^4`
+
 - **套路**：排序 + 對撞指標找最接近值
 - **思路**：
   - 和 3Sum 一樣先排序並固定第一個數，差別在於不需要剛好命中，只要持續維護最接近 `target` 的總和即可。
@@ -215,6 +301,22 @@ def threeSumClosest(nums, target):
 
 ### 42. Trapping Rain Water (Hard)
 
+- **Problem (English)**:
+  - Given an elevation map where each bar has width `1`, compute how much rainwater can be trapped after raining.
+- **題目（中文）**：
+  - 給定一張高度圖，每根柱子的寬度都為 `1`，請計算下雨後總共能接住多少水。
+
+- **Examples**:
+  - Example 1: `height = [0,1,0,2,1,0,1,3,2,1,2,1]`
+    - Output: `6`
+    - Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+  - Example 2: `height = [4,2,0,3,2,5]`
+    - Output: `9`
+- **Constraints**:
+  - `n == height.length`
+  - `1 <= n <= 2 * 10^4`
+  - `0 <= height[i] <= 10^5`
+
 - **套路**：對撞指標 + 左右最大值
 - **思路**：
   - 每一格能裝多少水，取決於它左邊最高牆與右邊最高牆中較矮的那個，再減去自身高度。
@@ -258,6 +360,22 @@ def trap(height):
 
 ### 283. Move Zeroes (Easy)
 
+- **Problem (English)**:
+  - Move all zeroes in the array to the end while keeping the relative order of non-zero values unchanged.
+  - The modification must be done in place.
+- **題目（中文）**：
+  - 把陣列中的所有 `0` 移到最後面，同時維持非零元素的相對順序不變。
+  - 必須原地完成這個修改。
+
+- **Examples**:
+  - Example 1: `nums = [0,1,0,3,12]`
+    - Output: `[1,3,12,0,0]`
+  - Example 2: `nums = [0]`
+    - Output: `[0]`
+- **Constraints**:
+  - `1 <= nums.length <= 10^4`
+  - `-2^31 <= nums[i] <= 2^31 - 1`
+
 - **套路**：快慢指標原地交換
 - **思路**：
   - `fast` 負責掃描整個陣列，`slow` 指向下一個應放非零元素的位置。
@@ -289,6 +407,25 @@ def moveZeroes(nums):
 ```
 
 ### 977. Squares of a Sorted Array (Easy)
+
+- **Problem (English)**:
+  - You are given an integer array sorted in non-decreasing order.
+  - Return an array of the square of each number, also sorted in non-decreasing order.
+- **題目（中文）**：
+  - 給定一個已按非遞減順序排序的整數陣列。
+  - 請回傳每個數字平方後所組成的新陣列，並且結果也要保持非遞減排序。
+
+- **Examples**:
+  - Example 1: `nums = [-4,-1,0,3,10]`
+    - Output: `[0,1,9,16,100]`
+    - Explanation: After squaring, the array becomes [16,1,0,9,100].
+After sorting, it becomes [0,1,9,16,100].
+  - Example 2: `nums = [-7,-3,2,3,11]`
+    - Output: `[4,9,9,49,121]`
+- **Constraints**:
+  - `1 <= nums.length <= 10^4`
+  - `-10^4 <= nums[i] <= 10^4`
+  - nums is sorted in non-decreasing order.
 
 - **套路**：對撞指標從尾端填答案
 - **思路**：
@@ -327,6 +464,21 @@ def sortedSquares(nums):
 ```
 
 ### 5. Longest Palindromic Substring (Med.)
+
+- **Problem (English)**:
+  - Given a string `s`, return its longest contiguous substring that is a palindrome.
+- **題目（中文）**：
+  - 給定字串 `s`，請回傳其中最長的回文連續子字串。
+
+- **Examples**:
+  - Example 1: `s = "babad"`
+    - Output: `"bab"`
+    - Explanation: "aba" is also a valid answer.
+  - Example 2: `s = "cbbd"`
+    - Output: `"bb"`
+- **Constraints**:
+  - `1 <= s.length <= 1000`
+  - s consist of only digits and English letters.
 
 - **套路**：中心擴散
 - **思路**：
@@ -371,6 +523,24 @@ def longestPalindrome(s):
 ```
 
 ### 9. Palindrome Number (Easy)
+
+- **Problem (English)**:
+  - Determine whether an integer reads the same forward and backward.
+- **題目（中文）**：
+  - 判斷一個整數是否為回文數，也就是正反讀都相同。
+
+- **Examples**:
+  - Example 1: `x = 121`
+    - Output: `true`
+    - Explanation: 121 reads as 121 from left to right and from right to left.
+  - Example 2: `x = -121`
+    - Output: `false`
+    - Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+  - Example 3: `x = 10`
+    - Output: `false`
+    - Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+- **Constraints**:
+  - `-2^31 <= x <= 2^31 - 1`
 
 - **套路**：反轉後半段數字
 - **思路**：

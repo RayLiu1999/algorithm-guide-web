@@ -35,6 +35,27 @@ def top_k_largest(nums, k):
 
 ### 973. K Closest Points to Origin (Med.)
 
+- **Problem (English)**:
+        - Given an array of 2D points and an integer `k`, return the `k` points closest to the origin `(0, 0)`.
+        - The output order does not matter.
+- **題目（中文）**：
+        - 給定一個二維點陣列與整數 `k`，請回傳距離原點 `(0, 0)` 最近的 `k` 個點。
+        - 回傳順序不限。
+
+- **Examples**:
+  - Example 1: `points = [[1,3],[-2,2]], k = 1`
+    - Output: `[[-2,2]]`
+    - Explanation: The distance between (1, 3) and the origin is sqrt(10).
+The distance between (-2, 2) and the origin is sqrt(8).
+Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
+We only want the closest k = 1 points from the origin, so the answer is just [[-2,2]].
+  - Example 2: `points = [[3,3],[5,-1],[-2,4]], k = 2`
+    - Output: `[[3,3],[-2,4]]`
+    - Explanation: The answer [[-2,4],[3,3]] would also be accepted.
+- **Constraints**:
+  - `1 <= k <= points.length <= 10^4`
+  - `-10^4 <= xi, yi <= 10^4`
+
 - **套路**：大小為 `k` 的 max-heap
 - **思路**：
         - 距離只用來比較大小，所以直接算 `x^2 + y^2` 即可，不需要真的開根號。
@@ -73,6 +94,22 @@ def kClosest(points, k):
 
 ### 215. Kth Largest Element in an Array (Med.)
 
+- **Problem (English)**:
+        - Given an integer array `nums` and an integer `k`, return the `k`th largest element in the array.
+        - This refers to the element's position in sorted order, not the `k`th distinct value.
+- **題目（中文）**：
+        - 給定整數陣列 `nums` 與整數 `k`，請回傳陣列中的第 `k` 大元素。
+        - 這裡的第 `k` 大是排序後的位置，不是第 `k` 個不同的值。
+
+- **Examples**:
+  - Example 1: `nums = [3,2,1,5,6,4], k = 2`
+    - Output: `5`
+  - Example 2: `nums = [3,2,3,1,2,4,5,5,6], k = 4`
+    - Output: `4`
+- **Constraints**:
+  - `1 <= k <= nums.length <= 10^5`
+  - `-10^4 <= nums[i] <= 10^4`
+
 - **套路**：min-heap 維持 `k` 個最大值
 - **思路**：
         - 依序掃過所有數字，把它們放進 min-heap。
@@ -109,6 +146,27 @@ def findKthLargest(nums, k):
 ```
 
 ### 692. Top K Frequent Words (Med.)
+
+- **Problem (English)**:
+        - Given an array of words and an integer `k`, return the `k` most frequent words.
+        - If multiple words have the same frequency, the lexicographically smaller word comes first.
+- **題目（中文）**：
+        - 給定一個單字陣列與整數 `k`，請回傳出現頻率最高的 `k` 個單字。
+        - 若頻率相同，字典序較小的單字要排在前面。
+
+- **Examples**:
+  - Example 1: `words = ["i","love","leetcode","i","love","coding"], k = 2`
+    - Output: `["i","love"]`
+    - Explanation: "i" and "love" are the two most frequent words.
+Note that "i" comes before "love" due to a lower alphabetical order.
+  - Example 2: `words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4`
+    - Output: `["the","is","sunny","day"]`
+    - Explanation: "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.
+- **Constraints**:
+  - `1 <= words.length <= 500`
+  - `1 <= words[i].length <= 10`
+  - words[i] consists of lowercase English letters.
+  - k is in the range [1, The number of unique words[i]]
 
 - **套路**：計數 + heap 排序規則
 - **思路**：
@@ -147,6 +205,23 @@ def topKFrequent(words, k):
 ```
 
 ### 621. Task Scheduler (Med.)
+
+- **Problem (English)**:
+        - You are given tasks represented by uppercase letters and a non-negative cooldown `n`.
+        - In one unit of time, the CPU may execute one task or stay idle.
+        - Two identical tasks must be separated by at least `n` intervals.
+        - Return the minimum time needed to finish all tasks.
+- **題目（中文）**：
+        - 給定由大寫字母表示的任務陣列，以及非負整數冷卻時間 `n`。
+        - 每個時間單位 CPU 只能執行一個任務或保持閒置。
+        - 兩個相同任務之間至少要相隔 `n` 個時間單位。
+        - 請回傳完成所有任務所需的最少時間。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= tasks.length <= 10^4`
+  - tasks[i] is an uppercase English letter.
+  - `0 <= n <= 100`
 
 - **套路**：max-heap + cooldown queue
 - **思路**：
@@ -198,6 +273,21 @@ def leastInterval(tasks, n):
 
 ### 253. Meeting Rooms II (Med.)
 
+- **Problem (English)**:
+        - Given meeting intervals, return the minimum number of rooms required so that all meetings can be held without overlap.
+        - If one meeting ends exactly when another starts, they may reuse the same room.
+- **題目（中文）**：
+        - 給定多個會議區間，請回傳為了讓所有會議都能進行且不衝突，最少需要幾間會議室。
+        - 若一個會議剛好在另一個會議開始時結束，則可共用同一間會議室。
+- **Examples**:
+        - Example 1: `intervals = [[0,30],[5,10],[15,20]]`
+                - Output: `2`
+        - Example 2: `intervals = [[7,10],[2,4]]`
+                - Output: `1`
+- **Constraints**:
+        - `0 <= intervals.length <= 10^4`
+        - `0 <= start_i < end_i <= 10^6`
+
 - **套路**：min-heap 存進行中會議的結束時間
 - **思路**：
         - 先依開始時間排序，確保會議按時間軸進入系統。
@@ -240,6 +330,19 @@ def minMeetingRooms(intervals):
 ```
 
 ### 295. Find Median from Data Stream (Hard)
+
+- **Problem (English)**:
+        - Design a data structure that supports `addNum(num)` and `findMedian()`.
+        - `addNum` inserts a number from the stream, and `findMedian` returns the median of all inserted numbers so far.
+- **題目（中文）**：
+        - 設計一個資料結構，支援 `addNum(num)` 與 `findMedian()`。
+        - `addNum` 用來插入資料流中的數字，`findMedian` 則回傳目前所有已插入數字的中位數。
+
+- **Examples**:
+- **Constraints**:
+  - `-10^5 <= num <= 10^5`
+  - There will be at least one element in the data structure before calling findMedian.
+  - At most 5 * 10^4 calls will be made to addNum and findMedian.
 
 - **套路**：雙 heap 維持左右兩半
 - **思路**：
@@ -284,6 +387,25 @@ class MedianFinder:
 ```
 
 ### 759. Employee Free Time (Hard)
+
+- **Problem (English)**:
+        - Each employee has a list of non-overlapping working intervals, and each employee's intervals are already sorted.
+        - Return the finite intervals representing common, positive-length free time for all employees, also in sorted order.
+        - Infinite intervals such as `[-inf, x]` or `[y, inf]` are not part of the answer.
+- **題目（中文）**：
+        - 每位員工都有一份已排序且彼此不重疊的工作時間區間列表。
+        - 請找出所有員工共同的、長度為正且有限的空閒區間，並依序回傳。
+        - 像 `[-inf, x]` 或 `[y, inf]` 這種 infinite interval / 無限區間不算答案。
+- **Examples**:
+        - Example 1: `schedule = [[[1,2],[5,6]],[[1,3]],[[4,10]]]`
+                - Output: `[[3,4]]`
+        - Example 2: `schedule = [[[1,3],[6,7]],[[2,4]],[[2,5],[9,12]]]`
+                - Output: `[[5,6],[7,9]]`
+- **Constraints**:
+        - `1 <= schedule.length <= 50`
+        - `1 <= schedule[i].length <= 50`
+        - `0 <= start < end <= 10^8`
+        - Intervals of each employee are sorted and non-overlapping.
 
 - **套路**：k-way merge + 區間合併
 - **思路**：
@@ -337,6 +459,22 @@ def employeeFreeTime(schedule):
 ```
 
 ### 362. Design Hit Counter (Med.)
+
+- **Problem (English)**:
+        - Design a hit counter that counts the number of hits received in the past 5 minutes (the past 300 seconds).
+        - Timestamps are given with seconds granularity, calls happen in chronological order, and multiple hits may happen at the same timestamp.
+        - Implement `HitCounter()`, `hit(timestamp)`, and `getHits(timestamp)`.
+- **題目（中文）**：
+        - 設計一個 hit counter，用來統計最近 5 分鐘內，也就是過去 300 秒內的 hit 次數。
+        - `timestamp` 以秒為單位，所有呼叫都會依時間先後順序發生，同一秒內也可能出現多次 hit。
+        - 你需要實作 `HitCounter()`、`hit(timestamp)` 與 `getHits(timestamp)`。
+- **Examples**:
+        - Example 1: `hit(1)`, `hit(2)`, `hit(3)`, `getHits(4)`, `hit(300)`, `getHits(300)`, `getHits(301)`
+                - Output: `[null,null,null,3,null,4,3]`
+- **Constraints**:
+        - `1 <= timestamp <= 2 * 10^9`
+        - Calls to `hit` and `getHits` are made in chronological order.
+        - At most `300` calls will be made to `hit` and `getHits`.
 
 - **套路**：queue 保存最近 300 秒內的 hit
 - **思路**：

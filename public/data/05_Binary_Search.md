@@ -52,6 +52,26 @@ def lower_bound(nums, target):
 
 ### 704. Binary Search (Easy)
 
+- **Problem (English)**:
+  - Given a sorted array of distinct integers `nums` and an integer `target`, return the index of `target` if it exists.
+  - If `target` does not exist, return `-1`.
+- **題目（中文）**：
+  - 給定一個已排序且元素互不重複的整數陣列 `nums`，以及一個整數 `target`。
+  - 若 `target` 存在於陣列中，回傳它的索引；否則回傳 `-1`。
+
+- **Examples**:
+  - Example 1: `nums = [-1,0,3,5,9,12], target = 9`
+    - Output: `4`
+    - Explanation: 9 exists in nums and its index is 4
+  - Example 2: `nums = [-1,0,3,5,9,12], target = 2`
+    - Output: `-1`
+    - Explanation: 2 does not exist in nums so return -1
+- **Constraints**:
+  - `1 <= nums.length <= 10^4`
+  - `-10^4 < nums[i], target < 10^4`
+  - All the integers in nums are unique.
+  - nums is sorted in ascending order.
+
 - **套路**：標準二分搜尋 (Standard Binary Search)
 - **思路**：
   - 初始化 `left = 0`, `right = len(nums) - 1`。
@@ -109,6 +129,27 @@ def binary_search(nums, target):
 
 ### 278. First Bad Version (Easy)
 
+- **Problem (English)**:
+  - You are given an API `isBadVersion(version)` and versions numbered from `1` to `n`.
+  - Once a version is bad, every later version is also bad.
+  - Return the first bad version while minimizing API calls.
+- **題目（中文）**：
+  - 給定一個 API `isBadVersion(version)` 與版本編號 `1` 到 `n`。
+  - 一旦某個版本是壞的，後面的版本也都會是壞的。
+  - 請找出第一個壞版本，並盡量減少 API 呼叫次數。
+
+- **Examples**:
+  - Example 1: `n = 5, bad = 4`
+    - Output: `4`
+    - Explanation: call isBadVersion(3) -> false
+call isBadVersion(5) -> true
+call isBadVersion(4) -> true
+Then 4 is the first bad version.
+  - Example 2: `n = 1, bad = 1`
+    - Output: `1`
+- **Constraints**:
+  - `1 <= bad <= n <= 2^31 - 1`
+
 - **套路**：找左邊界的二分搜尋
 - **思路**：
   - `isBadVersion(mid)` 為真時，答案可能在 `mid` 或更左邊，所以收縮右邊界。
@@ -138,6 +179,29 @@ def firstBadVersion(n):
 ```
 
 ### 33. Search in Rotated Sorted Array (Med.)
+
+- **Problem (English)**:
+  - An ascending array of distinct integers has been rotated at an unknown pivot.
+  - Given the rotated array `nums` and a `target`, return the index of `target` if present; otherwise return `-1`.
+  - Your solution must run in `O(log n)` time.
+- **題目（中文）**：
+  - 一個原本遞增排序、元素互不重複的整數陣列，在未知位置被旋轉過。
+  - 給定旋轉後的陣列 `nums` 與目標值 `target`，若存在則回傳索引，否則回傳 `-1`。
+  - 演算法必須在 `O(log n)` 時間內完成。
+
+- **Examples**:
+  - Example 1: `nums = [4,5,6,7,0,1,2], target = 0`
+    - Output: `4`
+  - Example 2: `nums = [4,5,6,7,0,1,2], target = 3`
+    - Output: `-1`
+  - Example 3: `nums = [1], target = 0`
+    - Output: `-1`
+- **Constraints**:
+  - `1 <= nums.length <= 5000`
+  - `-10^4 <= nums[i] <= 10^4`
+  - All values of nums are unique.
+  - nums is an ascending array that is possibly rotated.
+  - `-10^4 <= target <= 10^4`
 
 - **套路**：旋轉陣列二分搜尋
 - **思路**：
@@ -177,6 +241,32 @@ def search(nums, target):
 
 ### 153. Find Minimum in Rotated Sorted Array (Med.)
 
+- **Problem (English)**:
+  - An ascending array of distinct integers has been rotated at an unknown pivot.
+  - Return the minimum element in the array.
+  - Your solution must run in `O(log n)` time.
+- **題目（中文）**：
+  - 一個原本遞增排序、元素互不重複的整數陣列，在未知位置被旋轉過。
+  - 請找出陣列中的最小值。
+  - 演算法必須在 `O(log n)` 時間內完成。
+
+- **Examples**:
+  - Example 1: `nums = [3,4,5,1,2]`
+    - Output: `1`
+    - Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+  - Example 2: `nums = [4,5,6,7,0,1,2]`
+    - Output: `0`
+    - Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
+  - Example 3: `nums = [11,13,15,17]`
+    - Output: `11`
+    - Explanation: The original array was [11,13,15,17] and it was rotated 4 times.
+- **Constraints**:
+  - `n == nums.length`
+  - `1 <= n <= 5000`
+  - `-5000 <= nums[i] <= 5000`
+  - All the integers of nums are unique.
+  - nums is sorted and rotated between 1 and n times.
+
 - **套路**：用右邊界判斷最小值所在半邊
 - **思路**：
   - 若 `nums[mid] > nums[right]`，代表最小值在右半邊。
@@ -206,6 +296,23 @@ def findMin(nums):
 ```
 
 ### 981. Time Based Key-Value Store (Med.)
+
+- **Problem (English)**:
+  - Design a time-based key-value store with two operations.
+  - `set(key, value, timestamp)` stores a key-value pair.
+  - `get(key, timestamp)` returns the value set at the largest timestamp less than or equal to `timestamp`, or `""` if none exists.
+- **題目（中文）**：
+  - 設計一個時間型 key-value store，支援兩個操作。
+  - `set(key, value, timestamp)` 用來儲存一筆資料。
+  - `get(key, timestamp)` 要回傳時間戳不大於 `timestamp` 的最新值；若不存在，回傳空字串 `""`。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= key.length, value.length <= 100`
+  - key and value consist of lowercase English letters and digits.
+  - `1 <= timestamp <= 10^7`
+  - All the timestamps timestamp of set are strictly increasing.
+  - At most 2 * 10^5 calls will be made to set and get.
 
 - **套路**：Hash Map + 對時間戳做二分搜尋
 - **思路**：
@@ -242,6 +349,24 @@ class TimeMap:
 
 ### 74. Search a 2D Matrix (Med.)
 
+- **Problem (English)**:
+  - You are given an `m x n` matrix where each row is sorted from left to right, and the first element of each row is greater than the last element of the previous row.
+  - Return whether `target` exists in the matrix.
+- **題目（中文）**：
+  - 給定一個 `m x n` 矩陣，其中每一列由左到右遞增，且每列的第一個元素都大於前一列的最後一個元素。
+  - 請判斷 `target` 是否存在於矩陣中。
+
+- **Examples**:
+  - Example 1: `matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3`
+    - Output: `true`
+  - Example 2: `matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13`
+    - Output: `false`
+- **Constraints**:
+  - `m == matrix.length`
+  - `n == matrix[i].length`
+  - `1 <= m, n <= 100`
+  - `-10^4 <= matrix[i][j], target <= 10^4`
+
 - **套路**：把矩陣視為一維有序陣列
 - **思路**：
   - 因為每列遞增且每列首元素大於前一列末元素，所以整體可視為排序陣列。
@@ -277,6 +402,22 @@ def searchMatrix(matrix, target):
 
 ### 658. Find K Closest Elements (Med.)
 
+- **Problem (English)**:
+  - Given a sorted array `arr`, an integer `k`, and an integer `x`, return the `k` elements closest to `x`.
+  - The returned list must be in ascending order.
+  - If two numbers are equally close, prefer the smaller one.
+- **題目（中文）**：
+  - 給定已排序陣列 `arr`、整數 `k` 與整數 `x`，請找出距離 `x` 最近的 `k` 個元素。
+  - 回傳結果必須保持遞增排序。
+  - 若有兩個元素距離相同，優先選較小的那個。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= k <= arr.length`
+  - `1 <= arr.length <= 10^4`
+  - arr is sorted in ascending order.
+  - `-10^4 <= arr[i], x <= 10^4`
+
 - **套路**：二分搜尋長度為 k 的最佳窗口起點
 - **思路**：
   - 答案一定是原陣列中的連續長度 `k` 窗口。
@@ -305,6 +446,19 @@ def findClosestElements(arr, k, x):
 ```
 
 ### 528. Random Pick with Weight (Med.)
+
+- **Problem (English)**:
+  - You are given an array `w` of positive weights.
+  - Implement `pickIndex()` so that index `i` is chosen with probability `w[i] / sum(w)`.
+- **題目（中文）**：
+  - 給定一個正整數權重陣列 `w`。
+  - 請實作 `pickIndex()`，使得索引 `i` 被選中的機率為 `w[i] / sum(w)`。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= w.length <= 10^4`
+  - `1 <= w[i] <= 10^5`
+  - pickIndex will be called at most 10^4 times.
 
 - **套路**：前綴和 + 隨機數二分定位
 - **思路**：
@@ -343,6 +497,28 @@ class Solution:
 ```
 
 ### 4. Median of Two Sorted Arrays (Hard)
+
+- **Problem (English)**:
+  - Given two sorted arrays `nums1` and `nums2`, return the median of the combined sorted array.
+  - The overall runtime complexity must be `O(log(min(m, n)))`.
+- **題目（中文）**：
+  - 給定兩個已排序陣列 `nums1` 與 `nums2`，請回傳它們合併後排序序列的中位數。
+  - 整體時間複雜度必須是 `O(log(min(m, n)))`。
+
+- **Examples**:
+  - Example 1: `nums1 = [1,3], nums2 = [2]`
+    - Output: `2.00000`
+    - Explanation: merged array = [1,2,3] and median is 2.
+  - Example 2: `nums1 = [1,2], nums2 = [3,4]`
+    - Output: `2.50000`
+    - Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+- **Constraints**:
+  - `nums1.length == m`
+  - `nums2.length == n`
+  - `0 <= m <= 1000`
+  - `0 <= n <= 1000`
+  - `1 <= m + n <= 2000`
+  - `-10^6 <= nums1[i], nums2[i] <= 10^6`
 
 - **套路**：在較短陣列上二分切分點
 - **思路**：

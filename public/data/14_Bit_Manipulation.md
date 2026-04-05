@@ -20,6 +20,21 @@
 
 ### 67. Add Binary (Easy)
 
+- **Problem (English)**:
+	- Given two binary strings `a` and `b`, return their sum as a binary string.
+- **題目（中文）**：
+	- 給定兩個二進位字串 `a` 與 `b`，請回傳它們相加後的二進位字串結果。
+
+- **Examples**:
+  - Example 1: `a = "11", b = "1"`
+    - Output: `"100"`
+  - Example 2: `a = "1010", b = "1011"`
+    - Output: `"10101"`
+- **Constraints**:
+  - `1 <= a.length, b.length <= 10^4`
+  - a and b consist only of '0' or '1' characters.
+  - Each string does not contain leading zeros except for the zero itself.
+
 - **套路**：逐位相加 + 進位模擬
 - **思路**：
 	- 從兩個二進位字串尾端往前掃描，完全模擬小學直式加法。
@@ -64,6 +79,19 @@ def addBinary(a, b):
 
 ### 268. Missing Number (Easy)
 
+- **Problem (English)**:
+	- Given an array containing `n` distinct numbers from the range `[0, n]`, return the single number in that range that does not appear in the array.
+- **題目（中文）**：
+	- 給定一個長度為 `n` 的陣列，裡面包含 `[0, n]` 範圍內的 `n` 個不同數字。
+	- 請找出其中缺少的那一個數字。
+
+- **Examples**:
+- **Constraints**:
+  - `n == nums.length`
+  - `1 <= n <= 10^4`
+  - `0 <= nums[i] <= n`
+  - All the numbers of nums are unique.
+
 - **套路**：XOR 抵消
 - **思路**：
 	- 將完整範圍 `0..n` 與陣列中的所有元素一起 XOR。
@@ -96,6 +124,15 @@ def missingNumber(nums):
 
 ### 191. Number of 1 Bits (Easy)
 
+- **Problem (English)**:
+	- Given a positive integer `n`, return how many `'1'` bits appear in its binary representation.
+- **題目（中文）**：
+	- 給定一個正整數 `n`，請回傳它的二進位表示中有多少個 `'1'` 位元。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= n <= 2^31 - 1`
+
 - **套路**：Brian Kernighan 位元技巧
 - **思路**：
 	- 每次做 `n &= n - 1`，都會把 `n` 最低位的 `1` 消掉。
@@ -126,6 +163,16 @@ def hammingWeight(n):
 ```
 
 ### 190. Reverse Bits (Easy)
+
+- **Problem (English)**:
+	- Given a 32-bit integer `n`, reverse the order of its bits and return the resulting integer.
+- **題目（中文）**：
+	- 給定一個 32 位整數 `n`，請把它的位元順序完全反轉，並回傳反轉後的整數。
+
+- **Examples**:
+- **Constraints**:
+  - `0 <= n <= 2^31 - 2`
+  - n is even.
 
 - **套路**：逐位取出並反向組裝
 - **思路**：
@@ -158,6 +205,28 @@ def reverseBits(n):
 ```
 
 ### 338. Counting Bits (Easy)
+
+- **Problem (English)**:
+	- Given a non-negative integer `n`, return an array `ans` of length `n + 1` where `ans[i]` equals the number of `1` bits in the binary form of `i`.
+- **題目（中文）**：
+	- 給定非負整數 `n`，請回傳長度為 `n + 1` 的陣列 `ans`，其中 `ans[i]` 表示整數 `i` 的二進位表示中 `'1'` 的數量。
+
+- **Examples**:
+  - Example 1: `n = 2`
+    - Output: `[0,1,1]`
+    - Explanation: 0 --> 0
+1 --> 1
+2 --> 10
+  - Example 2: `n = 5`
+    - Output: `[0,1,1,2,1,2]`
+    - Explanation: 0 --> 0
+1 --> 1
+2 --> 10
+3 --> 11
+4 --> 100
+5 --> 101
+- **Constraints**:
+  - `0 <= n <= 10^5`
 
 - **套路**：DP + 去掉最低位 1
 - **思路**：

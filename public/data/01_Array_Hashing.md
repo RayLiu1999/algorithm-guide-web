@@ -64,6 +64,29 @@ def prefix_sum_pattern(nums, k):
 
 ### 1. Two Sum (Easy)
 
+- **Problem (English)**:
+  - Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+  - You may assume that each input would have exactly one solution, and you may not use the same element twice.
+  - You can return the answer in any order.
+- **題目（中文）**：
+  - 給你一個整數陣列 `nums` 和一個整數 `target`，請找出兩個數字，使它們的總和等於 `target`，並回傳這兩個數字的索引。
+  - 你可以假設每組輸入都只有一個解，而且不能使用同一個元素兩次。
+  - 你可以用任何順序回傳答案。
+
+- **Examples**:
+  - Example 1: `nums = [2,7,11,15], target = 9`
+    - Output: `[0,1]`
+    - Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+  - Example 2: `nums = [3,2,4], target = 6`
+    - Output: `[1,2]`
+  - Example 3: `nums = [3,3], target = 6`
+    - Output: `[0,1]`
+- **Constraints**:
+  - `2 <= nums.length <= 10^4`
+  - `-10^9 <= nums[i] <= 10^9`
+  - `-10^9 <= target <= 10^9`
+  - Only one valid answer exists.
+
 - **套路**： Hash Map 反查法
 - **思路**：
   - 遍歷陣列時，不直接找另一個數字，而是問 Hash Map：「我的另一半（target - num）在不在你家？」。
@@ -98,6 +121,24 @@ def two_sum_pattern(nums, target):
 ---
 
 ### 383. Ransom Note (Easy)
+
+- **Problem (English)**:
+  - Given two strings `ransomNote` and `magazine`, return `true` if `ransomNote` can be built using letters from `magazine`.
+  - Each letter in `magazine` may be used at most once.
+- **題目（中文）**：
+  - 給定兩個字串 `ransomNote` 與 `magazine`，請判斷是否能用 `magazine` 中的字母拼出 `ransomNote`。
+  - `magazine` 中的每個字母最多只能使用一次。
+
+- **Examples**:
+  - Example 1: `ransomNote = "a", magazine = "b"`
+    - Output: `false`
+  - Example 2: `ransomNote = "aa", magazine = "ab"`
+    - Output: `false`
+  - Example 3: `ransomNote = "aa", magazine = "aab"`
+    - Output: `true`
+- **Constraints**:
+  - `1 <= ransomNote.length, magazine.length <= 10^5`
+  - ransomNote and magazine consist of lowercase English letters.
 
 - **套路**：字元計數
 - **思路**：
@@ -135,6 +176,22 @@ def canConstruct(ransomNote, magazine):
 ```
 
 ### 409. Longest Palindrome (Easy)
+
+- **Problem (English)**:
+  - Given a string containing uppercase and lowercase English letters, return the length of the longest palindrome that can be built from those letters.
+- **題目（中文）**：
+  - 給定一個包含大小寫英文字母的字串，請回傳能由這些字母組成的最長回文長度。
+
+- **Examples**:
+  - Example 1: `s = "abccccdd"`
+    - Output: `7`
+    - Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
+  - Example 2: `s = "a"`
+    - Output: `1`
+    - Explanation: The longest palindrome that can be built is "a", whose length is 1.
+- **Constraints**:
+  - `1 <= s.length <= 2000`
+  - s consists of lowercase and/or uppercase English letters only.
 
 - **套路**：統計奇偶次數
 - **思路**：
@@ -176,6 +233,26 @@ def longestPalindrome(s):
 
 ### 169. Majority Element (Easy)
 
+- **Problem (English)**:
+  - Given an array `nums` of size `n`, return the majority element.
+  - The majority element is the value that appears more than `floor(n / 2)` times.
+  - The input always contains a majority element.
+- **題目（中文）**：
+  - 給定一個大小為 `n` 的陣列 `nums`，請回傳多數元素。
+  - 多數元素是指出現次數嚴格超過 `floor(n / 2)` 的值。
+  - 題目保證一定存在多數元素。
+
+- **Examples**:
+  - Example 1: `nums = [3,2,3]`
+    - Output: `3`
+  - Example 2: `nums = [2,2,1,1,1,2,2]`
+    - Output: `2`
+- **Constraints**:
+  - `n == nums.length`
+  - `1 <= n <= 5 * 10^4`
+  - `-10^9 <= nums[i] <= 10^9`
+  - The input is generated such that a majority element will exist in the array.
+
 - **套路**：Boyer-Moore Voting
 - **思路**：
   - 把過半元素想成最後一定會在「兩兩互相抵消」之後存活的那個候選人。
@@ -212,6 +289,18 @@ def majorityElement(nums):
 
 ### 217. Contains Duplicate (Easy)
 
+- **Problem (English)**:
+  - Given an integer array `nums`, return `true` if any value appears at least twice.
+  - Return `false` if every element is distinct.
+- **題目（中文）**：
+  - 給定一個整數陣列 `nums`，若其中有任意值至少出現兩次，回傳 `true`。
+  - 若所有元素都互不相同，回傳 `false`。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - `-10^9 <= nums[i] <= 10^9`
+
 - **套路**：Hash Set 去重
 - **思路**：
   - 一邊掃描陣列，一邊把看過的值放進 set。
@@ -245,6 +334,18 @@ def containsDuplicate(nums):
 ```
 
 ### 242. Valid Anagram (Easy)
+
+- **Problem (English)**:
+  - Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`; otherwise return `false`.
+  - An anagram uses exactly the same letters with exactly the same counts, only rearranged.
+- **題目（中文）**：
+  - 給定兩個字串 `s` 與 `t`，若 `t` 是 `s` 的異位詞則回傳 `true`，否則回傳 `false`。
+  - 異位詞表示字母種類與每種字母數量都相同，只是排列順序不同。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= s.length, t.length <= 5 * 10^4`
+  - s and t consist of lowercase English letters.
 
 - **套路**：Counter 比對
 - **思路**：
@@ -280,6 +381,25 @@ def isAnagram(s, t):
 
 ### 121. Best Time to Buy and Sell Stock (Easy)
 
+- **Problem (English)**:
+  - Given an array `prices` where `prices[i]` is the stock price on day `i`, return the maximum profit from one buy and one sell.
+  - If no profitable transaction exists, return `0`.
+- **題目（中文）**：
+  - 給定陣列 `prices`，其中 `prices[i]` 代表第 `i` 天的股價，請回傳只做一次買賣時可得到的最大利潤。
+  - 若無法獲利，回傳 `0`。
+
+- **Examples**:
+  - Example 1: `prices = [7,1,5,3,6,4]`
+    - Output: `5`
+    - Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+  - Example 2: `prices = [7,6,4,3,1]`
+    - Output: `0`
+    - Explanation: In this case, no transactions are done and the max profit = 0.
+- **Constraints**:
+  - `1 <= prices.length <= 10^5`
+  - `0 <= prices[i] <= 10^4`
+
 - **套路**：一次掃描維護最低買點
 - **思路**：
   - 當走到第 `i` 天時，若要在今天賣出，最佳買點只可能是前面出現過的最低價格。
@@ -314,6 +434,23 @@ def maxProfit(prices):
 ```
 
 ### 238. Product of Array Except Self (Med.)
+
+- **Problem (English)**:
+  - Given an integer array `nums`, return an array `answer` where `answer[i]` equals the product of all values in `nums` except `nums[i]`.
+  - Solve it without using division.
+- **題目（中文）**：
+  - 給定整數陣列 `nums`，請回傳一個陣列 `answer`，其中 `answer[i]` 等於除了 `nums[i]` 之外所有元素的乘積。
+  - 不可使用除法。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3,4]`
+    - Output: `[24,12,8,6]`
+  - Example 2: `nums = [-1,1,0,-3,3]`
+    - Output: `[0,0,9,0,0]`
+- **Constraints**:
+  - `2 <= nums.length <= 10^5`
+  - `-30 <= nums[i] <= 30`
+  - The input is generated such that answer[i] is guaranteed to fit in a 32-bit integer.
 
 - **套路**：前綴積 + 後綴積
 - **思路**：
@@ -356,6 +493,19 @@ def productExceptSelf(nums):
 
 ### 49. Group Anagrams (Med.)
 
+- **Problem (English)**:
+  - Given an array of strings `strs`, group the anagrams together.
+  - You may return the groups in any order.
+- **題目（中文）**：
+  - 給定字串陣列 `strs`，請將彼此為異位詞的字串分組。
+  - 回傳順序不限。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= strs.length <= 10^4`
+  - `0 <= strs[i].length <= 100`
+  - strs[i] consists of lowercase English letters.
+
 - **套路**：以排序後字串作為分組 key
 - **思路**：
   - 互為 anagram 的字串，排序後一定會變成同一個字元序列。
@@ -392,6 +542,25 @@ def groupAnagrams(strs):
 
 ### 53. Maximum Subarray (Med.)
 
+- **Problem (English)**:
+  - Given an integer array `nums`, find the contiguous subarray with the largest sum and return that sum.
+- **題目（中文）**：
+  - 給定整數陣列 `nums`，請找出總和最大的連續子陣列，並回傳其總和。
+
+- **Examples**:
+  - Example 1: `nums = [-2,1,-3,4,-1,2,1,-5,4]`
+    - Output: `6`
+    - Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+  - Example 2: `nums = [1]`
+    - Output: `1`
+    - Explanation: The subarray [1] has the largest sum 1.
+  - Example 3: `nums = [5,4,-1,7,8]`
+    - Output: `23`
+    - Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - `-10^4 <= nums[i] <= 10^4`
+
 - **套路**：Kadane's Algorithm
 - **思路**：
   - 定義 `current` 為「必須以當前元素結尾」的最大子陣列和。
@@ -426,6 +595,25 @@ def maxSubArray(nums):
 ```
 
 ### 525. Contiguous Array (Med.)
+
+- **Problem (English)**:
+  - Given a binary array `nums`, return the maximum length of a contiguous subarray with the same number of `0`s and `1`s.
+- **題目（中文）**：
+  - 給定一個二元陣列 `nums`，請回傳其中 `0` 與 `1` 數量相同的最長連續子陣列長度。
+
+- **Examples**:
+  - Example 1: `nums = [0,1]`
+    - Output: `2`
+    - Explanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.
+  - Example 2: `nums = [0,1,0]`
+    - Output: `2`
+    - Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
+  - Example 3: `nums = [0,1,1,1,1,1,0,0,0]`
+    - Output: `6`
+    - Explanation: [1,1,1,0,0,0] is the longest contiguous subarray with equal number of 0 and 1.
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - nums[i] is either 0 or 1.
 
 - **套路**：前綴和 + 首次出現索引
 - **思路**：
@@ -465,6 +653,21 @@ def findMaxLength(nums):
 
 ### 560. Subarray Sum Equals K (Med.)
 
+- **Problem (English)**:
+  - Given an integer array `nums` and an integer `k`, return the number of contiguous subarrays whose sum equals `k`.
+- **題目（中文）**：
+  - 給定整數陣列 `nums` 與整數 `k`，請回傳總和等於 `k` 的連續子陣列數量。
+
+- **Examples**:
+  - Example 1: `nums = [1,1,1], k = 2`
+    - Output: `2`
+  - Example 2: `nums = [1,2,3], k = 3`
+    - Output: `2`
+- **Constraints**:
+  - `1 <= nums.length <= 2 * 10^4`
+  - `-1000 <= nums[i] <= 1000`
+  - `-10^7 <= k <= 10^7`
+
 - **套路**：前綴和 + 次數表
 - **思路**：
   - 設目前前綴和為 `prefix`，若先前某個位置的前綴和是 `prefix - k`，那麼中間那段子陣列和就會是 `k`。
@@ -502,6 +705,25 @@ def subarraySum(nums, k):
 
 ### 128. Longest Consecutive Sequence (Med.)
 
+- **Problem (English)**:
+  - Given an unsorted integer array `nums`, return the length of the longest sequence of consecutive integers.
+  - Your algorithm must run in `O(n)` time.
+- **題目（中文）**：
+  - 給定一個未排序整數陣列 `nums`，請回傳最長連續整數序列的長度。
+  - 演算法必須在 `O(n)` 時間內完成。
+
+- **Examples**:
+  - Example 1: `nums = [100,4,200,1,3,2]`
+    - Output: `4`
+    - Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+  - Example 2: `nums = [0,3,7,2,5,8,4,6,0,1]`
+    - Output: `9`
+  - Example 3: `nums = [1,0,1,2]`
+    - Output: `3`
+- **Constraints**:
+  - `0 <= nums.length <= 10^5`
+  - `-10^9 <= nums[i] <= 10^9`
+
 - **套路**：Hash Set 找序列起點
 - **思路**：
   - 若某個數字 `num - 1` 也存在，代表 `num` 不是序列起點，從它開始往後數只會重複工作。
@@ -538,6 +760,20 @@ def longestConsecutive(nums):
 ```
 
 ### 8. String to Integer - atoi (Med.)
+
+- **Problem (English)**:
+  - Implement `myAtoi(string s)`, which converts a string to a 32-bit signed integer.
+  - Ignore leading whitespace, read an optional sign, then read digits until a non-digit is reached.
+  - Clamp the result into the 32-bit signed integer range if it overflows.
+- **題目（中文）**：
+  - 實作 `myAtoi(string s)`，將字串轉成 32 位有號整數。
+  - 需要先忽略前導空白，再讀取可選的正負號，接著盡可能讀取數字直到遇到非數字字元。
+  - 若結果超出 32 位有號整數範圍，需截斷到邊界值。
+
+- **Examples**:
+- **Constraints**:
+  - `0 <= s.length <= 200`
+  - s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
 
 - **套路**：字串模擬解析
 - **思路**：
@@ -590,6 +826,22 @@ def myAtoi(s):
 
 ### 54. Spiral Matrix (Med.)
 
+- **Problem (English)**:
+  - Given an `m x n` matrix, return all elements in spiral order.
+- **題目（中文）**：
+  - 給定一個 `m x n` 矩陣，請依照螺旋順序回傳所有元素。
+
+- **Examples**:
+  - Example 1: `matrix = [[1,2,3],[4,5,6],[7,8,9]]`
+    - Output: `[1,2,3,6,9,8,7,4,5]`
+  - Example 2: `matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]`
+    - Output: `[1,2,3,4,8,12,11,10,9,5,6,7]`
+- **Constraints**:
+  - `m == matrix.length`
+  - `n == matrix[i].length`
+  - `1 <= m, n <= 10`
+  - `-100 <= matrix[i][j] <= 100`
+
 - **套路**：四邊界逐層收縮
 - **思路**：
   - 用 `top`、`bottom`、`left`、`right` 表示當前還沒走過的矩形邊界。
@@ -640,6 +892,23 @@ def spiralOrder(matrix):
 
 ### 48. Rotate Image (Med.)
 
+- **Problem (English)**:
+  - You are given an `n x n` matrix representing an image.
+  - Rotate the image by 90 degrees clockwise in-place.
+- **題目（中文）**：
+  - 給定一個 `n x n` 的矩陣代表圖片。
+  - 請原地將圖片順時針旋轉 90 度。
+
+- **Examples**:
+  - Example 1: `matrix = [[1,2,3],[4,5,6],[7,8,9]]`
+    - Output: `[[7,4,1],[8,5,2],[9,6,3]]`
+  - Example 2: `matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]`
+    - Output: `[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]`
+- **Constraints**:
+  - `n == matrix.length == matrix[i].length`
+  - `1 <= n <= 20`
+  - `-1000 <= matrix[i][j] <= 1000`
+
 - **套路**：先轉置再左右翻轉
 - **思路**：
   - 順時針旋轉 90 度可以拆成兩個原地操作：先沿主對角線轉置，再把每一列反轉。
@@ -673,6 +942,24 @@ def rotate(matrix):
 ```
 
 ### 73. Set Matrix Zeroes (Med.)
+
+- **Problem (English)**:
+  - Given an `m x n` integer matrix, if an element is `0`, set its entire row and column to `0`.
+  - You must modify the matrix in-place.
+- **題目（中文）**：
+  - 給定一個 `m x n` 的整數矩陣，若某個元素為 `0`，則將其整列與整欄都設為 `0`。
+  - 必須原地修改矩陣。
+
+- **Examples**:
+  - Example 1: `matrix = [[1,1,1],[1,0,1],[1,1,1]]`
+    - Output: `[[1,0,1],[0,0,0],[1,0,1]]`
+  - Example 2: `matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]`
+    - Output: `[[0,0,0,0],[0,4,5,0],[0,3,1,0]]`
+- **Constraints**:
+  - `m == matrix.length`
+  - `n == matrix[0].length`
+  - `1 <= m, n <= 200`
+  - `-2^31 <= matrix[i][j] <= 2^31 - 1`
 
 - **套路**：用第一列與第一欄當標記區
 - **思路**：
@@ -722,6 +1009,23 @@ def setZeroes(matrix):
 
 ### 75. Sort Colors (Med.)
 
+- **Problem (English)**:
+  - Given an array `nums` containing `0`, `1`, and `2` to represent red, white, and blue, sort the array in-place so equal colors are adjacent.
+  - Do not use the library sort function.
+- **題目（中文）**：
+  - 給定一個只包含 `0`、`1`、`2` 的陣列 `nums`，分別代表紅、白、藍三種顏色，請原地排序讓相同顏色相鄰。
+  - 不可使用函式庫內建排序。
+
+- **Examples**:
+  - Example 1: `nums = [2,0,2,1,1,0]`
+    - Output: `[0,0,1,1,2,2]`
+  - Example 2: `nums = [2,0,1]`
+    - Output: `[0,1,2]`
+- **Constraints**:
+  - `n == nums.length`
+  - `1 <= n <= 300`
+  - nums[i] is either 0, 1, or 2.
+
 - **套路**：Dutch National Flag
 - **思路**：
   - 維護三個區域：`[0, left)` 都是 0，`(right, end]` 都是 2，中間是尚未分類的區域。
@@ -760,6 +1064,21 @@ def sortColors(nums):
 
 ### 136. Single Number (Easy)
 
+- **Problem (English)**:
+  - Given a non-empty integer array `nums`, every element appears twice except for one.
+  - Return the element that appears exactly once.
+  - The solution must run in linear time and use constant extra space.
+- **題目（中文）**：
+  - 給定一個非空整數陣列 `nums`，其中每個元素都出現兩次，只有一個元素只出現一次。
+  - 請回傳那個只出現一次的元素。
+  - 解法必須使用線性時間與常數額外空間。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= nums.length <= 3 * 10^4`
+  - `-3 * 10^4 <= nums[i] <= 3 * 10^4`
+  - Each element in the array appears twice except for one element which appears only once.
+
 - **套路**：XOR 抵消
 - **思路**：
   - XOR 有兩個關鍵性質：`a ^ a = 0`，`a ^ 0 = a`。
@@ -792,6 +1111,22 @@ def singleNumber(nums):
 ```
 
 ### 179. Largest Number (Med.)
+
+- **Problem (English)**:
+  - Given a list of non-negative integers `nums`, arrange them so they form the largest possible number.
+  - Return the result as a string.
+- **題目（中文）**：
+  - 給定一組非負整數 `nums`，請重新排列它們，使其組成最大的數字。
+  - 結果需以字串形式回傳。
+
+- **Examples**:
+  - Example 1: `nums = [10,2]`
+    - Output: `"210"`
+  - Example 2: `nums = [3,30,34,5,9]`
+    - Output: `"9534330"`
+- **Constraints**:
+  - `1 <= nums.length <= 100`
+  - `0 <= nums[i] <= 10^9`
 
 - **套路**：自訂排序規則
 - **思路**：
@@ -834,6 +1169,28 @@ def largestNumber(nums):
 
 ### 189. Rotate Array (Med.)
 
+- **Problem (English)**:
+  - Given an integer array `nums`, rotate the array to the right by `k` steps.
+  - Do it in-place when possible.
+- **題目（中文）**：
+  - 給定整數陣列 `nums`，請將陣列向右旋轉 `k` 步。
+  - 盡可能原地完成。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3,4,5,6,7], k = 3`
+    - Output: `[5,6,7,1,2,3,4]`
+    - Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+  - Example 2: `nums = [-1,-100,3,99], k = 2`
+    - Output: `[3,99,-1,-100]`
+    - Explanation: rotate 1 steps to the right: [99,-1,-100,3]
+rotate 2 steps to the right: [3,99,-1,-100]
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - `-2^31 <= nums[i] <= 2^31 - 1`
+  - `0 <= k <= 10^5`
+
 - **套路**：三次反轉
 - **思路**：
   - 把陣列整體反轉後，原本最後面的 `k` 個元素會被翻到前面，但順序也被反轉。
@@ -871,6 +1228,27 @@ def rotate(nums, k):
 ```
 
 ### 41. First Missing Positive (Hard)
+
+- **Problem (English)**:
+  - Given an unsorted integer array `nums`, return the smallest missing positive integer.
+  - Your algorithm must run in `O(n)` time and use `O(1)` extra space.
+- **題目（中文）**：
+  - 給定一個未排序整數陣列 `nums`，請回傳最小缺失正整數。
+  - 演算法必須在 `O(n)` 時間內完成，並只使用 `O(1)` 額外空間。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,0]`
+    - Output: `3`
+    - Explanation: The numbers in the range [1,2] are all in the array.
+  - Example 2: `nums = [3,4,-1,1]`
+    - Output: `2`
+    - Explanation: 1 is in the array but 2 is missing.
+  - Example 3: `nums = [7,8,9,11,12]`
+    - Output: `1`
+    - Explanation: The smallest positive integer 1 is missing.
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - `-2^31 <= nums[i] <= 2^31 - 1`
 
 - **套路**：原地放回對應索引
 - **思路**：
@@ -910,6 +1288,24 @@ def firstMissingPositive(nums):
 
 ### 271. Encode and Decode Strings (Med.)
 
+- **Problem (English)**:
+  - Design an algorithm to encode a list of strings into a single string so it can be sent over a network and decoded back to the original list.
+  - Implement `encode` and `decode` so the decoded list exactly matches the original list.
+  - You may not use built-in serialize methods such as `eval`.
+- **題目（中文）**：
+  - 設計一個演算法，將字串列表編碼成單一字串，以便透過網路傳送後再正確解碼回原本的列表。
+  - 你需要實作 `encode` 與 `decode`，並保證解碼後的結果和原始列表完全相同。
+  - 不能直接使用內建的 serialize 類型方法，例如 `eval`。
+- **Examples**:
+  - Example 1: `dummy_input = ["Hello","World"]`
+    - Output: `["Hello","World"]`
+    - Explanation: After encoding on one machine and decoding on another, the recovered list must still be `["Hello","World"]`.
+  - Example 2: `dummy_input = [""]`
+    - Output: `[""]`
+- **Constraints**:
+  - `1 <= strs.length <= 200`
+  - `0 <= strs[i].length <= 200`
+  - `strs[i]` may contain any of the 256 valid ASCII characters.
 - **套路**：長度前綴編碼
 - **思路**：
   - 若只用某個分隔符直接 join，原字串本身也可能含有那個分隔符，decode 時就會歧義。
@@ -952,6 +1348,23 @@ def decode(s):
 ```
 
 ### 380. Insert Delete GetRandom O(1) (Med.)
+
+- **Problem (English)**:
+  - Design a data structure that supports `insert`, `remove`, and `getRandom` in average `O(1)` time.
+  - `insert(val)` returns whether the value was newly added.
+  - `remove(val)` returns whether the value existed and was removed.
+  - `getRandom()` returns a random current element, with each element having equal probability.
+- **題目（中文）**：
+  - 設計一個資料結構，支援平均 `O(1)` 時間的 `insert`、`remove` 與 `getRandom`。
+  - `insert(val)` 需回傳該值是否為新加入。
+  - `remove(val)` 需回傳該值是否存在並被成功刪除。
+  - `getRandom()` 需從目前元素中等機率回傳一個值。
+
+- **Examples**:
+- **Constraints**:
+  - `-2^31 <= val <= 2^31 - 1`
+  - At most 2 * 10^5 calls will be made to insert, remove, and getRandom.
+  - There will be at least one element in the data structure when getRandom is called.
 
 - **套路**：陣列 + Hash Map 索引
 - **思路**：

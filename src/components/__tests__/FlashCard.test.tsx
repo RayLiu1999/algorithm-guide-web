@@ -6,16 +6,20 @@ import FlashCard from '../FlashCard';
 const MOCK_PROPS = {
   title: 'Two Sum',
   difficulty: 'Easy' as const,
-  explanation: '就像你想找兩張拼圖湊成完整的圖案。',
+  explanation: '- **Problem (English)**:\n  - Given an array of integers `nums` and an integer `target`.\n  - Return the indices of the two numbers that add up to `target`.\n- **Examples**:\n  - Example 1: `nums = [2,7,11,15], target = 9`\n    - Output: `[0,1]`\n- **Constraints**:\n  - `2 <= nums.length <= 10^4`',
   solution: `# 解法\n\`\`\`python\ndef twoSum(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        diff = target - n\n        if diff in seen:\n            return [seen[diff], i]\n        seen[n] = i\n\`\`\``,
   onRate: vi.fn(),
 };
 
 describe('FlashCard', () => {
-  it('預設顯示題目標題與解說', () => {
+  it('預設顯示題目標題與完整英文題目區塊', () => {
     render(<FlashCard {...MOCK_PROPS} />);
     expect(screen.getByText(/Two Sum/i)).toBeInTheDocument();
-    expect(screen.getByText(/就像你想找兩張拼圖/i)).toBeInTheDocument();
+    expect(screen.getByText(/Problem \(English\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Given an array of integers/i)).toBeInTheDocument();
+    expect(screen.getByText(/Examples/i)).toBeInTheDocument();
+    expect(screen.getByText(/Constraints/i)).toBeInTheDocument();
+    expect(screen.getByText(/Return the indices of the two numbers/i)).toBeInTheDocument();
   });
 
   it('預設隱藏解答 (程式碼)', () => {

@@ -68,6 +68,18 @@ def bfs(root):
 
 ### 104. Maximum Depth of Binary Tree (Easy)
 
+- **Problem (English)**: Find the maximum depth (height) of a binary tree, defined as the number of nodes along the longest path from root to leaf.
+- **題目（中文）**：找出二元樹的最大深度，定義為從根到葉節點的最長路徑上的節點個數。
+
+- **Examples**:
+  - Example 1: `root = [3,9,20,null,null,15,7]`
+    - Output: `3`
+  - Example 2: `root = [1,null,2]`
+    - Output: `2`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 10^4].
+  - `-100 <= Node.val <= 100`
+
 - **套路**：DFS 遞迴算高度
 - **思路**：
   - 樹的最大深度，本質上就是「根節點到底下最深葉節點的最長路徑長度」。
@@ -96,6 +108,20 @@ def maxDepth(root):
 ```
 
 ### 226. Invert Binary Tree (Easy)
+
+- **Problem (English)**: Flip a binary tree mirror-wise by inverting all left and right child pointers at each node.
+- **題目（中文）**：通過反轉每個節點的左右子指針來鏡像翻轉二元樹。
+
+- **Examples**:
+  - Example 1: `root = [4,2,7,1,3,6,9]`
+    - Output: `[4,7,2,9,6,3,1]`
+  - Example 2: `root = [2,1,3]`
+    - Output: `[2,3,1]`
+  - Example 3: `root = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 100].
+  - `-100 <= Node.val <= 100`
 
 - **套路**：DFS 交換左右子樹
 - **思路**：
@@ -128,6 +154,20 @@ def invertTree(root):
 
 ### 100. Same Tree (Easy)
 
+- **Problem (English)**: Determine whether two binary trees are identical in both structure and node values.
+- **題目（中文）**：判斷兩棵二元樹是否在結構和節點值上都相同。
+
+- **Examples**:
+  - Example 1: `p = [1,2,3], q = [1,2,3]`
+    - Output: `true`
+  - Example 2: `p = [1,2], q = [1,null,2]`
+    - Output: `false`
+  - Example 3: `p = [1,2,1], q = [1,1,2]`
+    - Output: `false`
+- **Constraints**:
+  - The number of nodes in both trees is in the range [0, 100].
+  - `-10^4 <= Node.val <= 10^4`
+
 - **套路**：同步 DFS 比較
 - **思路**：
   - 兩棵樹相同，代表每個對應位置都要同時滿足「值相同」與「結構相同」。
@@ -158,6 +198,18 @@ def isSameTree(p, q):
 ```
 
 ### 101. Symmetric Tree (Easy)
+
+- **Problem (English)**: Check if a binary tree exhibits mirror symmetry, where the left subtree mirrors the right subtree.
+- **題目（中文）**：檢查二元樹是否具有鏡像對稱性，即左子樹與右子樹互為鏡像。
+
+- **Examples**:
+  - Example 1: `root = [1,2,2,3,4,4,3]`
+    - Output: `true`
+  - Example 2: `root = [1,2,2,null,3,null,3]`
+    - Output: `false`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 1000].
+  - `-100 <= Node.val <= 100`
 
 - **套路**：鏡像 DFS
 - **思路**：
@@ -196,6 +248,20 @@ def isSymmetric(root):
 
 ### 572. Subtree of Another Tree (Easy)
 
+- **Problem (English)**: Verify whether one binary tree is a subtree of another, matching both structure and values.
+- **題目（中文）**：驗證一棵二元樹是否為另一棵樹的子樹，需要匹配結構和值。
+
+- **Examples**:
+  - Example 1: `root = [3,4,5,1,2], subRoot = [4,1,2]`
+    - Output: `true`
+  - Example 2: `root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]`
+    - Output: `false`
+- **Constraints**:
+  - The number of nodes in the root tree is in the range [1, 2000].
+  - The number of nodes in the subRoot tree is in the range [1, 1000].
+  - `-10^4 <= root.val <= 10^4`
+  - `-10^4 <= subRoot.val <= 10^4`
+
 - **套路**：遍歷大樹 + 比對同構子樹
 - **思路**：
   - 先寫一個 `same(a, b)`，專門判斷兩棵樹是否完全相同。
@@ -233,6 +299,19 @@ def isSubtree(root, subRoot):
 ```
 
 ### 543. Diameter of Binary Tree (Easy)
+
+- **Problem (English)**: Find the length of the longest path between any two nodes (any starting point), measured in edges or nodes.
+- **題目（中文）**：找出任意兩個節點間最長路徑的長度，可以計算邊數或節點數。
+
+- **Examples**:
+  - Example 1: `root = [1,2,3,4,5]`
+    - Output: `3`
+    - Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
+  - Example 2: `root = [1,2]`
+    - Output: `1`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 10^4].
+  - `-100 <= Node.val <= 100`
 
 - **套路**：後序遍歷回傳高度
 - **思路**：
@@ -274,6 +353,20 @@ def diameterOfBinaryTree(root):
 
 ### 110. Balanced Binary Tree (Easy)
 
+- **Problem (English)**: Determine if a binary tree is height-balanced, where left and right subtree heights differ by at most 1 at every node.
+- **題目（中文）**：判斷二元樹是否高度平衡，即每個節點的左右子樹高度差最多為 1。
+
+- **Examples**:
+  - Example 1: `root = [3,9,20,null,null,15,7]`
+    - Output: `true`
+  - Example 2: `root = [1,2,2,3,3,null,null,4,4]`
+    - Output: `false`
+  - Example 3: `root = []`
+    - Output: `true`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 5000].
+  - `-10^4 <= Node.val <= 10^4`
+
 - **套路**：後序遍歷 + `-1` 哨兵
 - **思路**：
   - 判斷平衡需要先知道左右子樹高度，所以最自然的是後序遍歷。
@@ -312,6 +405,21 @@ def isBalanced(root):
 
 ### 108. Convert Sorted Array to Binary Search Tree (Easy)
 
+- **Problem (English)**: Build a height-balanced binary search tree from a sorted array by selecting the middle element as root repeatedly.
+- **題目（中文）**：從排序陣列通過重複選擇中間元素為根來構建高度平衡的二元搜尋樹。
+
+- **Examples**:
+  - Example 1: `nums = [-10,-3,0,5,9]`
+    - Output: `[0,-3,9,-10,null,5]`
+    - Explanation: [0,-10,5,null,-3,null,9] is also accepted:
+  - Example 2: `nums = [1,3]`
+    - Output: `[3,1]`
+    - Explanation: [1,null,3] and [3,1] are both height-balanced BSTs.
+- **Constraints**:
+  - `1 <= nums.length <= 10^4`
+  - `-10^4 <= nums[i] <= 10^4`
+  - nums is sorted in a strictly increasing order.
+
 - **套路**：分治取中點建樹
 - **思路**：
   - 有序陣列若想建出高度平衡 BST，最自然的根節點就是中間值。
@@ -348,6 +456,20 @@ def sortedArrayToBST(nums):
 ```
 
 ### 102. Binary Tree Level Order Traversal (Med.)
+
+- **Problem (English)**: Perform a breadth-first traversal of a binary tree, returning nodes grouped by their depth level.
+- **題目（中文）**：對二元樹進行廣度優先遍歷，按深度層級分組返回節點。
+
+- **Examples**:
+  - Example 1: `root = [3,9,20,null,null,15,7]`
+    - Output: `[[3],[9,20],[15,7]]`
+  - Example 2: `root = [1]`
+    - Output: `[[1]]`
+  - Example 3: `root = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 2000].
+  - `-1000 <= Node.val <= 1000`
 
 - **套路**：BFS 層序遍歷
 - **思路**：
@@ -392,6 +514,20 @@ def levelOrder(root):
 ```
 
 ### 103. Binary Tree Zigzag Level Order Traversal (Med.)
+
+- **Problem (English)**: Traverse a binary tree level by level where even levels go left-to-right and odd levels go right-to-left.
+- **題目（中文）**：按層遍歷二元樹，偶數層由左到右，奇數層由右到左。
+
+- **Examples**:
+  - Example 1: `root = [3,9,20,null,null,15,7]`
+    - Output: `[[3],[20,9],[15,7]]`
+  - Example 2: `root = [1]`
+    - Output: `[[1]]`
+  - Example 3: `root = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 2000].
+  - `-100 <= Node.val <= 100`
 
 - **套路**：BFS + 奇偶層改變加入方向
 - **思路**：
@@ -445,6 +581,14 @@ def zigzagLevelOrder(root):
 
 ### 199. Binary Tree Right Side View (Med.)
 
+- **Problem (English)**: Identify the nodes visible when viewing a binary tree from the right side, collecting the rightmost node at each level.
+- **題目（中文）**：從樹的右側看時所有可見的節點，每層選擇最右邊的節點。
+
+- **Examples**:
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 100].
+  - `-100 <= Node.val <= 100`
+
 - **套路**：BFS 每層取最後一個節點
 - **思路**：
   - 從右側看一棵樹時，每一層真正可見的，就是該層最右邊的節點。
@@ -491,6 +635,23 @@ def rightSideView(root):
 ```
 
 ### 662. Maximum Width of Binary Tree (Med.)
+
+- **Problem (English)**: Calculate the maximum width of any level in the tree, counting gaps from the leftmost to rightmost node.
+- **題目（中文）**：計算樹任何層的最大寬度，計算從最左邊到最右邊節點的距離（含間隔）。
+
+- **Examples**:
+  - Example 1: `root = [1,3,2,5,3,null,9]`
+    - Output: `4`
+    - Explanation: The maximum width exists in the third level with length 4 (5,3,null,9).
+  - Example 2: `root = [1,3,2,5,null,null,9,6,null,7]`
+    - Output: `7`
+    - Explanation: The maximum width exists in the fourth level with length 7 (6,null,null,null,null,null,7).
+  - Example 3: `root = [1,3,2,5]`
+    - Output: `2`
+    - Explanation: The maximum width exists in the second level with length 2 (3,2).
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 3000].
+  - `-100 <= Node.val <= 100`
 
 - **套路**：BFS + 完全二元樹索引
 - **思路**：
@@ -541,6 +702,19 @@ def widthOfBinaryTree(root):
 
 ### 98. Validate Binary Search Tree (Med.)
 
+- **Problem (English)**: Verify whether a binary tree is a valid BST, where each node falls within the bounds set by its ancestors.
+- **題目（中文）**：驗證二元樹是否為有效的二元搜尋樹，每個節點都在祖先確定的範圍內。
+
+- **Examples**:
+  - Example 1: `root = [2,1,3]`
+    - Output: `true`
+  - Example 2: `root = [5,1,4,null,null,3,6]`
+    - Output: `false`
+    - Explanation: The root node's value is 5 but its right child's value is 4.
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 10^4].
+  - `-2^31 <= Node.val <= 2^31 - 1`
+
 - **套路**：遞迴傳上下界
 - **思路**：
   - BST 的條件不是只看父子節點，而是每個節點都要落在整條祖先路徑定下的合法範圍內。
@@ -574,6 +748,19 @@ def isValidBST(root):
 ```
 
 ### 230. Kth Smallest Element in a BST (Med.)
+
+- **Problem (English)**: Find the k-th smallest value in a binary search tree using in-order traversal properties.
+- **題目（中文）**：使用中序遍歷特性在二元搜尋樹中找到第 k 小的值。
+
+- **Examples**:
+  - Example 1: `root = [3,1,4,null,2], k = 1`
+    - Output: `1`
+  - Example 2: `root = [5,3,6,2,4,null,null,1], k = 3`
+    - Output: `3`
+- **Constraints**:
+  - The number of nodes in the tree is n.
+  - `1 <= k <= n <= 10^4`
+  - `0 <= Node.val <= 10^4`
 
 - **套路**：BST 中序遍歷
 - **思路**：
@@ -613,6 +800,26 @@ def kthSmallest(root, k):
 
 ### 285. Inorder Successor in BST (Med.)
 
+- **Problem (English)**:
+  - Given the `root` of a binary search tree and a node `p` in it, return the in-order successor of that node in the BST.
+  - If the given node has no in-order successor, return `null`.
+  - The successor of a node `p` is the node with the smallest key greater than `p.val`.
+- **題目（中文）**：
+  - 給定一棵二元搜尋樹的 `root` 與其中一個節點 `p`，請回傳 `p` 在這棵 BST 中的中序後繼。
+  - 如果 `p` 沒有中序後繼，請回傳 `null`。
+  - 節點 `p` 的後繼，是所有鍵值大於 `p.val` 的節點中，鍵值最小的那一個。
+- **Examples**:
+  - Example 1: `root = [2,1,3], p = 1`
+    - Output: `2`
+    - Explanation: `1` 的中序後繼節點是 `2`。
+  - Example 2: `root = [5,3,6,2,4,null,null,1], p = 6`
+    - Output: `null`
+    - Explanation: `6` 沒有中序後繼，所以答案是 `null`。
+- **Constraints**:
+  - The number of nodes in the tree is in the range `[1, 10^4]`.
+  - `-10^5 <= Node.val <= 10^5`
+  - All `Node.val` values are unique.
+
 - **套路**：利用 BST 性質往下維護候選 successor
 - **思路**：
   - 中序後繼是「比 `p` 大的最小節點」。
@@ -649,6 +856,25 @@ def inorderSuccessor(root, p):
 
 ### 235. Lowest Common Ancestor of a Binary Search Tree (Med.)
 
+- **Problem (English)**: Find the lowest common ancestor of two nodes in a BST using the tree's ordering property.
+- **題目（中文）**：使用二元搜尋樹的排序特性找到兩個節點的最低共同祖先。
+
+- **Examples**:
+  - Example 1: `root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8`
+    - Output: `6`
+    - Explanation: The LCA of nodes 2 and 8 is 6.
+  - Example 2: `root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4`
+    - Output: `2`
+    - Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
+  - Example 3: `root = [2,1], p = 2, q = 1`
+    - Output: `2`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [2, 10^5].
+  - `-10^9 <= Node.val <= 10^9`
+  - All Node.val are unique.
+  - `p != q`
+  - p and q will exist in the BST.
+
 - **套路**：利用 BST 找分叉點
 - **思路**：
   - BST 中，若 `p` 和 `q` 都比當前節點小，LCA 一定在左子樹。
@@ -681,6 +907,25 @@ def lowestCommonAncestor(root, p, q):
 ```
 
 ### 236. Lowest Common Ancestor of a Binary Tree (Med.)
+
+- **Problem (English)**: Find the lowest common ancestor of two nodes in a general binary tree without relying on BST properties.
+- **題目（中文）**：在一般二元樹中找到兩個節點的最低共同祖先，不依賴二元搜尋樹的性質。
+
+- **Examples**:
+  - Example 1: `root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1`
+    - Output: `3`
+    - Explanation: The LCA of nodes 5 and 1 is 3.
+  - Example 2: `root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4`
+    - Output: `5`
+    - Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+  - Example 3: `root = [1,2], p = 1, q = 2`
+    - Output: `1`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [2, 10^5].
+  - `-10^9 <= Node.val <= 10^9`
+  - All Node.val are unique.
+  - `p != q`
+  - p and q will exist in the tree.
 
 - **套路**：後序遞迴回傳命中結果
 - **思路**：
@@ -716,6 +961,23 @@ def lowestCommonAncestor(root, p, q):
 ```
 
 ### 105. Construct Binary Tree from Preorder and Inorder Traversal (Med.)
+
+- **Problem (English)**: Build a unique binary tree from its preorder and in-order traversal sequences.
+- **題目（中文）**：從前序和中序遍歷序列唯一地構建二元樹。
+
+- **Examples**:
+  - Example 1: `preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]`
+    - Output: `[3,9,20,null,null,15,7]`
+  - Example 2: `preorder = [-1], inorder = [-1]`
+    - Output: `[-1]`
+- **Constraints**:
+  - `1 <= preorder.length <= 3000`
+  - `inorder.length == preorder.length`
+  - `-3000 <= preorder[i], inorder[i] <= 3000`
+  - preorder and inorder consist of unique values.
+  - Each value of inorder also appears in preorder.
+  - preorder is guaranteed to be the preorder traversal of the tree.
+  - inorder is guaranteed to be the inorder traversal of the tree.
 
 - **套路**：前序定根 + 中序切左右子樹
 - **思路**：
@@ -761,6 +1023,24 @@ def buildTree(preorder, inorder):
 
 ### 113. Path Sum II (Med.)
 
+- **Problem (English)**: Find all root-to-leaf paths whose node sum equals a target value.
+- **題目（中文）**：找出所有節點值和等於目標值的根到葉路徑。
+
+- **Examples**:
+  - Example 1: `root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22`
+    - Output: `[[5,4,11,2],[5,8,4,5]]`
+    - Explanation: There are two paths whose sum equals targetSum:
+5 + 4 + 11 + 2 = 22
+5 + 8 + 4 + 5 = 22
+  - Example 2: `root = [1,2,3], targetSum = 5`
+    - Output: `[]`
+  - Example 3: `root = [1,2], targetSum = 0`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 5000].
+  - `-1000 <= Node.val <= 1000`
+  - `-1000 <= targetSum <= 1000`
+
 - **套路**：DFS 路徑累積 + 回溯
 - **思路**：
   - 從根往下走時，把當前節點值加進 `path`，並同步維護剩餘目標值 `remain`。
@@ -803,6 +1083,20 @@ def pathSum(root, targetSum):
 ```
 
 ### 437. Path Sum III (Med.)
+
+- **Problem (English)**: Count all paths (not necessarily root-to-leaf) in the tree whose node values sum to a target.
+- **題目（中文）**：計算樹中所有（不必是根到葉）節點值和等於目標的路徑數量。
+
+- **Examples**:
+  - Example 1: `root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8`
+    - Output: `3`
+    - Explanation: The paths that sum to 8 are shown.
+  - Example 2: `root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22`
+    - Output: `3`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 1000].
+  - `-10^9 <= Node.val <= 10^9`
+  - `-1000 <= targetSum <= 1000`
 
 - **套路**：樹上前綴和
 - **思路**：
@@ -847,6 +1141,20 @@ def pathSum(root, targetSum):
 
 ### 124. Binary Tree Maximum Path Sum (Hard)
 
+- **Problem (English)**: Find the maximum sum of a path connecting any two nodes, not necessarily containing the root.
+- **題目（中文）**：找到連接任意兩個節點的最大路徑和，不一定包含根節點。
+
+- **Examples**:
+  - Example 1: `root = [1,2,3]`
+    - Output: `6`
+    - Explanation: The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.
+  - Example 2: `root = [-10,9,20,null,null,15,7]`
+    - Output: `42`
+    - Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 3 * 10^4].
+  - `-1000 <= Node.val <= 1000`
+
 - **套路**：後序遍歷回傳單邊最大貢獻
 - **思路**：
   - 對父節點來說，一條可往上延伸的路徑最多只能選左邊或右邊其中一支，所以 DFS 要回傳的是「單邊最大貢獻」。
@@ -887,6 +1195,26 @@ def maxPathSum(root):
 ```
 
 ### 863. All Nodes Distance K in Binary Tree (Med.)
+
+- **Problem (English)**:
+  - Return the values of all nodes that are exactly distance `k` from the target node in the binary tree.
+  - You may return the answer in any order.
+- **題目（中文）**：
+  - 請回傳二元樹中所有與目標節點距離恰好為 `k` 的節點值。
+  - 答案順序不限。
+
+- **Examples**:
+  - Example 1: `root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, k = 2`
+    - Output: `[7,4,1]`
+    - Explanation: The nodes that are a distance 2 from the target node (with value 5) have values 7, 4, and 1.
+  - Example 2: `root = [1], target = 1, k = 3`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [1, 500].
+  - `0 <= Node.val <= 500`
+  - All the values Node.val are unique.
+  - target is the value of one of the nodes in the tree.
+  - `0 <= k <= 1000`
 
 - **套路**：建 `parent map` 後從 `target` 做 BFS
 - **思路**：
@@ -944,6 +1272,18 @@ def distanceK(root, target, k):
 
 ### 297. Serialize and Deserialize Binary Tree (Hard)
 
+- **Problem (English)**: Convert a binary tree to a string representation (serialization) and reconstruct it from that string (deserialization).
+- **題目（中文）**：將二元樹轉換為字串表示（序列化）並從字串重構（反序列化）。
+
+- **Examples**:
+  - Example 1: `root = [1,2,3,null,null,4,5]`
+    - Output: `[1,2,3,null,null,4,5]`
+  - Example 2: `root = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the tree is in the range [0, 10^4].
+  - `-1000 <= Node.val <= 1000`
+
 - **套路**：前序遍歷 + 空節點標記
 - **思路**：
   - 若序列化時只記錄存在的節點值，會失去樹的結構，因此空節點也必須寫成特殊標記，例如 `#`。
@@ -996,6 +1336,29 @@ class Codec:
 ```
 
 ### 310. Minimum Height Trees (Med.)
+
+- **Problem (English)**:
+  - You are given a tree with `n` nodes labeled from `0` to `n - 1` and `n - 1` undirected edges.
+  - In a tree, any two nodes are connected by exactly one path.
+  - Return all root labels of the minimum height trees, in any order.
+- **題目（中文）**：
+  - 給定一棵有 `n` 個節點、節點編號為 `0` 到 `n - 1` 的樹，以及 `n - 1` 條無向邊。
+  - 在樹中，任兩個節點之間都恰好只有一條路徑。
+  - 請回傳所有能形成最小高度樹的根節點編號，答案順序不限。
+
+- **Examples**:
+  - Example 1: `n = 4, edges = [[1,0],[1,2],[1,3]]`
+    - Output: `[1]`
+    - Explanation: As shown, the height of the tree is 1 when the root is the node with label 1 which is the only MHT.
+  - Example 2: `n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]]`
+    - Output: `[3,4]`
+- **Constraints**:
+  - `1 <= n <= 2 * 10^4`
+  - `edges.length == n - 1`
+  - `0 <= ai, bi < n`
+  - `ai != bi`
+  - All the pairs (ai, bi) are distinct.
+  - The given input is guaranteed to be a tree and there will be no repeated edges.
 
 - **套路**：拓樸式剝葉子
 - **思路**：

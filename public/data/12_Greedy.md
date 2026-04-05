@@ -14,6 +14,24 @@
 
 ### 55. Jump Game (Med.)
 
+- **Problem (English)**:
+	- You are given an array of non-negative integers where each value tells you the farthest distance you may jump from that index.
+	- Starting at index `0`, determine whether you can reach the last index.
+- **題目（中文）**：
+	- 給定一個非負整數陣列，每個元素表示你從該位置最多可以往前跳多遠。
+	- 請判斷從索引 `0` 出發，是否能夠抵達最後一個索引。
+
+- **Examples**:
+  - Example 1: `nums = [2,3,1,1,4]`
+    - Output: `true`
+    - Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+  - Example 2: `nums = [3,2,1,0,4]`
+    - Output: `false`
+    - Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+- **Constraints**:
+  - `1 <= nums.length <= 10^4`
+  - `0 <= nums[i] <= 10^5`
+
 - **套路**：貪心維護最遠可達位置
 - **思路**：
 	- 從左到右掃描陣列，維護目前能到達的最遠索引 `farthest`。
@@ -48,6 +66,39 @@ def canJump(nums):
 ```
 
 ### 134. Gas Station (Med.)
+
+- **Problem (English)**:
+	- There are `n` gas stations arranged in a circle.
+	- At station `i`, you can fill `gas[i]` units, and it costs `cost[i]` units to travel to the next station.
+	- Starting with an empty tank, return the unique starting station index that lets you complete the circuit, or `-1` if it cannot be done.
+- **題目（中文）**：
+	- 有 `n` 個加油站沿環狀路線排列。
+	- 在第 `i` 站可以加 `gas[i]` 單位的油，前往下一站需要花費 `cost[i]` 單位。
+	- 初始油箱為空，請回傳能繞完整圈的唯一起點索引；如果不存在，回傳 `-1`。
+
+- **Examples**:
+  - Example 1: `gas = [1,2,3,4,5], cost = [3,4,5,1,2]`
+    - Output: `3`
+    - Explanation: Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+Travel to station 4. Your tank = 4 - 1 + 5 = 8
+Travel to station 0. Your tank = 8 - 2 + 1 = 7
+Travel to station 1. Your tank = 7 - 3 + 2 = 6
+Travel to station 2. Your tank = 6 - 4 + 3 = 5
+Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.
+Therefore, return 3 as the starting index.
+  - Example 2: `gas = [2,3,4], cost = [3,4,3]`
+    - Output: `-1`
+    - Explanation: You can't start at station 0 or 1, as there is not enough gas to travel to the next station.
+Let's start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+Travel to station 0. Your tank = 4 - 3 + 2 = 3
+Travel to station 1. Your tank = 3 - 3 + 3 = 3
+You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.
+Therefore, you can't travel around the circuit once no matter where you start.
+- **Constraints**:
+  - `n == gas.length == cost.length`
+  - `1 <= n <= 10^5`
+  - `0 <= gas[i], cost[i] <= 10^4`
+  - The input is generated such that the answer is unique.
 
 - **套路**：貪心 + 前綴盈虧重置起點
 - **思路**：
@@ -88,6 +139,29 @@ def canCompleteCircuit(gas, cost):
 ```
 
 ### 435. Non-overlapping Intervals (Med.)
+
+- **Problem (English)**:
+	- You are given a list of intervals.
+	- Remove the minimum number of intervals so that the remaining intervals do not overlap.
+	- Intervals that only touch at an endpoint are considered non-overlapping.
+- **題目（中文）**：
+	- 給定一組區間，請移除最少數量的區間，使剩下的區間彼此不重疊。
+	- 如果兩個區間只是端點相接，視為不重疊。
+
+- **Examples**:
+  - Example 1: `intervals = [[1,2],[2,3],[3,4],[1,3]]`
+    - Output: `1`
+    - Explanation: [1,3] can be removed and the rest of the intervals are non-overlapping.
+  - Example 2: `intervals = [[1,2],[1,2],[1,2]]`
+    - Output: `2`
+    - Explanation: You need to remove two [1,2] to make the rest of the intervals non-overlapping.
+  - Example 3: `intervals = [[1,2],[2,3]]`
+    - Output: `0`
+    - Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
+- **Constraints**:
+  - `1 <= intervals.length <= 10^5`
+  - `intervals[i].length == 2`
+  - `-5 * 10^4 <= starti < endi <= 5 * 10^4`
 
 - **套路**：按結束點排序的區間貪心
 - **思路**：

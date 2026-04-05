@@ -14,6 +14,28 @@
 
 ### 56. Merge Intervals (Med.)
 
+- **Problem (English)**:
+	- You are given an array of intervals where `intervals[i] = [start_i, end_i]`.
+	- Merge every pair of overlapping intervals and return the resulting non-overlapping intervals that fully cover the original ranges.
+- **題目（中文）**：
+	- 給定一個區間陣列，其中 `intervals[i] = [start_i, end_i]`。
+	- 請把所有重疊區間合併，並回傳合併後的非重疊區間，完整涵蓋原本所有範圍。
+
+- **Examples**:
+  - Example 1: `intervals = [[1,3],[2,6],[8,10],[15,18]]`
+    - Output: `[[1,6],[8,10],[15,18]]`
+    - Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+  - Example 2: `intervals = [[1,4],[4,5]]`
+    - Output: `[[1,5]]`
+    - Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+  - Example 3: `intervals = [[4,7],[1,4]]`
+    - Output: `[[1,7]]`
+    - Explanation: Intervals [1,4] and [4,7] are considered overlapping.
+- **Constraints**:
+  - `1 <= intervals.length <= 10^4`
+  - `intervals[i].length == 2`
+  - `0 <= starti <= endi <= 10^4`
+
 - **套路**：排序後線性合併
 - **思路**：
 	- 先按區間起點排序，這樣所有可能重疊的區間一定會相鄰出現。
@@ -51,6 +73,29 @@ def merge(intervals):
 ```
 
 ### 57. Insert Interval (Med.)
+
+- **Problem (English)**:
+	- You are given a list of non-overlapping intervals sorted by start time, along with a new interval.
+	- Insert the new interval into the list and merge if necessary so that the final list remains sorted and non-overlapping.
+	- You do not need to modify the original array in place; returning a new array is allowed.
+- **題目（中文）**：
+	- 給定一個依起點排序、彼此不重疊的區間陣列，以及一個新的區間。
+	- 請把新區間插入原本的列表中，必要時進行合併，使最後結果仍然有序且不重疊。
+	- 你不需要原地修改原陣列，可以建立並回傳新的結果陣列。
+
+- **Examples**:
+  - Example 1: `intervals = [[1,3],[6,9]], newInterval = [2,5]`
+    - Output: `[[1,5],[6,9]]`
+  - Example 2: `intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]`
+    - Output: `[[1,2],[3,10],[12,16]]`
+    - Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+- **Constraints**:
+  - `0 <= intervals.length <= 10^4`
+  - `intervals[i].length == 2`
+  - `0 <= starti <= endi <= 10^5`
+  - intervals is sorted by starti in ascending order.
+  - `newInterval.length == 2`
+  - `0 <= start <= end <= 10^5`
 
 - **套路**：分三段處理區間插入
 - **思路**：
@@ -95,6 +140,22 @@ def insert(intervals, newInterval):
 ```
 
 ### 252. Meeting Rooms (Easy)
+
+- **Problem (English)**:
+	- You are given meeting time intervals where `intervals[i] = [start_i, end_i]`.
+	- Determine whether one person can attend every meeting without any time conflict.
+- **題目（中文）**：
+	- 給定多個會議時間區間，其中 `intervals[i] = [start_i, end_i]`。
+	- 請判斷一個人是否能夠參加所有會議，而不發生時間衝突。
+- **Examples**:
+	- Example 1: `intervals = [[0,30],[5,10],[15,20]]`
+		- Output: `false`
+	- Example 2: `intervals = [[7,10],[2,4]]`
+		- Output: `true`
+- **Constraints**:
+	- `0 <= intervals.length <= 10^4`
+	- `intervals[i].length == 2`
+	- `0 <= start_i < end_i <= 10^6`
 
 - **套路**：排序後檢查相鄰區間是否重疊
 - **思路**：

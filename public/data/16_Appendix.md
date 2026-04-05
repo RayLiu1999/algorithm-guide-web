@@ -12,6 +12,28 @@
 
 ### 13. Roman to Integer (Easy)
 
+- **Problem (English)**:
+        - Given a Roman numeral string, convert it to the corresponding integer.
+        - Roman numerals follow the usual subtraction rule, such as `IV = 4` and `IX = 9`.
+- **題目（中文）**：
+        - 給定一個羅馬數字字串，請把它轉換成對應的整數。
+        - 羅馬數字遵循一般前減規則，例如 `IV = 4`、`IX = 9`。
+
+- **Examples**:
+  - Example 1: `s = "III"`
+    - Output: `3`
+    - Explanation: III = 3.
+  - Example 2: `s = "LVIII"`
+    - Output: `58`
+    - Explanation: L = 50, V= 5, III = 3.
+  - Example 3: `s = "MCMXCIV"`
+    - Output: `1994`
+    - Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+- **Constraints**:
+  - `1 <= s.length <= 15`
+  - s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').
+  - It is guaranteed that s is a valid roman numeral in the range [1, 3999].
+
 - **套路**：查表 + 前減規則
 - **思路**：
         - 從左到右掃描字串，平常直接把羅馬字元轉成數值累加。
@@ -46,6 +68,24 @@ def romanToInt(s):
 ```
 
 ### 14. Longest Common Prefix (Easy)
+
+- **Problem (English)**:
+        - Given an array of strings, return the longest prefix shared by every string.
+        - If no common prefix exists, return an empty string.
+- **題目（中文）**：
+        - 給定一個字串陣列，請回傳所有字串共同擁有的最長前綴。
+        - 若不存在共同前綴，回傳空字串。
+
+- **Examples**:
+  - Example 1: `strs = ["flower","flow","flight"]`
+    - Output: `"fl"`
+  - Example 2: `strs = ["dog","racecar","car"]`
+    - Output: `""`
+    - Explanation: There is no common prefix among the input strings.
+- **Constraints**:
+  - `1 <= strs.length <= 200`
+  - `0 <= strs[i].length <= 200`
+  - strs[i] consists of only lowercase English letters if it is non-empty.
 
 - **套路**：逐欄比較字元
 - **思路**：
@@ -82,6 +122,25 @@ def longestCommonPrefix(strs):
 ```
 
 ### 7. Reverse Integer (Med.)
+
+- **Problem (English)**:
+        - Given a signed 32-bit integer `x`, reverse its digits.
+        - If the reversed value falls outside the signed 32-bit range, return `0`.
+        - Assume you cannot use 64-bit integers.
+- **題目（中文）**：
+        - 給定一個 32 位有號整數 `x`，請將它的數字位數反轉。
+        - 如果反轉後超出 32 位有號整數範圍，回傳 `0`。
+        - 假設你不能使用 64 位整數。
+
+- **Examples**:
+  - Example 1: `x = 123`
+    - Output: `321`
+  - Example 2: `x = -123`
+    - Output: `-321`
+  - Example 3: `x = 120`
+    - Output: `21`
+- **Constraints**:
+  - `-2^31 <= x <= 2^31 - 1`
 
 - **套路**：數學逐位反轉
 - **思路**：
@@ -120,6 +179,28 @@ def reverse(x):
 ```
 
 ### 844. Backspace String Compare (Easy)
+
+- **Problem (English)**:
+        - Given two strings `s` and `t` containing lowercase letters and `#`, compare them after applying all backspace operations.
+        - A `#` removes the character immediately to its left if one exists.
+- **題目（中文）**：
+        - 給定兩個字串 `s` 與 `t`，其中包含小寫字母與 `#`。
+        - 請在套用所有退格操作後，比較兩個字串是否相同。
+        - `#` 會刪掉它左邊最近的一個字元（若存在）。
+
+- **Examples**:
+  - Example 1: `s = "ab#c", t = "ad#c"`
+    - Output: `true`
+    - Explanation: Both s and t become "ac".
+  - Example 2: `s = "ab##", t = "c#d#"`
+    - Output: `true`
+    - Explanation: Both s and t become "".
+  - Example 3: `s = "a#c", t = "b"`
+    - Output: `false`
+    - Explanation: s becomes "c" while t becomes "b".
+- **Constraints**:
+  - `1 <= s.length, t.length <= 200`
+  - s and t only contain lowercase letters and '#' characters.
 
 - **套路**：從右往左跳過被刪除字元
 - **思路**：
@@ -171,6 +252,26 @@ def backspaceCompare(s, t):
 ```
 
 ### 336. Palindrome Pairs (Hard)
+
+- **Problem (English)**:
+        - Given an array of unique strings, return all index pairs `[i, j]` such that `words[i] + words[j]` forms a palindrome.
+- **題目（中文）**：
+        - 給定一個由不重複字串組成的陣列，請回傳所有索引對 `[i, j]`，使得 `words[i] + words[j]` 形成回文。
+
+- **Examples**:
+  - Example 1: `words = ["abcd","dcba","lls","s","sssll"]`
+    - Output: `[[0,1],[1,0],[3,2],[2,4]]`
+    - Explanation: The palindromes are ["abcddcba","dcbaabcd","slls","llssssll"]
+  - Example 2: `words = ["bat","tab","cat"]`
+    - Output: `[[0,1],[1,0]]`
+    - Explanation: The palindromes are ["battab","tabbat"]
+  - Example 3: `words = ["a",""]`
+    - Output: `[[0,1],[1,0]]`
+    - Explanation: The palindromes are ["a","a"]
+- **Constraints**:
+  - `1 <= words.length <= 5000`
+  - `0 <= words[i].length <= 300`
+  - words[i] consists of lowercase English letters.
 
 - **套路**：Hash Map + 拆分前後綴
 - **思路**：

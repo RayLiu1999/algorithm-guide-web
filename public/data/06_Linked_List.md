@@ -54,6 +54,22 @@ def reverse_list(head):
 
 ### 206. Reverse Linked List (Easy)
 
+- **Problem (English)**:
+  - Reverse a singly linked list so that the last node becomes the new head.
+- **題目（中文）**：
+  - 反轉一條單向鏈結串列，使原本的尾節點成為新的頭節點。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5]`
+    - Output: `[5,4,3,2,1]`
+  - Example 2: `head = [1,2]`
+    - Output: `[2,1]`
+  - Example 3: `head = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the list is the range [0, 5000].
+  - `-5000 <= Node.val <= 5000`
+
 - **套路**：迭代反轉
 - **思路**：
   - 用 `prev`、`curr`、`next_node` 三個指標依序保存前一個節點、目前節點與下一個節點。
@@ -90,6 +106,24 @@ def reverseList(head):
 
 ### 876. Middle of the Linked List (Easy)
 
+- **Problem (English)**:
+  - Return the middle node of a singly linked list.
+  - If there are two middle nodes, return the second one.
+- **題目（中文）**：
+  - 回傳一條單向鏈結串列的中間節點。
+  - 若有兩個中間節點，請回傳第二個。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5]`
+    - Output: `[3,4,5]`
+    - Explanation: The middle node of the list is node 3.
+  - Example 2: `head = [1,2,3,4,5,6]`
+    - Output: `[4,5,6]`
+    - Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+- **Constraints**:
+  - The number of nodes in the list is in the range [1, 100].
+  - `1 <= Node.val <= 100`
+
 - **套路**：快慢指標找中點
 - **思路**：
   - `slow` 每次走一步，`fast` 每次走兩步。
@@ -122,6 +156,28 @@ def middleNode(head):
 ```
 
 ### 141. Linked List Cycle (Easy)
+
+- **Problem (English)**:
+  - Determine whether a singly linked list contains a cycle.
+  - The variable `pos` indicates the index that the tail connects to, and is used only to describe the input.
+- **題目（中文）**：
+  - 判斷一條單向鏈結串列是否存在環。
+  - 輸入中的 `pos` 只用來描述尾節點連回哪個索引，不會作為函式參數傳入。
+
+- **Examples**:
+  - Example 1: `head = [3,2,0,-4], pos = 1`
+    - Output: `true`
+    - Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+  - Example 2: `head = [1,2], pos = 0`
+    - Output: `true`
+    - Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+  - Example 3: `head = [1], pos = -1`
+    - Output: `false`
+    - Explanation: There is no cycle in the linked list.
+- **Constraints**:
+  - The number of the nodes in the list is in the range [0, 10^4].
+  - `-10^5 <= Node.val <= 10^5`
+  - pos is -1 or a valid index in the linked-list.
 
 - **套路**：Floyd 快慢指標判環
 - **思路**：
@@ -158,6 +214,25 @@ def hasCycle(head):
 ```
 
 ### 21. Merge Two Sorted Lists (Easy)
+
+- **Problem (English)**:
+  - Merge two sorted linked lists and return the merged sorted list.
+  - The merged list should be formed by splicing together the nodes of the original lists.
+- **題目（中文）**：
+  - 合併兩條已排序的鏈結串列，並回傳新的排序串列。
+  - 新串列應由原本兩條串列的節點重新接起來組成。
+
+- **Examples**:
+  - Example 1: `list1 = [1,2,4], list2 = [1,3,4]`
+    - Output: `[1,1,2,3,4,4]`
+  - Example 2: `list1 = [], list2 = []`
+    - Output: `[]`
+  - Example 3: `list1 = [], list2 = [0]`
+    - Output: `[0]`
+- **Constraints**:
+  - The number of nodes in both lists is in the range [0, 50].
+  - `-100 <= Node.val <= 100`
+  - Both list1 and list2 are sorted in non-decreasing order.
 
 - **套路**：Dummy Node 串接較小節點
 - **思路**：
@@ -198,6 +273,20 @@ def mergeTwoLists(list1, list2):
 ```
 
 ### 234. Palindrome Linked List (Easy)
+
+- **Problem (English)**:
+  - Determine whether a singly linked list forms a palindrome.
+- **題目（中文）**：
+  - 判斷一條單向鏈結串列是否為回文。
+
+- **Examples**:
+  - Example 1: `head = [1,2,2,1]`
+    - Output: `true`
+  - Example 2: `head = [1,2]`
+    - Output: `false`
+- **Constraints**:
+  - The number of nodes in the list is in the range [1, 10^5].
+  - `0 <= Node.val <= 9`
 
 - **套路**：找中點 + 反轉後半段 + 雙向比對
 - **思路**：
@@ -245,6 +334,24 @@ def isPalindrome(head):
 
 ### 19. Remove Nth Node From End of List (Med.)
 
+- **Problem (English)**:
+  - Remove the `n`th node from the end of a linked list and return the head.
+- **題目（中文）**：
+  - 移除鏈結串列中倒數第 `n` 個節點，並回傳新的頭節點。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5], n = 2`
+    - Output: `[1,2,3,5]`
+  - Example 2: `head = [1], n = 1`
+    - Output: `[]`
+  - Example 3: `head = [1,2], n = 1`
+    - Output: `[1]`
+- **Constraints**:
+  - The number of nodes in the list is sz.
+  - `1 <= sz <= 30`
+  - `0 <= Node.val <= 100`
+  - `1 <= n <= sz`
+
 - **套路**：Dummy Node + 快慢指標固定距離
 - **思路**：
   - 先讓 `fast` 從 `dummy` 出發往前走 `n` 步，之後再讓 `fast` 與 `slow` 同步前進。
@@ -282,6 +389,18 @@ def removeNthFromEnd(head, n):
 ```
 
 ### 24. Swap Nodes in Pairs (Med.)
+
+- **Problem (English)**:
+  - Swap every two adjacent nodes in a linked list and return the modified head.
+  - You must swap the nodes themselves rather than only changing their values.
+- **題目（中文）**：
+  - 交換鏈結串列中每兩個相鄰節點，並回傳修改後的頭節點。
+  - 必須交換節點本身，不能只修改節點值。
+
+- **Examples**:
+- **Constraints**:
+  - The number of nodes in the list is in the range [0, 100].
+  - `0 <= Node.val <= 100`
 
 - **套路**：Dummy Node + 每次交換兩個節點
 - **思路**：
@@ -322,6 +441,22 @@ def swapPairs(head):
 ```
 
 ### 143. Reorder List (Med.)
+
+- **Problem (English)**:
+  - Reorder a linked list from `L0 -> L1 -> ... -> Ln` into `L0 -> Ln -> L1 -> Ln-1 -> L2 -> ...`.
+  - You may not change node values; only node connections may be changed.
+- **題目（中文）**：
+  - 將鏈結串列由 `L0 -> L1 -> ... -> Ln` 重排成 `L0 -> Ln -> L1 -> Ln-1 -> L2 -> ...`。
+  - 不可修改節點值，只能調整節點連接方式。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4]`
+    - Output: `[1,4,2,3]`
+  - Example 2: `head = [1,2,3,4,5]`
+    - Output: `[1,5,2,4,3]`
+- **Constraints**:
+  - The number of nodes in the list is in the range [1, 5 * 10^4].
+  - `1 <= Node.val <= 1000`
 
 - **套路**：找中點 + 反轉後半段 + 交錯合併
 - **思路**：
@@ -374,6 +509,22 @@ def reorderList(head):
 
 ### 328. Odd Even Linked List (Med.)
 
+- **Problem (English)**:
+  - Group all nodes at odd indices together followed by nodes at even indices.
+  - The relative order within the odd group and within the even group must stay the same.
+- **題目（中文）**：
+  - 將所有奇數位置的節點排在前面，再接上所有偶數位置的節點。
+  - 奇數組內與偶數組內的相對順序都必須保留。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5]`
+    - Output: `[1,3,5,2,4]`
+  - Example 2: `head = [2,1,3,5,6,4,7]`
+    - Output: `[2,3,6,7,1,5,4]`
+- **Constraints**:
+  - The number of nodes in the linked list is in the range [0, 10^4].
+  - `-10^6 <= Node.val <= 10^6`
+
 - **套路**：奇偶指標分流後再拼接
 - **思路**：
   - `odd` 串起所有奇數位置節點，`even` 串起所有偶數位置節點。
@@ -414,6 +565,21 @@ def oddEvenList(head):
 ```
 
 ### 61. Rotate List (Med.)
+
+- **Problem (English)**:
+  - Rotate a linked list to the right by `k` places.
+- **題目（中文）**：
+  - 將鏈結串列向右旋轉 `k` 次。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5], k = 2`
+    - Output: `[4,5,1,2,3]`
+  - Example 2: `head = [0,1,2], k = 4`
+    - Output: `[2,0,1]`
+- **Constraints**:
+  - The number of nodes in the list is in the range [0, 500].
+  - `-100 <= Node.val <= 100`
+  - `0 <= k <= 2 * 10^9`
 
 - **套路**：先成環再斷開
 - **思路**：
@@ -462,6 +628,22 @@ def rotateRight(head, k):
 ```
 
 ### 148. Sort List (Med.)
+
+- **Problem (English)**:
+  - Sort a linked list in ascending order.
+- **題目（中文）**：
+  - 將鏈結串列按照升序排序。
+
+- **Examples**:
+  - Example 1: `head = [4,2,1,3]`
+    - Output: `[1,2,3,4]`
+  - Example 2: `head = [-1,5,3,4,0]`
+    - Output: `[-1,0,3,4,5]`
+  - Example 3: `head = []`
+    - Output: `[]`
+- **Constraints**:
+  - The number of nodes in the list is in the range [0, 5 * 10^4].
+  - `-10^5 <= Node.val <= 10^5`
 
 - **套路**：鏈結串列 Merge Sort
 - **思路**：
@@ -518,6 +700,26 @@ def sortList(head):
 
 ### 287. Find the Duplicate Number (Med.)
 
+- **Problem (English)**:
+  - Given an array `nums` containing `n + 1` integers where each integer is in the range `[1, n]`, return the repeated number.
+  - You must solve it without modifying the array and using only constant extra space.
+- **題目（中文）**：
+  - 給定一個長度為 `n + 1` 的整數陣列 `nums`，其中每個整數都介於 `[1, n]`，請找出重複出現的數字。
+  - 解法不能修改原陣列，且只能使用常數額外空間。
+
+- **Examples**:
+  - Example 1: `nums = [1,3,4,2,2]`
+    - Output: `2`
+  - Example 2: `nums = [3,1,3,4,2]`
+    - Output: `3`
+  - Example 3: `nums = [3,3,3,3,3]`
+    - Output: `3`
+- **Constraints**:
+  - `1 <= n <= 10^5`
+  - `nums.length == n + 1`
+  - `1 <= nums[i] <= n`
+  - All the integers in nums appear only once except for precisely one integer which appears two or more times.
+
 - **套路**：把陣列視為鏈結串列後做 Floyd Cycle Detection
 - **思路**：
   - 把索引看成節點、`nums[i]` 看成 next 指標，因為值域落在 `1..n`，所以一定會形成一個環。
@@ -559,6 +761,26 @@ def findDuplicate(nums):
 ```
 
 ### 2. Add Two Numbers (Med.)
+
+- **Problem (English)**:
+  - Two non-negative integers are stored in reverse order in two linked lists.
+  - Add the numbers and return the sum as a linked list in the same reversed format.
+- **題目（中文）**：
+  - 兩個非負整數分別以反序方式存放在兩條鏈結串列中。
+  - 請將它們相加，並以相同反序格式的鏈結串列回傳結果。
+
+- **Examples**:
+  - Example 1: `l1 = [2,4,3], l2 = [5,6,4]`
+    - Output: `[7,0,8]`
+    - Explanation: 342 + 465 = 807.
+  - Example 2: `l1 = [0], l2 = [0]`
+    - Output: `[0]`
+  - Example 3: `l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]`
+    - Output: `[8,9,9,9,0,0,0,1]`
+- **Constraints**:
+  - The number of nodes in each linked list is in the range [1, 100].
+  - `0 <= Node.val <= 9`
+  - It is guaranteed that the list represents a number that does not have leading zeros.
 
 - **套路**：逐位相加 + 進位
 - **思路**：
@@ -606,6 +828,34 @@ def addTwoNumbers(l1, l2):
 
 ### 23. Merge k Sorted Lists (Hard)
 
+- **Problem (English)**:
+  - Merge `k` sorted linked lists into one sorted linked list.
+- **題目（中文）**：
+  - 將 `k` 條已排序的鏈結串列合併成一條排序後的鏈結串列。
+
+- **Examples**:
+  - Example 1: `lists = [[1,4,5],[1,3,4],[2,6]]`
+    - Output: `[1,1,2,3,4,4,5,6]`
+    - Explanation: The linked-lists are:
+[
+1->4->5,
+1->3->4,
+2->6
+]
+merging them into one sorted linked list:
+1->1->2->3->4->4->5->6
+  - Example 2: `lists = []`
+    - Output: `[]`
+  - Example 3: `lists = [[]]`
+    - Output: `[]`
+- **Constraints**:
+  - `k == lists.length`
+  - `0 <= k <= 10^4`
+  - `0 <= lists[i].length <= 500`
+  - `-10^4 <= lists[i][j] <= 10^4`
+  - lists[i] is sorted in ascending order.
+  - The sum of lists[i].length will not exceed 10^4.
+
 - **套路**：Min-Heap 合併 k 條有序鏈結串列
 - **思路**：
   - 每條串列頭節點都是該串列目前最小值，所以先把所有非空頭節點放進 min-heap。
@@ -651,6 +901,25 @@ def mergeKLists(lists):
 ```
 
 ### 25. Reverse Nodes in k-Group (Hard)
+
+- **Problem (English)**:
+  - Reverse nodes of a linked list `k` at a time.
+  - If the remaining number of nodes is smaller than `k`, leave them as they are.
+  - Node values may not be changed; only nodes themselves may be moved.
+- **題目（中文）**：
+  - 每次以 `k` 個節點為一組反轉鏈結串列。
+  - 如果剩餘節點數少於 `k`，則保持原樣。
+  - 不可修改節點值，只能調整節點本身的位置。
+
+- **Examples**:
+  - Example 1: `head = [1,2,3,4,5], k = 2`
+    - Output: `[2,1,4,3,5]`
+  - Example 2: `head = [1,2,3,4,5], k = 3`
+    - Output: `[3,2,1,4,5]`
+- **Constraints**:
+  - The number of nodes in the list is n.
+  - `1 <= k <= n <= 5000`
+  - `0 <= Node.val <= 1000`
 
 - **套路**：每 k 個節點做一次局部反轉
 - **思路**：

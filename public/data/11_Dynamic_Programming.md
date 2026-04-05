@@ -43,6 +43,24 @@ def dp_pattern(n):
 
 ### 70. Climbing Stairs (Easy)
 
+- **Problem (English)**: You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+- **題目（中文）**：給定一個有 n 階的樓梯，每次可以爬 1 階或 2 階，求有多少種不同的方式可以爬到頂部。
+
+- **Examples**:
+  - Example 1: `n = 2`
+    - Output: `2`
+    - Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+  - Example 2: `n = 3`
+    - Output: `3`
+    - Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+- **Constraints**:
+  - `1 <= n <= 45`
+
 - **套路**：一維 DP / Fibonacci
 - **思路**：
   - 走到第 `i` 階的最後一步，只可能從第 `i - 1` 階跨 1 步上來，或從第 `i - 2` 階跨 2 步上來。
@@ -75,6 +93,22 @@ def climbStairs(n):
 
 ### 198. House Robber (Med.)
 
+- **Problem (English)**: You are a robber planning to rob houses along a street. You cannot rob two adjacent houses. Given an integer array where each element is the amount of money in each house, return the maximum amount of money you can rob without alerting the police.
+- **題目（中文）**：給定一個陣列表示各房屋的金額，你不能搶相鄰的兩間房子，求能搶到的最大金額。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3,1]`
+    - Output: `4`
+    - Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+  - Example 2: `nums = [2,7,9,3,1]`
+    - Output: `12`
+    - Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+- **Constraints**:
+  - `1 <= nums.length <= 100`
+  - `0 <= nums[i] <= 400`
+
 - **套路**：線性 DP 的選或不選
 - **思路**：
   - 到第 `i` 間房時，要嘛不搶它，答案沿用前一間的最佳值；要嘛搶它，答案就是前兩間最佳值加上當前金額。
@@ -106,6 +140,22 @@ def rob(nums):
 ```
 
 ### 322. Coin Change (Med.)
+
+- **Problem (English)**: You are given an array of coin denominations and an integer amount. You have an infinite number of each kind of coin. Return the fewest coins needed to make up that amount, or `-1` if it is impossible.
+- **題目（中文）**：給定不同面額的硬幣與一個金額，且每種硬幣都可以無限使用。請回傳湊出該金額所需的最少硬幣數；若無法湊出則回傳 `-1`。
+
+- **Examples**:
+  - Example 1: `coins = [1,2,5], amount = 11`
+    - Output: `3`
+    - Explanation: 11 = 5 + 5 + 1
+  - Example 2: `coins = [2], amount = 3`
+    - Output: `-1`
+  - Example 3: `coins = [1], amount = 0`
+    - Output: `0`
+- **Constraints**:
+  - `1 <= coins.length <= 12`
+  - `1 <= coins[i] <= 2^31 - 1`
+  - `0 <= amount <= 10^4`
 
 - **套路**：完全背包 (Unbounded Knapsack)
 - **思路**：
@@ -141,6 +191,26 @@ def coinChange(coins, amount):
 ```
 
 ### 139. Word Break (Med.)
+
+- **Problem (English)**: Given a string and a dictionary of words, determine if the string can be segmented into words from the dictionary.
+- **題目（中文）**：給定一個字串和一個單字字典，判斷字串是否能被字典中的單字完整分割。
+
+- **Examples**:
+  - Example 1: `s = "leetcode", wordDict = ["leet","code"]`
+    - Output: `true`
+    - Explanation: Return true because "leetcode" can be segmented as "leet code".
+  - Example 2: `s = "applepenapple", wordDict = ["apple","pen"]`
+    - Output: `true`
+    - Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+Note that you are allowed to reuse a dictionary word.
+  - Example 3: `s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]`
+    - Output: `false`
+- **Constraints**:
+  - `1 <= s.length <= 300`
+  - `1 <= wordDict.length <= 1000`
+  - `1 <= wordDict[i].length <= 20`
+  - s and wordDict[i] consist of only lowercase English letters.
+  - All the strings of wordDict are unique.
 
 - **套路**：字串切分 DP
 - **思路**：
@@ -179,6 +249,21 @@ def wordBreak(s, wordDict):
 
 ### 62. Unique Paths (Med.)
 
+- **Problem (English)**: A robot is located at the top-left corner of an m x n grid. It can only move right or down. How many unique paths are there to the bottom-right corner?
+- **題目（中文）**：機器人位於 m x n 網格的左上角，只能向右或向下移動，求到達右下角有多少條不同的路徑。
+
+- **Examples**:
+  - Example 1: `m = 3, n = 7`
+    - Output: `28`
+  - Example 2: `m = 3, n = 2`
+    - Output: `3`
+    - Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Down -> Down
+2. Down -> Down -> Right
+3. Down -> Right -> Down
+- **Constraints**:
+  - `1 <= m, n <= 100`
+
 - **套路**：網格 DP
 - **思路**：
   - 走到某格的方法數，只會來自上方或左方，因為機器人只能向右或向下。
@@ -210,6 +295,20 @@ def uniquePaths(m, n):
 ```
 
 ### 416. Partition Equal Subset Sum (Med.)
+
+- **Problem (English)**: Given an integer array, determine if it can be partitioned into two subsets with equal sum.
+- **題目（中文）**：給定一個整數陣列，判斷是否能分割成兩個總和相等的子集。
+
+- **Examples**:
+  - Example 1: `nums = [1,5,11,5]`
+    - Output: `true`
+    - Explanation: The array can be partitioned as [1, 5, 5] and [11].
+  - Example 2: `nums = [1,2,3,5]`
+    - Output: `false`
+    - Explanation: The array cannot be partitioned into equal sum subsets.
+- **Constraints**:
+  - `1 <= nums.length <= 200`
+  - `1 <= nums[i] <= 100`
 
 - **套路**：0/1 背包布林 DP
 - **思路**：
@@ -248,6 +347,14 @@ def canPartition(nums):
 ```
 
 ### 91. Decode Ways (Med.)
+
+- **Problem (English)**: A message containing only digits needs to be decoded. 1-26 map to 'A'-'Z'. Given an encoded message, return the total number of ways to decode it.
+- **題目（中文）**：給定只含數字的編碼字串，其中 1-26 對應 'A'-'Z'，求所有可能的解碼方式總數。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= s.length <= 100`
+  - s contains only digits and may contain leading zero(s).
 
 - **套路**：一維 DP 根據一碼與兩碼轉移
 - **思路**：
@@ -295,6 +402,21 @@ def numDecodings(s):
 
 ### 152. Maximum Product Subarray (Med.)
 
+- **Problem (English)**: Given an integer array, find the contiguous subarray that has the largest product. Return the maximum product.
+- **題目（中文）**：給定整數陣列，求連續子陣列的最大乘積。
+
+- **Examples**:
+  - Example 1: `nums = [2,3,-2,4]`
+    - Output: `6`
+    - Explanation: [2,3] has the largest product 6.
+  - Example 2: `nums = [-2,0,-1]`
+    - Output: `0`
+    - Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+- **Constraints**:
+  - `1 <= nums.length <= 2 * 10^4`
+  - `-10 <= nums[i] <= 10`
+  - The product of any subarray of nums is guaranteed to fit in a 32-bit integer.
+
 - **套路**：同時追蹤最大積與最小積
 - **思路**：
   - 乘積問題和加總不同，因為負數會讓最大與最小角色互換；前一步的最小負積，乘上新的負數後可能突然變成最大正積。
@@ -331,6 +453,21 @@ def maxProduct(nums):
 
 ### 300. Longest Increasing Subsequence (Med.)
 
+- **Problem (English)**: Given an integer array, find the length of the longest strictly increasing subsequence.
+- **題目（中文）**：給定整數陣列，求最長遞增子序列的長度。
+
+- **Examples**:
+  - Example 1: `nums = [10,9,2,5,3,7,101,18]`
+    - Output: `4`
+    - Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+  - Example 2: `nums = [0,1,0,3,2,3]`
+    - Output: `4`
+  - Example 3: `nums = [7,7,7,7,7,7,7]`
+    - Output: `1`
+- **Constraints**:
+  - `1 <= nums.length <= 2500`
+  - `-10^4 <= nums[i] <= 10^4`
+
 - **套路**：一維 DP
 - **思路**：
   - `dp[i]` 表示以 `nums[i]` 結尾的最長遞增子序列長度；若 `nums[j] < nums[i]`，就能從 `dp[j]` 轉移成 `dp[j] + 1`。
@@ -363,6 +500,22 @@ def lengthOfLIS(nums):
 ```
 
 ### 221. Maximal Square (Med.)
+
+- **Problem (English)**: Given an m x n binary matrix, find the largest square containing only 1's. Return the area of the largest such square.
+- **題目（中文）**：給定 m x n 的二進制矩陣，求最大只含 1 的正方形面積。
+
+- **Examples**:
+  - Example 1: `matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]`
+    - Output: `4`
+  - Example 2: `matrix = [["0","1"],["1","0"]]`
+    - Output: `1`
+  - Example 3: `matrix = [["0"]]`
+    - Output: `0`
+- **Constraints**:
+  - `m == matrix.length`
+  - `n == matrix[i].length`
+  - `1 <= m, n <= 300`
+  - matrix[i][j] is '0' or '1'.
 
 - **套路**：2D DP 看左、上、左上最小值
 - **思路**：
@@ -399,6 +552,24 @@ def maximalSquare(matrix):
 ```
 
 ### 329. Longest Increasing Path in a Matrix (Hard)
+
+- **Problem (English)**: Given an m x n integer matrix, find the length of the longest path where values strictly increase. You can move up, down, left, or right.
+- **題目（中文）**：給定 m x n 整數矩陣，求值嚴格遞增的最長路徑長度，可上下左右移動。
+
+- **Examples**:
+  - Example 1: `matrix = [[9,9,4],[6,6,8],[2,1,1]]`
+    - Output: `4`
+    - Explanation: The longest increasing path is [1, 2, 6, 9].
+  - Example 2: `matrix = [[3,4,5],[3,2,6],[2,2,1]]`
+    - Output: `4`
+    - Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
+  - Example 3: `matrix = [[1]]`
+    - Output: `1`
+- **Constraints**:
+  - `m == matrix.length`
+  - `n == matrix[i].length`
+  - `1 <= m, n <= 200`
+  - `0 <= matrix[i][j] <= 2^31 - 1`
 
 - **套路**：DFS + 記憶化
 - **思路**：
@@ -445,6 +616,29 @@ def longestIncreasingPath(matrix):
 
 ### 377. Combination Sum IV (Med.)
 
+- **Problem (English)**: Given an integer array of distinct numbers, return the number of possible combinations that add up to the target. The order matters.
+- **題目（中文）**：給定不同整數的陣列，求有多少種排列方式可以加總為目標值，順序不同視為不同排列。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3], target = 4`
+    - Output: `7`
+    - Explanation: The possible combination ways are:
+(1, 1, 1, 1)
+(1, 1, 2)
+(1, 2, 1)
+(1, 3)
+(2, 1, 1)
+(2, 2)
+(3, 1)
+Note that different sequences are counted as different combinations.
+  - Example 2: `nums = [9], target = 3`
+    - Output: `0`
+- **Constraints**:
+  - `1 <= nums.length <= 200`
+  - `1 <= nums[i] <= 1000`
+  - All the elements of nums are unique.
+  - `1 <= target <= 1000`
+
 - **套路**：順序敏感的完全背包 DP
 - **思路**：
   - `dp[total]` 表示組成 `total` 的排列數；這題把不同順序視為不同答案，所以外層必須先枚舉目標和，再枚舉可放在最後一步的數字。
@@ -478,6 +672,25 @@ def combinationSum4(nums, target):
 ```
 
 ### 1235. Maximum Profit in Job Scheduling (Hard)
+
+- **Problem (English)**: You are given job schedules with start time, end time, and profit. Non-overlapping jobs can be scheduled. Return the maximum profit achievable.
+- **題目（中文）**：給定多份工作的開始、結束時間與利潤，找不重疊工作組合的最大利潤。
+
+- **Examples**:
+  - Example 1: `startTime = [1,2,3,3], endTime = [3,4,5,6], profit = [50,10,40,70]`
+    - Output: `120`
+    - Explanation: The subset chosen is the first and fourth job.
+Time range [1-3]+[3-6] , we get profit of 120 = 50 + 70.
+  - Example 2: `startTime = [1,2,3,4,6], endTime = [3,5,10,6,9], profit = [20,20,100,70,60]`
+    - Output: `150`
+    - Explanation: The subset chosen is the first, fourth and fifth job.
+Profit obtained 150 = 20 + 70 + 60.
+  - Example 3: `startTime = [1,1,1], endTime = [2,3,4], profit = [5,6,4]`
+    - Output: `6`
+- **Constraints**:
+  - `1 <= startTime.length == endTime.length == profit.length <= 5 * 10^4`
+  - `1 <= startTime[i] < endTime[i] <= 10^9`
+  - `1 <= profit[i] <= 10^4`
 
 - **套路**：排序 + 二分找下一份可接工作 + DP
 - **思路**：
@@ -515,6 +728,26 @@ def jobScheduling(startTime, endTime, profit):
 ```
 
 ### 31. Next Permutation (Med.)
+
+- **Problem (English)**:
+  - Rearrange the numbers into the next lexicographically greater permutation.
+  - If such an arrangement is not possible, rearrange them into the lowest possible order, that is, sorted in ascending order.
+  - The replacement must be done in place and use only constant extra memory.
+- **題目（中文）**：
+  - 請將數列重新排列成下一個字典序更大的排列。
+  - 如果不存在更大的排列，就改成最小可能順序，也就是遞增排序後的結果。
+  - 這個修改必須原地完成，且只能使用常數額外空間。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3]`
+    - Output: `[1,3,2]`
+  - Example 2: `nums = [3,2,1]`
+    - Output: `[1,2,3]`
+  - Example 3: `nums = [1,1,5]`
+    - Output: `[1,5,1]`
+- **Constraints**:
+  - `1 <= nums.length <= 100`
+  - `0 <= nums[i] <= 100`
 
 - **套路**：找下降點 + 交換 + 反轉尾段
 - **思路**：
@@ -555,6 +788,24 @@ def nextPermutation(nums):
 ```
 
 ### 50. Pow(x, n) (Med.)
+
+- **Problem (English)**: Compute x raised to the power n, where n can be positive, negative, or zero.
+- **題目（中文）**：計算 x 的 n 次方，n 可以是正數、負數或零。
+
+- **Examples**:
+  - Example 1: `x = 2.00000, n = 10`
+    - Output: `1024.00000`
+  - Example 2: `x = 2.10000, n = 3`
+    - Output: `9.26100`
+  - Example 3: `x = 2.00000, n = -2`
+    - Output: `0.25000`
+    - Explanation: 2^-2 = 1/2^2 = 1/4 = 0.25
+- **Constraints**:
+  - `-100.0 < x < 100.0`
+  - `-2^31 <= n <= 2^31-1`
+  - n is an integer.
+  - Either x is not zero or n > 0.
+  - `-10^4 <= x^n <= 10^4`
 
 - **套路**：快速冪 / 二分冪次
 - **思路**：

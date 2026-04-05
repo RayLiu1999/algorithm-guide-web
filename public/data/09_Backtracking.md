@@ -36,6 +36,23 @@ def backtrack(candidates, path, result, start):
 
 ### 78. Subsets (Med.)
 
+- **Problem (English)**:
+    - Given an integer array `nums` whose elements are unique, return all possible subsets.
+    - The solution set must not contain duplicate subsets, and the subsets may be returned in any order.
+- **題目（中文）**：
+    - 給定一個元素互不相同的整數陣列 `nums`，請回傳所有可能的子集合。
+    - 答案中不能有重複子集合，回傳順序不限。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3]`
+    - Output: `[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]`
+  - Example 2: `nums = [0]`
+    - Output: `[[],[0]]`
+- **Constraints**:
+  - `1 <= nums.length <= 10`
+  - `-10 <= nums[i] <= 10`
+  - All the numbers of nums are unique.
+
 - **套路**：回溯從 `start` 往後展開
 - **思路**：
     - 當前 `path` 本身就是一個合法子集，所以每次進入遞迴時先把它收進答案。
@@ -73,6 +90,33 @@ def subsets(nums):
 ```
 
 ### 39. Combination Sum (Med.)
+
+- **Problem (English)**:
+        - Given an array of distinct integers `candidates` and an integer `target`, return all unique combinations of `candidates` where the chosen numbers sum to `target`.
+        - You may use the same number in `candidates` any number of times.
+        - Two combinations are different if at least one chosen number appears a different number of times.
+    - You may return the combinations in any order.
+- **題目（中文）**：
+        - 給定一個由互不相同整數組成的陣列 `candidates` 與整數 `target`，請回傳所有總和等於 `target` 的不同組合。
+        - `candidates` 中的每個數字都可以被重複使用任意次。
+        - 若某個數字在兩組答案中的使用次數不同，則視為不同組合。
+    - 答案順序不限。
+
+- **Examples**:
+  - Example 1: `candidates = [2,3,6,7], target = 7`
+    - Output: `[[2,2,3],[7]]`
+    - Explanation: 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+7 is a candidate, and 7 = 7.
+These are the only two combinations.
+  - Example 2: `candidates = [2,3,5], target = 8`
+    - Output: `[[2,2,2,2],[2,3,3],[3,5]]`
+  - Example 3: `candidates = [2], target = 1`
+    - Output: `[]`
+- **Constraints**:
+  - `1 <= candidates.length <= 30`
+  - `2 <= candidates[i] <= 40`
+  - All elements of candidates are distinct.
+  - `1 <= target <= 40`
 
 - **套路**：回溯 + 同一元素可重複使用
 - **思路**：
@@ -118,6 +162,25 @@ def combinationSum(candidates, target):
 
 ### 46. Permutations (Med.)
 
+- **Problem (English)**:
+        - Given an array `nums` of distinct integers, return all possible permutations.
+        - You may return the answer in any order.
+- **題目（中文）**：
+        - 給定一個由互不相同整數組成的陣列 `nums`，請回傳所有可能的排列。
+        - 回傳順序不限。
+
+- **Examples**:
+  - Example 1: `nums = [1,2,3]`
+    - Output: `[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]`
+  - Example 2: `nums = [0,1]`
+    - Output: `[[0,1],[1,0]]`
+  - Example 3: `nums = [1]`
+    - Output: `[[1]]`
+- **Constraints**:
+  - `1 <= nums.length <= 6`
+  - `-10 <= nums[i] <= 10`
+  - All the integers of nums are unique.
+
 - **套路**：回溯 + `used` 陣列
 - **思路**：
     - 排列的本質是每一層都要決定「下一個位置放哪個還沒用過的數字」。
@@ -162,6 +225,24 @@ def permute(nums):
 ```
 
 ### 17. Letter Combinations of a Phone Number (Med.)
+
+- **Problem (English)**:
+        - Given a string `digits` containing digits from `2` to `9`, return all letter combinations the number could represent.
+        - Return the answer in any order.
+        - The digit-to-letter mapping follows the standard telephone keypad.
+- **題目（中文）**：
+        - 給定一個只包含 `2` 到 `9` 的字串 `digits`，請回傳它在電話按鍵對應下可能表示的所有字母組合。
+        - 回傳順序不限。
+        - 數字與字母的對應關係採用一般電話鍵盤規則。
+
+- **Examples**:
+  - Example 1: `digits = "23"`
+    - Output: `["ad","ae","af","bd","be","bf","cd","ce","cf"]`
+  - Example 2: `digits = "2"`
+    - Output: `["a","b","c"]`
+- **Constraints**:
+  - `1 <= digits.length <= 4`
+  - digits[i] is a digit in the range ['2', '9'].
 
 - **套路**：回溯枚舉每一位數可對應的字母
 - **思路**：
@@ -215,6 +296,29 @@ def letterCombinations(digits):
 ```
 
 ### 79. Word Search (Med.)
+
+- **Problem (English)**:
+        - Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid.
+        - The word must be built from sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring.
+        - A cell may not be used more than once in the same path.
+- **題目（中文）**：
+        - 給定一個 `m x n` 的字元矩陣 `board` 與字串 `word`，請判斷 `word` 是否存在於棋盤中。
+        - 單字必須由相鄰格子依序組成，相鄰只包含上下左右四個方向。
+        - 同一個格子在同一條搜尋路徑中不能重複使用。
+
+- **Examples**:
+  - Example 1: `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"`
+    - Output: `true`
+  - Example 2: `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"`
+    - Output: `true`
+  - Example 3: `board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"`
+    - Output: `false`
+- **Constraints**:
+  - `m == board.length`
+  - `n = board[i].length`
+  - `1 <= m, n <= 6`
+  - `1 <= word.length <= 15`
+  - board and word consists of only lowercase and uppercase English letters.
 
 - **套路**：DFS + 回溯走格子
 - **思路**：
@@ -274,6 +378,44 @@ def exist(board, word):
 
 ### 36. Valid Sudoku (Med.)
 
+- **Problem (English)**:
+    - Determine whether a `9 x 9` Sudoku board is valid.
+    - Only the filled cells need to be validated according to Sudoku rules.
+    - Each row, each column, and each `3 x 3` sub-box must not contain repeated digits from `1` to `9`.
+- **題目（中文）**：
+    - 判斷一個 `9 x 9` 的數獨盤面是否有效。
+    - 只需要檢查目前已填入的格子是否符合數獨規則。
+    - 每一列、每一欄，以及每個 `3 x 3` 宮格中，數字 `1` 到 `9` 都不能重複。
+
+- **Examples**:
+  - Example 1: `board =
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]`
+    - Output: `true`
+  - Example 2: `board =
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]`
+    - Output: `false`
+    - Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
+- **Constraints**:
+  - `board.length == 9`
+  - `board[i].length == 9`
+  - board[i][j] is a digit 1-9 or '.'.
+
 - **套路**：集合檢查 row / col / box 是否重複
 - **思路**：
     - 題目不是要你解 Sudoku，只要檢查目前盤面是否合法。
@@ -318,6 +460,25 @@ def isValidSudoku(board):
 ```
 
 ### 37. Sudoku Solver (Hard)
+
+- **Problem (English)**:
+    - Write a program to solve a Sudoku puzzle by filling the empty cells.
+    - A valid Sudoku solution must satisfy the standard rules for rows, columns, and `3 x 3` sub-boxes.
+    - Empty cells are represented by `'.'`, and the input puzzle is guaranteed to have exactly one solution.
+- **題目（中文）**：
+    - 請撰寫程式填滿數獨盤面中的空格，解出完整的數獨。
+    - 合法解必須符合標準數獨規則，也就是每列、每欄與每個 `3 x 3` 宮格都要包含 `1` 到 `9` 且不重複。
+    - 空格以 `'.'` 表示，題目保證輸入盤面恰好只有一個解。
+
+- **Examples**:
+  - Example 1: `board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]`
+    - Output: `[["5","3","4","6","7","8","9","1","2"],["6","7","2","1","9","5","3","4","8"],["1","9","8","3","4","2","5","6","7"],["8","5","9","7","6","1","4","2","3"],["4","2","6","8","5","3","7","9","1"],["7","1","3","9","2","4","8","5","6"],["9","6","1","5","3","7","2","8","4"],["2","8","7","4","1","9","6","3","5"],["3","4","5","2","8","6","1","7","9"]]`
+    - Explanation: The input board is shown above and the only valid solution is shown below:
+- **Constraints**:
+  - `board.length == 9`
+  - `board[i].length == 9`
+  - board[i][j] is a digit or '.'.
+  - It is guaranteed that the input board has only one solution.
 
 - **套路**：回溯填空格 + row / col / box 剪枝
 - **思路**：
@@ -389,6 +550,26 @@ def solveSudoku(board):
 ```
 
 ### 51. N-Queens (Hard)
+
+- **Problem (English)**:
+    - Place `n` queens on an `n x n` chessboard so that no two queens attack each other.
+    - Return all distinct solutions.
+    - Each solution should be represented as a board of strings, where `'Q'` marks a queen and `'.'` marks an empty square.
+    - You may return the answer in any order.
+- **題目（中文）**：
+    - 請在 `n x n` 的棋盤上放置 `n` 個皇后，使任兩個皇后都不會互相攻擊。
+    - 請回傳所有不同的合法解。
+    - 每組答案需用字串棋盤表示，其中 `'Q'` 代表皇后，`'.'` 代表空格。
+    - 答案順序不限。
+
+- **Examples**:
+  - Example 1: `n = 4`
+    - Output: `[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]`
+    - Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above
+  - Example 2: `n = 1`
+    - Output: `[["Q"]]`
+- **Constraints**:
+  - `1 <= n <= 9`
 
 - **套路**：回溯 + 欄位 / 對角線集合剪枝
 - **思路**：

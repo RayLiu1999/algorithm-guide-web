@@ -75,6 +75,30 @@ class UnionFind:
 
 ### 133. Clone Graph (Med.)
 
+- **Problem (English)**: Given a reference to a node in a connected, finite, undirected graph, return a deep copy of the graph.
+- **題目（中文）**：給定一個連通、有限、無向圖中的某個節點參考，請回傳整張圖的深度複製。
+
+- **Examples**:
+  - Example 1: `adjList = [[2,4],[1,3],[2,4],[1,3]]`
+    - Output: `[[2,4],[1,3],[2,4],[1,3]]`
+    - Explanation: There are 4 nodes in the graph.
+1st node (val = 1)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).
+2nd node (val = 2)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+3rd node (val = 3)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).
+4th node (val = 4)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+  - Example 2: `adjList = [[]]`
+    - Output: `[[]]`
+    - Explanation: Note that the input contains one empty list. The graph consists of only one node with val = 1 and it does not have any neighbors.
+  - Example 3: `adjList = []`
+    - Output: `[]`
+    - Explanation: This an empty graph, it does not have any nodes.
+- **Constraints**:
+  - The number of nodes in the graph is in the range [0, 100].
+  - `1 <= Node.val <= 100`
+  - Node.val is unique for each node.
+  - There are no repeated edges and no self-loops in the graph.
+  - The Graph is connected and all nodes can be visited starting from the given node.
+
 - **套路**：DFS/BFS + Hash Map 建立 old -> new 映射
 - **思路**：
   - 圖可能有環，也可能多個節點共享同一個鄰居，所以不能直接遞迴複製；第一次看到某個原節點時，要先建立 clone 並放進映射表。
@@ -124,6 +148,30 @@ def cloneGraph(node):
 
 ### 200. Number of Islands (Med.)
 
+- **Problem (English)**: Given an `m x n` grid of `1`s (land) and `0`s (water), count the number of islands, where an island is formed by horizontally or vertically adjacent lands and all four edges of the grid are surrounded by water.
+- **題目（中文）**：給定一個 `m x n` 的網格，其中 `1` 代表陸地、`0` 代表水，請計算島嶼數量；島嶼由水平或垂直相鄰的陸地組成，且整個網格的四條邊都可視為被水包圍。
+
+- **Examples**:
+  - Example 1: `grid = [
+["1","1","1","1","0"],
+["1","1","0","1","0"],
+["1","1","0","0","0"],
+["0","0","0","0","0"]
+]`
+    - Output: `1`
+  - Example 2: `grid = [
+["1","1","0","0","0"],
+["1","1","0","0","0"],
+["0","0","1","0","0"],
+["0","0","0","1","1"]
+]`
+    - Output: `3`
+- **Constraints**:
+  - `m == grid.length`
+  - `n == grid[i].length`
+  - `1 <= m, n <= 300`
+  - grid[i][j] is '0' or '1'.
+
 - **套路**：DFS/BFS 掃連通塊
 - **思路**：
   - 逐格掃描 `grid`，一旦遇到陸地 `1`，就代表發現一座還沒處理過的島，立刻啟動 DFS/BFS 把整個四向連通區塊都標記掉。
@@ -169,6 +217,22 @@ def numIslands(grid):
 
 ### 733. Flood Fill (Easy)
 
+- **Problem (English)**: Given an `m x n` image, a starting pixel `(sr, sc)`, and a new color, flood-fill the starting pixel and every 4-directionally connected pixel that has the same original color.
+- **題目（中文）**：給定一張 `m x n` 影像、一個起始像素 `(sr, sc)`，以及新顏色，請把起點與所有和它四方向連通、且原本顏色相同的像素一起染成新顏色。
+
+- **Examples**:
+  - Example 1: `image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2`
+    - Output: `[[2,2,2],[2,2,0],[2,0,1]]`
+  - Example 2: `image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0`
+    - Output: `[[0,0,0],[0,0,0]]`
+- **Constraints**:
+  - `m == image.length`
+  - `n == image[i].length`
+  - `1 <= m, n <= 50`
+  - `0 <= image[i][j], color < 2^16`
+  - `0 <= sr < m`
+  - `0 <= sc < n`
+
 - **套路**：DFS/BFS 同色擴散
 - **思路**：
   - 先記住起點原本的顏色 `original`，接著只要四方向相連且顏色仍是 `original`，就把它改成新顏色。
@@ -211,6 +275,24 @@ def floodFill(image, sr, sc, color):
 ```
 
 ### 994. Rotting Oranges (Med.)
+
+- **Problem (English)**: Given an m x n grid with fresh oranges (1), rotten oranges (2), and empty cells (0), return the minimum number of minutes until all fresh oranges rot via 4-directional spreading, or -1 if impossible.
+- **題目（中文）**：給定 m x n 的網格，標記為新鮮橘子(1)、腐爛橘子(2)和空格(0)。返回讓所有新鮮橘子腐爛的最少分鐘數，若不可能返回 -1。
+
+- **Examples**:
+  - Example 1: `grid = [[2,1,1],[1,1,0],[0,1,1]]`
+    - Output: `4`
+  - Example 2: `grid = [[2,1,1],[0,1,1],[1,0,1]]`
+    - Output: `-1`
+    - Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten, because rotting only happens 4-directionally.
+  - Example 3: `grid = [[0,2]]`
+    - Output: `0`
+    - Explanation: Since there are already no fresh oranges at minute 0, the answer is just 0.
+- **Constraints**:
+  - `m == grid.length`
+  - `n == grid[i].length`
+  - `1 <= m, n <= 10`
+  - grid[i][j] is 0, 1, or 2.
 
 - **套路**：多源 BFS
 - **思路**：
@@ -267,6 +349,22 @@ def orangesRotting(grid):
 
 ### 542. 01 Matrix (Med.)
 
+- **Problem (English)**: Given an m x n binary matrix, return a matrix of the same size where each cell contains the distance to the nearest 0.
+- **題目（中文）**：給定 m x n 的二進制矩陣，返回相同大小的矩陣，其中每個格子包含到最近 0 的距離。
+
+- **Examples**:
+  - Example 1: `mat = [[0,0,0],[0,1,0],[0,0,0]]`
+    - Output: `[[0,0,0],[0,1,0],[0,0,0]]`
+  - Example 2: `mat = [[0,0,0],[0,1,0],[1,1,1]]`
+    - Output: `[[0,0,0],[0,1,0],[1,2,1]]`
+- **Constraints**:
+  - `m == mat.length`
+  - `n == mat[i].length`
+  - `1 <= m, n <= 10^4`
+  - `1 <= m * n <= 10^4`
+  - mat[i][j] is either 0 or 1.
+  - There is at least one 0 in mat.
+
 - **套路**：多源 BFS 求最近距離
 - **思路**：
   - 每個 `0` 到自己的距離都是 `0`，所以可以把所有 `0` 一起丟進 queue，作為距離擴散的起點。
@@ -313,6 +411,37 @@ def updateMatrix(mat):
 ```
 
 ### 417. Pacific Atlantic Water Flow (Med.)
+
+- **Problem (English)**: Given an m x n matrix of elevation heights, determine which cells can flow water to both the Pacific Ocean (top/left borders) and the Atlantic Ocean (bottom/right borders).
+- **題目（中文）**：給定 m x n 的高度矩陣，找出可同時向太平洋(上/左邊界)和大西洋(下/右邊界)流水的格子。
+
+- **Examples**:
+  - Example 1: `heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]`
+    - Output: `[[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]`
+    - Explanation: The following cells can flow to the Pacific and Atlantic oceans, as shown below:
+[0,4]: [0,4] -> Pacific Ocean
+[0,4] -> Atlantic Ocean
+[1,3]: [1,3] -> [0,3] -> Pacific Ocean
+[1,3] -> [1,4] -> Atlantic Ocean
+[1,4]: [1,4] -> [1,3] -> [0,3] -> Pacific Ocean
+[1,4] -> Atlantic Ocean
+[2,2]: [2,2] -> [1,2] -> [0,2] -> Pacific Ocean
+[2,2] -> [2,3] -> [2,4] -> Atlantic Ocean
+[3,0]: [3,0] -> Pacific Ocean
+[3,0] -> [4,0] -> Atlantic Ocean
+[3,1]: [3,1] -> [3,0] -> Pacific Ocean
+[3,1] -> [4,1] -> Atlantic Ocean
+[4,0]: [4,0] -> Pacific Ocean
+[4,0] -> Atlantic Ocean
+Note that there are other possible paths for these cells to flow to the Pacific and Atlantic oceans.
+  - Example 2: `heights = [[1]]`
+    - Output: `[[0,0]]`
+    - Explanation: The water can flow from the only cell to the Pacific and Atlantic oceans.
+- **Constraints**:
+  - `m == heights.length`
+  - `n == heights[r].length`
+  - `1 <= m, n <= 200`
+  - `0 <= heights[r][c] <= 10^5`
 
 - **套路**：反向 DFS/BFS 從海邊往高處爬
 - **思路**：
@@ -367,6 +496,25 @@ def pacificAtlantic(heights):
 
 ### 207. Course Schedule (Med.)
 
+- **Problem (English)**: Given n courses and their prerequisite relationships, determine if it's possible to complete all courses without circular dependencies.
+- **題目（中文）**：給定 n 門課程及其前置課程關係，判斷是否可能在無環依賴的情況下完成所有課程。
+
+- **Examples**:
+  - Example 1: `numCourses = 2, prerequisites = [[1,0]]`
+    - Output: `true`
+    - Explanation: There are a total of 2 courses to take.
+To take course 1 you should have finished course 0. So it is possible.
+  - Example 2: `numCourses = 2, prerequisites = [[1,0],[0,1]]`
+    - Output: `false`
+    - Explanation: There are a total of 2 courses to take.
+To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+- **Constraints**:
+  - `1 <= numCourses <= 2000`
+  - `0 <= prerequisites.length <= 5000`
+  - `prerequisites[i].length == 2`
+  - `0 <= ai, bi < numCourses`
+  - All the pairs prerequisites[i] are unique.
+
 - **套路**：拓樸排序判斷有無環
 - **思路**：
   - 把 prerequisite 關係建成有向圖，並計算每門課的入度；入度為 `0` 代表目前沒有前置課，能先修。
@@ -414,6 +562,27 @@ def canFinish(numCourses, prerequisites):
 
 ### 210. Course Schedule II (Med.)
 
+- **Problem (English)**: Given `numCourses` and prerequisite pairs, return a valid order to finish all courses, or an empty array if impossible. If there are multiple valid orders, return any of them.
+- **題目（中文）**：給定 `numCourses` 與先修課關係，請回傳任一個可完成所有課程的合法修課順序；若不存在則回傳空陣列。若有多種合法答案，回傳任一種即可。
+
+- **Examples**:
+  - Example 1: `numCourses = 2, prerequisites = [[1,0]]`
+    - Output: `[0,1]`
+    - Explanation: There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1].
+  - Example 2: `numCourses = 4, prerequisites = [[1,0],[2,0],[3,1],[3,2]]`
+    - Output: `[0,2,1,3]`
+    - Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0.
+So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3].
+  - Example 3: `numCourses = 1, prerequisites = []`
+    - Output: `[0]`
+- **Constraints**:
+  - `1 <= numCourses <= 2000`
+  - `0 <= prerequisites.length <= numCourses * (numCourses - 1)`
+  - `prerequisites[i].length == 2`
+  - `0 <= ai, bi < numCourses`
+  - `ai != bi`
+  - All the pairs [ai, bi] are distinct.
+
 - **套路**：拓樸排序輸出修課順序
 - **思路**：
   - 和上一題相同，先把所有入度為 `0` 的課程入 queue，表示這些課可以立刻修。
@@ -460,6 +629,25 @@ def findOrder(numCourses, prerequisites):
 ```
 
 ### 721. Accounts Merge (Med.)
+
+- **Problem (English)**: Given a list of accounts, merge accounts that belong to the same person because they share at least one email address. Return the merged accounts in any order, with emails sorted and the name preserved.
+- **題目（中文）**：給定一組帳戶資料，若兩個帳戶至少共用一個電子郵件，就代表它們屬於同一個人。請合併後回傳結果，帳戶順序不限，但每筆帳戶中的 email 需排序且保留姓名。
+
+- **Examples**:
+  - Example 1: `accounts = [["John","johnsmith@mail.com","john_newyork@mail.com"],["John","johnsmith@mail.com","john00@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]`
+    - Output: `[["John","john00@mail.com","john_newyork@mail.com","johnsmith@mail.com"],["Mary","mary@mail.com"],["John","johnnybravo@mail.com"]]`
+    - Explanation: The first and second John's are the same person as they have the common email "johnsmith@mail.com".
+The third John and Mary are different people as none of their email addresses are used by other accounts.
+We could return these lists in any order, for example the answer [['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'],
+['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
+  - Example 2: `accounts = [["Gabe","Gabe0@m.co","Gabe3@m.co","Gabe1@m.co"],["Kevin","Kevin3@m.co","Kevin5@m.co","Kevin0@m.co"],["Ethan","Ethan5@m.co","Ethan4@m.co","Ethan0@m.co"],["Hanzo","Hanzo3@m.co","Hanzo1@m.co","Hanzo0@m.co"],["Fern","Fern5@m.co","Fern1@m.co","Fern0@m.co"]]`
+    - Output: `[["Ethan","Ethan0@m.co","Ethan4@m.co","Ethan5@m.co"],["Gabe","Gabe0@m.co","Gabe1@m.co","Gabe3@m.co"],["Hanzo","Hanzo0@m.co","Hanzo1@m.co","Hanzo3@m.co"],["Kevin","Kevin0@m.co","Kevin3@m.co","Kevin5@m.co"],["Fern","Fern0@m.co","Fern1@m.co","Fern5@m.co"]]`
+- **Constraints**:
+  - `1 <= accounts.length <= 1000`
+  - `2 <= accounts[i].length <= 10`
+  - `1 <= accounts[i][j].length <= 30`
+  - accounts[i][0] consists of English letters.
+  - accounts[i][j] (for j > 0) is a valid email.
 
 - **套路**：Union Find 合併 email 所屬帳號
 - **思路**：
@@ -513,6 +701,27 @@ def accountsMerge(accounts):
 
 ### 261. Graph Valid Tree (Med.)
 
+- **Problem (English)**:
+  - You have a graph of `n` nodes labeled from `0` to `n - 1`.
+  - `edges[i] = [a_i, b_i]` indicates an undirected edge between nodes `a_i` and `b_i`.
+  - Return `true` if the given edges make up a valid tree, and `false` otherwise.
+- **題目（中文）**：
+  - 給定一張有 `n` 個節點、編號從 `0` 到 `n - 1` 的圖。
+  - `edges[i] = [a_i, b_i]` 表示節點 `a_i` 與 `b_i` 之間有一條無向邊。
+  - 若這些邊能構成一棵合法的樹，回傳 `true`；否則回傳 `false`。
+- **Examples**:
+  - Example 1: `n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]`
+    - Output: `true`
+  - Example 2: `n = 5, edges = [[0,1],[1,2],[2,3],[1,3],[1,4]]`
+    - Output: `false`
+- **Constraints**:
+  - `1 <= n <= 2000`
+  - `0 <= edges.length <= 5000`
+  - `edges[i].length == 2`
+  - `0 <= a_i, b_i < n`
+  - `a_i != b_i`
+  - There are no self-loops or repeated edges.
+
 - **套路**：Union Find + 邊數檢查
 - **思路**：
   - 一棵樹要同時滿足兩件事：邊數必須是 `n - 1`，而且不能有環；缺一不可。
@@ -555,6 +764,27 @@ def validTree(n, edges):
 
 ### 323. Number of Connected Components in an Undirected Graph (Med.)
 
+- **Problem (English)**:
+  - You have a graph of `n` nodes.
+  - `edges[i] = [a_i, b_i]` indicates there is an undirected edge between `a_i` and `b_i`.
+  - Return the number of connected components in the graph.
+- **題目（中文）**：
+  - 給定一張有 `n` 個節點的圖。
+  - `edges[i] = [a_i, b_i]` 表示 `a_i` 與 `b_i` 之間有一條無向邊。
+  - 請回傳這張圖中的連通分量數量。
+- **Examples**:
+  - Example 1: `n = 5, edges = [[0,1],[1,2],[3,4]]`
+    - Output: `2`
+  - Example 2: `n = 5, edges = [[0,1],[1,2],[2,3],[3,4]]`
+    - Output: `1`
+- **Constraints**:
+  - `1 <= n <= 2000`
+  - `1 <= edges.length <= 5000`
+  - `edges[i].length == 2`
+  - `0 <= a_i <= b_i < n`
+  - `a_i != b_i`
+  - There are no repeated edges.
+
 - **套路**：Union Find / DFS 計算連通塊
 - **思路**：
   - 一開始每個節點都是自己的 component，數量先設成 `n`。
@@ -594,6 +824,20 @@ def countComponents(n, edges):
 ```
 
 ### 269. Alien Dictionary (Hard)
+
+- **Problem (English)**:
+  - There is a new alien language that uses the English alphabet, but the order of the letters is unknown.
+  - You are given a list of words that are already sorted lexicographically according to this alien language.
+  - If the given ordering is invalid, return `""`. Otherwise, return a string of the unique letters in lexicographically increasing order by the alien language. If multiple valid orders exist, return any of them.
+- **題目（中文）**：
+  - 有一種新的外星語言使用英文字母，但字母順序未知。
+  - 給定一串已依照外星語言字典序排序好的單字列表。
+  - 若這份排序不可能成立，請回傳 `""`；否則請回傳由所有出現過的唯一字元組成、依外星語言字典序遞增排列的字串。若有多種合法答案，回傳任一種即可。
+- **Examples**: Input: words = ["wrt","wrf","er","ett","rftt"] → Output: "wertf"; Input: words = ["z","x"] → Output: "zx"; Input: words = ["z","x","z"] → Output: ""
+- **Constraints**:
+  - `1 <= words.length <= 100`
+  - `1 <= words[i].length <= 100`
+  - `words[i]` consists of lowercase English letters.
 
 - **套路**：建字元圖後做拓樸排序
 - **思路**：
@@ -649,6 +893,25 @@ def alienOrder(words):
 ```
 
 ### 127. Word Ladder (Hard)
+
+- **Problem (English)**: Given a start word, an end word, and a dictionary of words, return the length of the shortest transformation sequence where each step changes only one letter and must be a valid dictionary word.
+- **題目（中文）**：給定起始字、終止字和字典，返回最短轉換序列的長度，其中每步只改一個字母且必須是字典中的有效字。
+
+- **Examples**:
+  - Example 1: `beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]`
+    - Output: `5`
+    - Explanation: One shortest transformation sequence is "hit" -> "hot" -> "dot" -> "dog" -> cog", which is 5 words long.
+  - Example 2: `beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]`
+    - Output: `0`
+    - Explanation: The endWord "cog" is not in wordList, therefore there is no valid transformation sequence.
+- **Constraints**:
+  - `1 <= beginWord.length <= 10`
+  - `endWord.length == beginWord.length`
+  - `1 <= wordList.length <= 5000`
+  - `wordList[i].length == beginWord.length`
+  - beginWord, endWord, and wordList[i] consist of lowercase English letters.
+  - `beginWord != endWord`
+  - All the words in wordList are unique.
 
 - **套路**：BFS 最短轉換步數 + wildcard 鄰居映射
 - **思路**：
@@ -706,6 +969,34 @@ def ladderLength(beginWord, endWord, wordList):
 
 ### 787. Cheapest Flights Within K Stops (Med.)
 
+- **Problem (English)**: Given n cities, flight routes with prices, a source, destination, and maximum stops k, return the minimum cost to reach the destination or -1 if impossible.
+- **題目（中文）**：給定 n 個城市、標記價格的航線、來源、目標和最多中轉次數 k，返回到達目標的最低成本或 -1。
+
+- **Examples**:
+  - Example 1: `n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1`
+    - Output: `700`
+    - Explanation: The graph is shown above.
+The optimal path with at most 1 stop from city 0 to 3 is marked in red and has cost 100 + 600 = 700.
+Note that the path through cities [0,1,2,3] is cheaper but is invalid because it uses 2 stops.
+  - Example 2: `n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1`
+    - Output: `200`
+    - Explanation: The graph is shown above.
+The optimal path with at most 1 stop from city 0 to 2 is marked in red and has cost 100 + 100 = 200.
+  - Example 3: `n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 0`
+    - Output: `500`
+    - Explanation: The graph is shown above.
+The optimal path with no stops from city 0 to 2 is marked in red and has cost 500.
+- **Constraints**:
+  - `2 <= n <= 100`
+  - `0 <= flights.length <= (n * (n - 1) / 2)`
+  - `flights[i].length == 3`
+  - `0 <= fromi, toi < n`
+  - `fromi != toi`
+  - `1 <= pricei <= 10^4`
+  - There will not be any multiple flights between two cities.
+  - `0 <= src, dst, k < n`
+  - `src != dst`
+
 - **套路**：Bellman-Ford 限制邊數
 - **思路**：
   - 最多 `k` 次中轉，等價於最多使用 `k + 1` 條邊；因此只要做 `k + 1` 輪鬆弛即可。
@@ -741,6 +1032,23 @@ def findCheapestPrice(n, flights, src, dst, k):
 ```
 
 ### 1197. Minimum Knight Moves (Med.)
+
+- **Problem (English)**:
+  - On an infinite chessboard with coordinates from `-infinity` to `+infinity`, a knight starts at square `[0, 0]`.
+  - Return the minimum number of moves needed to reach square `[x, y]`.
+- **題目（中文）**：
+  - 在一個座標範圍可延伸到 `-infinity` 到 `+infinity` 的無限棋盤上，有一匹騎士從 `[0, 0]` 出發。
+  - 請回傳它移動到 `[x, y]` 所需的最少步數。
+- **Examples**:
+  - Example 1: `x = 2, y = 1`
+    - Output: `1`
+    - Explanation: `[0, 0] -> [2, 1]`
+  - Example 2: `x = 5, y = 5`
+    - Output: `4`
+    - Explanation: `[0, 0] -> [2, 1] -> [4, 2] -> [3, 4] -> [5, 5]`
+- **Constraints**:
+  - `-300 <= x, y <= 300`
+  - `0 <= |x| + |y| <= 300`
 
 - **套路**：BFS + 利用對稱性縮小搜尋空間
 - **思路**：
@@ -784,6 +1092,35 @@ def minKnightMoves(x, y):
 ```
 
 ### 1730. Shortest Path to Get Food (Med.)
+
+- **Problem (English)**:
+  - You are given an `m x n` character matrix `grid`.
+  - `'*'` is your location, and there is exactly one `'*'` in the grid.
+  - `'#'` is a food cell, there may be multiple food cells, `'O'` is free space, and `'X'` is an obstacle.
+  - You may move north, east, south, or west to an adjacent non-obstacle cell.
+  - Return the length of the shortest path to reach any food cell, or `-1` if impossible.
+- **題目（中文）**：
+  - 給定一個 `m x n` 的字元矩陣 `grid`。
+  - `'*'` 代表你的起點，且整張圖中恰好只有一個 `'*'`。
+  - `'#'` 代表食物，可能有多個；`'O'` 代表可通行空地；`'X'` 代表障礙物。
+  - 你每次可以往上、右、下、左移動到相鄰且不是障礙物的格子。
+  - 請回傳到達任一食物格的最短路徑長度；若無法到達，回傳 `-1`。
+- **Examples**:
+  - Example 1: `grid = [["X","X","X","X","X","X"],["X","*","O","O","O","X"],["X","O","O","#","O","X"],["X","X","X","X","X","X"]]`
+    - Output: `3`
+  - Example 2: `grid = [["X","X","X","X","X"],["X","*","X","O","X"],["X","O","X","#","X"],["X","X","X","X","X"]]`
+    - Output: `-1`
+  - Example 3: `grid = [["X","X","X","X","X","X","X","X"],["X","*","O","X","O","#","O","X"],["X","O","O","X","O","O","X","X"],["X","O","O","O","O","#","O","X"],["X","X","X","X","X","X","X","X"]]`
+    - Output: `6`
+    - Explanation: There can be multiple food cells; the bottom food is the closest reachable one.
+  - Example 4: `grid = [["X","X","X","X","X","X","X","X"],["X","*","O","X","O","#","O","X"],["X","O","O","X","O","O","X","X"],["X","O","O","O","O","#","O","X"],["O","O","O","O","O","O","O","O"]]`
+    - Output: `5`
+- **Constraints**:
+  - `m == grid.length`
+  - `n == grid[i].length`
+  - `1 <= m, n <= 200`
+  - `grid[row][col]` is `'*'`, `'X'`, `'O'`, or `'#'`.
+  - The grid contains exactly one `'*'`.
 
 - **套路**：網格 BFS 最短路徑
 - **思路**：
@@ -834,6 +1171,23 @@ def getFood(grid):
 ```
 
 ### 815. Bus Routes (Hard)
+
+- **Problem (English)**: Given bus routes (each stop in a route is reachable), find the minimum number of buses needed to travel from source to target.
+- **題目（中文）**：給定公車路線(每條路線中的站點可到達)，找從起點到目標所需的最少公車數。
+
+- **Examples**:
+  - Example 1: `routes = [[1,2,7],[3,6,7]], source = 1, target = 6`
+    - Output: `2`
+    - Explanation: The best strategy is take the first bus to the bus stop 7, then take the second bus to the bus stop 6.
+  - Example 2: `routes = [[7,12],[4,5,15],[6],[15,19],[9,12,13]], source = 15, target = 12`
+    - Output: `-1`
+- **Constraints**:
+  - 1 <= routes.length <= 500.
+  - `1 <= routes[i].length <= 10^5`
+  - All the values of routes[i] are unique.
+  - `sum(routes[i].length) <= 10^5`
+  - `0 <= routes[i][j] < 10^6`
+  - `0 <= source, target < 10^6`
 
 - **套路**：站點到路線映射 + BFS
 - **思路**：

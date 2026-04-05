@@ -41,6 +41,26 @@ def sliding_window_longest(s):
 
 ### 3. Longest Substring Without Repeating Characters (Med.)
 
+- **Problem (English)**:
+  - Given a string, find the maximum length of a contiguous substring that contains no repeated characters.
+- **題目（中文）**：
+  - 給定一個字串，找出其中最長的連續子字串，使得子字串內每個字元都不重複。
+
+- **Examples**:
+  - Example 1: `s = "abcabcbb"`
+    - Output: `3`
+    - Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+  - Example 2: `s = "bbbbb"`
+    - Output: `1`
+    - Explanation: The answer is "b", with the length of 1.
+  - Example 3: `s = "pwwkew"`
+    - Output: `3`
+    - Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+- **Constraints**:
+  - `0 <= s.length <= 5 * 10^4`
+  - s consists of English letters, digits, symbols and spaces.
+
 - **套路**：滑動窗口 + 字典記錄最後出現索引
 - **思路**：
   - 視窗維持「所有字元都不重複」，右指標每次把新字元納入窗口。
@@ -79,6 +99,27 @@ def lengthOfLongestSubstring(s):
 ```
 
 ### 438. Find All Anagrams in a String (Med.)
+
+- **Problem (English)**:
+  - You are given two strings `s` and `p`. Return all starting indices in `s` where the substring of length `len(p)` is an anagram of `p`.
+  - You may return the answer in any order.
+- **題目（中文）**：
+  - 給定兩個字串 `s` 和 `p`，請找出 `s` 中所有起始位置，使得從該位置開始、長度為 `len(p)` 的子字串是 `p` 的異位字。
+  - 答案順序不限。
+
+- **Examples**:
+  - Example 1: `s = "cbaebabacd", p = "abc"`
+    - Output: `[0,6]`
+    - Explanation: The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+  - Example 2: `s = "abab", p = "ab"`
+    - Output: `[0,1,2]`
+    - Explanation: The substring with start index = 0 is "ab", which is an anagram of "ab".
+The substring with start index = 1 is "ba", which is an anagram of "ab".
+The substring with start index = 2 is "ab", which is an anagram of "ab".
+- **Constraints**:
+  - `1 <= s.length, p.length <= 3 * 10^4`
+  - s and p consist of lowercase English letters.
 
 - **套路**：固定長度滑動窗口 + 計數表
 - **思路**：
@@ -127,6 +168,30 @@ def findAnagrams(s, p):
 ```
 
 ### 76. Minimum Window Substring (Hard)
+
+- **Problem (English)**:
+  - Given strings `s` and `t`, return the shortest contiguous substring of `s` that contains every character in `t`, including repeated occurrences.
+  - If no such substring exists, return an empty string.
+- **題目（中文）**：
+  - 給定字串 `s` 和 `t`，找出 `s` 中最短的連續子字串，使其包含 `t` 中所有字元，而且重複字元次數也必須滿足。
+  - 若不存在這樣的子字串，回傳空字串。
+
+- **Examples**:
+  - Example 1: `s = "ADOBECODEBANC", t = "ABC"`
+    - Output: `"BANC"`
+    - Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+  - Example 2: `s = "a", t = "a"`
+    - Output: `"a"`
+    - Explanation: The entire string s is the minimum window.
+  - Example 3: `s = "a", t = "aa"`
+    - Output: `""`
+    - Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+- **Constraints**:
+  - `m == s.length`
+  - `n == t.length`
+  - `1 <= m, n <= 10^5`
+  - s and t consist of uppercase and lowercase English letters.
 
 - **套路**：可變長滑動窗口
 - **思路**：
@@ -182,6 +247,29 @@ def minWindow(s, t):
 
 ### 424. Longest Repeating Character Replacement (Med.)
 
+- **Problem (English)**:
+  - You are given an uppercase string `s` and an integer `k`.
+  - In one operation, you may change any character into another uppercase English letter.
+  - Return the maximum length of a substring that can be turned into all the same letter using at most `k` changes.
+- **題目（中文）**：
+  - 給定一個只含大寫英文字母的字串 `s` 與整數 `k`。
+  - 每次操作可以把任一字元改成另一個大寫字母。
+  - 請回傳最多經過 `k` 次修改後，可以變成「全部都是同一字元」的最長連續子字串長度。
+
+- **Examples**:
+  - Example 1: `s = "ABAB", k = 2`
+    - Output: `4`
+    - Explanation: Replace the two 'A's with two 'B's or vice versa.
+  - Example 2: `s = "AABABBA", k = 1`
+    - Output: `4`
+    - Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+The substring "BBBB" has the longest repeating letters, which is 4.
+There may exists other ways to achieve this answer too.
+- **Constraints**:
+  - `1 <= s.length <= 10^5`
+  - s consists of only uppercase English letters.
+  - `0 <= k <= s.length`
+
 - **套路**：滑動窗口 + 視窗內最大頻率字元
 - **思路**：
   - 如果窗口內最常出現的字元次數是 `max_freq`，那麼把整個窗口變成同一字元所需替換次數就是 `window_size - max_freq`。
@@ -223,6 +311,33 @@ def characterReplacement(s, k):
 ```
 
 ### 239. Sliding Window Maximum (Hard)
+
+- **Problem (English)**:
+  - You are given an integer array `nums` and a window size `k`.
+  - A window of length `k` slides from left to right by one position each time.
+  - Return the maximum value inside the window at every position.
+- **題目（中文）**：
+  - 給定整數陣列 `nums` 與窗口大小 `k`。
+  - 一個長度為 `k` 的滑動窗口會從左到右，每次往右移動一格。
+  - 請回傳每個窗口位置中的最大值。
+
+- **Examples**:
+  - Example 1: `nums = [1,3,-1,-3,5,3,6,7], k = 3`
+    - Output: `[3,3,5,5,6,7]`
+    - Explanation: Window position                Max
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+1 [3  -1  -3] 5  3  6  7       3
+1  3 [-1  -3  5] 3  6  7       5
+1  3  -1 [-3  5  3] 6  7       5
+1  3  -1  -3 [5  3  6] 7       6
+1  3  -1  -3  5 [3  6  7]      7
+  - Example 2: `nums = [1], k = 1`
+    - Output: `[1]`
+- **Constraints**:
+  - `1 <= nums.length <= 10^5`
+  - `-10^4 <= nums[i] <= 10^4`
+  - `1 <= k <= nums.length`
 
 - **套路**：單調遞減 deque
 - **思路**：
@@ -268,6 +383,30 @@ def maxSlidingWindow(nums, k):
 ```
 
 ### 632. Smallest Range Covering Elements from K Lists (Hard)
+
+- **Problem (English)**:
+  - You are given `k` sorted integer lists.
+  - Find the smallest interval `[a, b]` such that at least one number from every list lies inside this interval.
+  - A range is considered better if it is shorter, or if lengths tie, if its left endpoint is smaller.
+- **題目（中文）**：
+  - 給定 `k` 個已排序的整數列表。
+  - 請找出最小區間 `[a, b]`，使得每個列表中至少有一個數字落在這個區間內。
+  - 若兩個區間長度相同，則左端點較小者視為較佳答案。
+
+- **Examples**:
+  - Example 1: `nums = [[4,10,15,24,26],[0,9,12,20],[5,18,22,30]]`
+    - Output: `[20,24]`
+    - Explanation: List 1: [4, 10, 15, 24,26], 24 is in range [20,24].
+List 2: [0, 9, 12, 20], 20 is in range [20,24].
+List 3: [5, 18, 22, 30], 22 is in range [20,24].
+  - Example 2: `nums = [[1,2,3],[1,2,3],[1,2,3]]`
+    - Output: `[1,1]`
+- **Constraints**:
+  - `nums.length == k`
+  - `1 <= k <= 3500`
+  - `1 <= nums[i].length <= 50`
+  - `-10^5 <= nums[i][j] <= 10^5`
+  - nums[i] is sorted in non-decreasing order.
 
 - **套路**：展平排序後做滑動窗口
 - **思路**：

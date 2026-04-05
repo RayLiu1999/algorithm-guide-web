@@ -41,6 +41,18 @@ def monotonic_stack_pattern(nums):
 
 ### 20. Valid Parentheses (Easy)
 
+- **Problem (English)**:
+    - Determine whether a string containing brackets is valid.
+    - Every opening bracket must be closed by the same type of bracket, and the pairs must close in the correct order.
+- **題目（中文）**：
+    - 判斷一個包含括號的字串是否合法。
+    - 每個開括號都必須由相同類型的閉括號配對，且配對順序必須正確。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= s.length <= 10^4`
+  - s consists of parentheses only '()[]{}'.
+
 - **套路**：括號配對棧
 - **思路**：
   - 開括號進棧，閉括號出棧檢查是否匹配。
@@ -70,6 +82,19 @@ def isValid(s):
 ```
 
 ### 155. Min Stack (Med.)
+
+- **Problem (English)**:
+    - Design a stack that supports `push`, `pop`, and `top`.
+    - It must also support retrieving the minimum element in constant time.
+- **題目（中文）**：
+    - 設計一個棧，支援 `push`、`pop` 與 `top`。
+    - 此外還要能在常數時間內取得目前最小元素。
+
+- **Examples**:
+- **Constraints**:
+  - `-2^31 <= val <= 2^31 - 1`
+  - Methods pop, top and getMin operations will always be called on non-empty stacks.
+  - At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
 
 - **套路**：主棧 + 最小值棧
 - **思路**：
@@ -112,6 +137,19 @@ class MinStack:
 ```
 
 ### 232. Implement Queue using Stacks (Easy)
+
+- **Problem (English)**:
+    - Implement a first-in-first-out queue using only two stacks.
+    - Support the standard queue operations `push`, `pop`, `peek`, and `empty`.
+- **題目（中文）**：
+    - 僅使用兩個棧來實作先進先出的佇列。
+    - 需要支援標準佇列操作 `push`、`pop`、`peek` 與 `empty`。
+
+- **Examples**:
+- **Constraints**:
+  - `1 <= x <= 9`
+  - At most 100 calls will be made to push, pop, peek, and empty.
+  - All the calls to pop and peek are valid.
 
 - **套路**：兩個棧模擬 FIFO
 - **思路**：
@@ -156,6 +194,33 @@ class MyQueue:
 
 ### 150. Evaluate Reverse Polish Notation (Med.)
 
+- **Problem (English)**:
+    - Evaluate an arithmetic expression written in Reverse Polish Notation.
+    - Valid operators are `+`, `-`, `*`, and `/`, and division truncates toward zero.
+- **題目（中文）**：
+    - 計算一個以逆波蘭表示法撰寫的算術表達式。
+    - 合法運算子為 `+`、`-`、`*`、`/`，其中除法需要朝零截斷。
+
+- **Examples**:
+  - Example 1: `tokens = ["2","1","+","3","*"]`
+    - Output: `9`
+    - Explanation: ((2 + 1) * 3) = 9
+  - Example 2: `tokens = ["4","13","5","/","+"]`
+    - Output: `6`
+    - Explanation: (4 + (13 / 5)) = 6
+  - Example 3: `tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]`
+    - Output: `22`
+    - Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22
+- **Constraints**:
+  - `1 <= tokens.length <= 10^4`
+  - tokens[i] is either an operator: "+", "-", "*", or "/", or an integer in the range [-200, 200].
+
 - **套路**：運算元進棧，運算子立即結算
 - **思路**：
   - 遇到數字就進棧。
@@ -192,6 +257,24 @@ def evalRPN(tokens):
 
 ### 739. Daily Temperatures (Med.)
 
+- **Problem (English)**:
+    - Given an array of daily temperatures, return an array where each position tells how many days you must wait for a warmer temperature.
+    - If no warmer day exists, store `0` for that day.
+- **題目（中文）**：
+    - 給定每天的氣溫陣列，請回傳一個陣列，表示每一天還要等幾天才會遇到更高溫。
+    - 如果之後不會再有更高溫，該位置填 `0`。
+
+- **Examples**:
+  - Example 1: `temperatures = [73,74,75,71,69,72,76,73]`
+    - Output: `[1,1,4,2,1,1,0,0]`
+  - Example 2: `temperatures = [30,40,50,60]`
+    - Output: `[1,1,1,0]`
+  - Example 3: `temperatures = [30,60,90]`
+    - Output: `[1,1,0]`
+- **Constraints**:
+  - `1 <= temperatures.length <= 10^5`
+  - `30 <= temperatures[i] <= 100`
+
 - **套路**：單調遞減棧
 - **思路**：
   - 棧內存還沒找到更高溫度的索引，且對應溫度保持遞減。
@@ -221,6 +304,22 @@ def dailyTemperatures(temperatures):
 ```
 
 ### 84. Largest Rectangle in Histogram (Hard)
+
+- **Problem (English)**:
+    - Given the heights of bars in a histogram, return the area of the largest rectangle that can be formed.
+- **題目（中文）**：
+    - 給定直方圖中每個柱子的高度，請回傳可形成的最大矩形面積。
+
+- **Examples**:
+  - Example 1: `heights = [2,1,5,6,2,3]`
+    - Output: `10`
+    - Explanation: The above is a histogram where width of each bar is 1.
+The largest rectangle is shown in the red area, which has an area = 10 units.
+  - Example 2: `heights = [2,4]`
+    - Output: `4`
+- **Constraints**:
+  - `1 <= heights.length <= 10^5`
+  - `0 <= heights[i] <= 10^4`
 
 - **套路**：單調遞增棧找左右邊界
 - **思路**：
@@ -255,6 +354,29 @@ def largestRectangleArea(heights):
 ```
 
 ### 224. Basic Calculator (Hard)
+
+- **Problem (English)**:
+    - Evaluate a string expression containing non-negative integers, `+`, `-`, parentheses, and spaces.
+    - You may not use built-in expression evaluators.
+- **題目（中文）**：
+    - 計算一個包含非負整數、`+`、`-`、括號與空白的字串表達式。
+    - 不可直接使用內建的表達式求值器。
+
+- **Examples**:
+  - Example 1: `s = "1 + 1"`
+    - Output: `2`
+  - Example 2: `s = " 2-1 + 2 "`
+    - Output: `3`
+  - Example 3: `s = "(1+(4+5+2)-3)+(6+8)"`
+    - Output: `23`
+- **Constraints**:
+  - `1 <= s.length <= 3 * 10^5`
+  - s consists of digits, '+', '-', '(', ')', and ' '.
+  - s represents a valid expression.
+  - '+' is not used as a unary operation (i.e., "+1" and "+(2 + 3)" is invalid).
+  - '-' could be used as a unary operation (i.e., "-1" and "-(2 + 3)" is valid).
+  - There will be no two consecutive operators in the input.
+  - Every number and running calculation will fit in a signed 32-bit integer.
 
 - **套路**：棧保存括號前狀態
 - **思路**：
@@ -301,6 +423,27 @@ def calculate(s):
 
 ### 227. Basic Calculator II (Med.)
 
+- **Problem (English)**:
+    - Evaluate a string expression containing non-negative integers and the operators `+`, `-`, `*`, and `/`.
+    - Integer division must truncate toward zero.
+- **題目（中文）**：
+    - 計算一個包含非負整數以及 `+`、`-`、`*`、`/` 的字串表達式。
+    - 整數除法必須朝零截斷。
+
+- **Examples**:
+  - Example 1: `s = "3+2*2"`
+    - Output: `7`
+  - Example 2: `s = " 3/2 "`
+    - Output: `1`
+  - Example 3: `s = " 3+5 / 2 "`
+    - Output: `5`
+- **Constraints**:
+  - `1 <= s.length <= 3 * 10^5`
+  - s consists of integers and operators ('+', '-', '*', '/') separated by some number of spaces.
+  - s represents a valid expression.
+  - All the integers in the expression are non-negative integers in the range [0, 2^31 - 1].
+  - The answer is guaranteed to fit in a 32-bit integer.
+
 - **套路**：棧處理乘除、加減延後
 - **思路**：
   - `+` 與 `-` 直接把數字正負號後壓棧。
@@ -343,6 +486,35 @@ def calculate(s):
 
 ### 735. Asteroid Collision (Med.)
 
+- **Problem (English)**:
+    - Asteroids move in a row at the same speed.
+    - Positive values move right and negative values move left.
+    - When two asteroids collide, the smaller one explodes; if they are equal, both explode.
+    - Return the state after all collisions.
+- **題目（中文）**：
+    - 一列小行星以相同速度移動。
+    - 正值表示向右移動，負值表示向左移動。
+    - 當兩顆小行星碰撞時，較小者爆炸；若大小相同，兩者都爆炸。
+    - 請回傳所有碰撞結束後的結果。
+
+- **Examples**:
+  - Example 1: `asteroids = [5,10,-5]`
+    - Output: `[5,10]`
+    - Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+  - Example 2: `asteroids = [8,-8]`
+    - Output: `[]`
+    - Explanation: The 8 and -8 collide exploding each other.
+  - Example 3: `asteroids = [10,2,-5]`
+    - Output: `[10]`
+    - Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
+  - Example 4: `asteroids = [3,5,-6,2,-1,4]​​​​​​​`
+    - Output: `[-6,2,4]`
+    - Explanation: The asteroid -6 makes the asteroid 3 and 5 explode, and then continues going left. On the other side, the asteroid 2 makes the asteroid -1 explode and then continues going right, without reaching asteroid 4.
+- **Constraints**:
+  - `2 <= asteroids.length <= 10^4`
+  - `-1000 <= asteroids[i] <= 1000`
+  - `asteroids[i] != 0`
+
 - **套路**：棧模擬碰撞
 - **思路**：
   - 只有「棧頂往右、當前小行星往左」時才可能碰撞。
@@ -378,6 +550,26 @@ def asteroidCollision(asteroids):
 ```
 
 ### 394. Decode String (Med.)
+
+- **Problem (English)**:
+    - Decode an encoded string where patterns like `k[encoded_string]` mean the substring inside brackets is repeated `k` times.
+    - Nested encodings are allowed.
+- **題目（中文）**：
+    - 解碼一個編碼字串，其中像 `k[encoded_string]` 這樣的格式表示中括號內的字串要重複 `k` 次。
+    - 題目允許巢狀編碼。
+
+- **Examples**:
+  - Example 1: `s = "3[a]2[bc]"`
+    - Output: `"aaabcbc"`
+  - Example 2: `s = "3[a2[c]]"`
+    - Output: `"accaccacc"`
+  - Example 3: `s = "2[abc]3[cd]ef"`
+    - Output: `"abcabccdcdcdef"`
+- **Constraints**:
+  - `1 <= s.length <= 30`
+  - s consists of lowercase English letters, digits, and square brackets '[]'.
+  - s is guaranteed to be a valid input.
+  - All the integers in s are in the range [1, 300].
 
 - **套路**：棧保存重複次數與前綴字串
 - **思路**：
@@ -417,6 +609,19 @@ def decodeString(s):
 ```
 
 ### 22. Generate Parentheses (Med.)
+
+- **Problem (English)**:
+    - Given `n` pairs of parentheses, return all combinations of well-formed parentheses.
+- **題目（中文）**：
+    - 給定 `n` 對括號，請回傳所有合法且格式正確的括號組合。
+
+- **Examples**:
+  - Example 1: `n = 3`
+    - Output: `["((()))","(()())","(())()","()(())","()()()"]`
+  - Example 2: `n = 1`
+    - Output: `["()"]`
+- **Constraints**:
+  - `1 <= n <= 8`
 
 - **套路**：遞迴生成 + 隱性棧平衡
 - **思路**：
@@ -459,6 +664,24 @@ def generateParenthesis(n):
 
 ### 32. Longest Valid Parentheses (Hard)
 
+- **Problem (English)**:
+    - Given a string containing only `'('` and `')'`, return the length of the longest valid parentheses substring.
+- **題目（中文）**：
+    - 給定一個只包含 `'('` 與 `')'` 的字串，請回傳最長合法括號子字串的長度。
+
+- **Examples**:
+  - Example 1: `s = "(()"`
+    - Output: `2`
+    - Explanation: The longest valid parentheses substring is "()".
+  - Example 2: `s = ")()())"`
+    - Output: `4`
+    - Explanation: The longest valid parentheses substring is "()()".
+  - Example 3: `s = ""`
+    - Output: `0`
+- **Constraints**:
+  - `0 <= s.length <= 3 * 10^4`
+  - s[i] is '(', or ')'.
+
 - **套路**：索引棧 + 最後失敗位置哨兵
 - **思路**：
   - 棧先放 `-1` 當作基底，代表最近一個不合法位置。
@@ -496,6 +719,21 @@ def longestValidParentheses(s):
 ```
 
 ### 895. Maximum Frequency Stack (Hard)
+
+- **Problem (English)**:
+    - Design a stack-like structure that supports `push` and `pop`.
+    - `pop` should remove and return the most frequent element.
+    - If multiple elements share the same highest frequency, remove the one closest to the top.
+- **題目（中文）**：
+    - 設計一種類似棧的資料結構，支援 `push` 與 `pop`。
+    - `pop` 必須移除並回傳目前出現頻率最高的元素。
+    - 若多個元素頻率相同，則移除最靠近棧頂的那個。
+
+- **Examples**:
+- **Constraints**:
+  - `0 <= val <= 10^9`
+  - At most 2 * 10^4 calls will be made to push and pop.
+  - It is guaranteed that there will be at least one element in the stack before calling pop.
 
 - **套路**：頻率表 + 頻率對應的棧
 - **思路**：

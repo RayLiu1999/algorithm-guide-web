@@ -510,11 +510,11 @@ def longestPalindrome(s):
         while left >= 0 and right < len(s) and s[left] == s[right]:
             left -= 1
             right += 1
-        return s[left + 1:right]
+        return s[left + 1:right] // 因為最後一次擴散會多移動一次，所以回傳時要調整回上一回合的位置
 
     for index in range(len(s)):
-        odd = expand(index, index)
-        even = expand(index, index + 1)
+        odd = expand(index, index) // 奇數是同一點左右擴散
+        even = expand(index, index + 1) // 偶數是相鄰兩點往外擴散
         candidate = odd if len(odd) >= len(even) else even
         if len(candidate) > len(best):
             best = candidate

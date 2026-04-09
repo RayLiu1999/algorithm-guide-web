@@ -135,8 +135,14 @@ def maxDepth(root):
 - **其他思路**：
   - **BFS 迭代**：用 queue 逐層取出節點，當場交換左右子節點。
 - **解法比較**：
-  - **DFS**：優點是寫法最簡潔。缺點是深樹時遞迴層數較深。
-  - **BFS**：優點是沒有遞迴深度問題。缺點是要額外維護 queue。
+  - **DFS (遞迴)**：
+    - **優點**：程式碼最簡潔。
+    - **缺點**：極端深樹（Skewed Tree）時會有 Stack Overflow 風險。
+    - **SC**: $O(h)$，空間壓力取決於**樹的高度**。
+  - **BFS (迭代)**：
+    - **優點**：避免遞迴深度問題，適合深度極大的樹。
+    - **缺點**：需要額外空間維護 Queue。
+    - **SC**: $O(w)$，空間壓力取決於**樹的最大寬度**（滿二元樹時空間開銷 $O(n/2) \approx O(n)$）。
 - **測試重點 (Testing)**：
   - **空樹**：應回傳 `None`。
   - **單一節點**：翻轉前後相同。
@@ -1027,11 +1033,9 @@ def buildTree(preorder, inorder):
 - **題目（中文）**：找出所有節點值和等於目標值的根到葉路徑。
 
 - **Examples**:
-  - Example 1: `root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22`
-    - Output: `[[5,4,11,2],[5,8,4,5]]`
-    - Explanation: There are two paths whose sum equals targetSum:
-5 + 4 + 11 + 2 = 22
-5 + 8 + 4 + 5 = 22
+  - Example 1: `root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22` - Output: `[[5,4,11,2],[5,8,4,5]]` - Explanation: There are two paths whose sum equals targetSum:
+    5 + 4 + 11 + 2 = 22
+    5 + 8 + 4 + 5 = 22
   - Example 2: `root = [1,2,3], targetSum = 5`
     - Output: `[]`
   - Example 3: `root = [1,2], targetSum = 0`
